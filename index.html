@@ -1,111 +1,78 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Storage Signal</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div id="app-shell">
-    <aside id="sidebar" class="sidebar">
-      <div class="brand-block">
-        <div class="brand-mark">S</div>
-        <div><strong>Storage Signal</strong><small>Portfolio intelligence</small></div>
-      </div>
-      <nav class="nav-list" aria-label="Primary navigation">
-        <button class="nav-item active"><span>Overview</span></button>
-        <button class="nav-item disabled"><span>Facilities</span></button>
-        <button class="nav-item disabled"><span>Attribution</span></button>
-        <button class="nav-item disabled"><span>Revenue</span></button>
-      </nav>
-      <div class="sidebar-foot">
-        <button id="definitions-button" class="ghost-button">Metric definitions</button>
-        <button id="help-button" class="ghost-button">About Storage Signal</button>
-      </div>
-    </aside>
-
-    <div id="backdrop" class="backdrop hidden"></div>
-
-    <main id="content" class="content">
-      <header class="topbar">
-        <div class="topbar-left">
-          <button id="mobile-menu" class="icon-button mobile-only" aria-label="Open menu">☰</button>
-          <div>
-            <span id="mode-ribbon" class="mode-ribbon">Loading governed snapshot…</span>
-            <h1>Portfolio overview</h1>
-            <p>Paid media, lead flow and website behaviour in one governed client summary.</p>
-          </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Storage Signal governed portfolio reporting." />
+    <title>Storage Signal — Portfolio Overview</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="prototype-ribbon" id="mode-ribbon"><span class="ribbon-dot"></span>Loading governed snapshot…</div>
+    <div class="shell">
+      <aside class="sidebar" id="sidebar">
+        <div class="brand"><div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div><div><strong>Storage Signal</strong><span>Portfolio intelligence</span></div></div>
+        <nav aria-label="Storage Signal navigation">
+          <p class="nav-label">Workspace</p>
+          <button class="nav-item active"><span class="nav-glyph">⌂</span>Overview</button>
+          <button class="nav-item disabled" title="Future module"><span class="nav-glyph">▤</span>Reports<span class="soon">Soon</span></button>
+          <button class="nav-item disabled" title="Future module"><span class="nav-glyph">◇</span>Facilities<span class="soon">Soon</span></button>
+          <button class="nav-item disabled" title="Future module"><span class="nav-glyph">◎</span>Attribution<span class="soon">Soon</span></button>
+          <button class="nav-item disabled" title="Future module"><span class="nav-glyph">♡</span>Data health<span class="soon">Soon</span></button>
+        </nav>
+        <div class="sidebar-foot">
+          <div class="workspace"><span class="workspace-avatar">FH</span><div><strong>Family Heirloom</strong><small id="facility-count">Portfolio</small></div></div>
+          <p><span></span><b id="snapshot-label">Snapshot loading</b></p>
         </div>
-        <div class="topbar-right">
-          <div id="freshness" class="freshness-card"></div>
-        </div>
-      </header>
-
-      <section class="filter-bar panel">
-        <label>Reporting period<select id="period-filter"></select></label>
-        <label>Brand<select id="brand-filter"></select></label>
-        <label>Facility<select id="facility-filter"></select></label>
-        <label>Compare<select id="compare-filter"><option value="previous">Previous period</option><option value="none">No comparison</option></select></label>
-        <button id="reset-filters" class="secondary-button">Reset</button>
-      </section>
-
-      <section id="source-strip" class="source-strip panel"></section>
-
-      <section id="kpi-grid" class="kpi-grid"></section>
-
-      <section class="grid-two">
-        <article class="panel chart-panel">
-          <div class="panel-head">
-            <div><span class="eyebrow">Trend</span><h2 id="trend-label">Advertising spend</h2><p id="trend-subtitle"></p></div>
-            <div class="chart-toggle" role="group" aria-label="Trend metric"><button class="active" data-chart="advertising_spend">Spend</button><button data-chart="leads">Leads</button><button data-chart="sessions">Sessions</button></div>
-          </div>
-          <div class="trend-summary"><strong id="trend-total">—</strong><span id="trend-delta"></span></div>
-          <div id="trend-chart" class="trend-chart"></div>
-        </article>
-
-        <article class="panel outcome-panel">
-          <div class="panel-head"><div><span class="eyebrow">Business outcomes</span><h2>Revenue attribution</h2><p>CCStorage-dependent outcomes remain pending until separately governed.</p></div><button id="outcome-info" class="icon-button" aria-label="Outcome information">i</button></div>
-          <div id="outcome-list" class="outcome-list"></div>
-        </article>
-      </section>
-
-      <section class="panel channel-panel">
-        <div class="panel-head"><div><span class="eyebrow">Paid media</span><h2>Channel evidence</h2><p>Platform-reported evidence and governed lead receipts remain visibly distinct.</p></div><span id="channel-mode" class="pill">—</span></div>
-        <div id="channel-list" class="channel-list"></div>
-      </section>
-
-      <section class="grid-two">
-        <article class="panel health-panel">
-          <div class="panel-head"><div><span class="eyebrow">Source health</span><h2>Attention required</h2><p>Anything not fully confirmed appears here.</p></div><span id="attention-count" class="pill">—</span></div>
-          <div id="attention-list" class="attention-list"></div>
-        </article>
-        <article class="panel snapshot-panel">
-          <span class="eyebrow">Release state</span><h2 id="snapshot-label">Snapshot</h2>
-          <p>The browser reads only the immutable validated client bundle. Unsupported outcomes are rendered pending rather than zero.</p>
-          <div class="snapshot-note">No renter, customer, unit, invoice, payment, credential or raw source-row data is included in this client surface.</div>
-        </article>
-      </section>
-
-      <section class="panel facility-panel">
-        <div class="panel-head facility-head"><div><span class="eyebrow">Facilities</span><h2>Facility mapping status</h2><p>Facility performance remains pending where deterministic source mapping is not yet accepted.</p></div><span id="facility-count" class="pill">—</span></div>
-        <div class="table-tools"><input id="table-search" type="search" placeholder="Search facility or company ID" aria-label="Search facilities"><label>Mapping<select id="health-filter"><option value="all">All</option><option value="deterministic">Deterministic</option><option value="review">Review</option></select></label></div>
-        <div class="table-wrap"><table><thead><tr><th class="sortable" data-sort="facility_label">Facility</th><th class="sortable" data-sort="advertising_spend">Spend</th><th class="sortable" data-sort="leads">Leads</th><th>Cost / lead</th><th class="sortable" data-sort="sessions">Sessions</th><th>Mapping</th></tr></thead><tbody id="facility-tbody"></tbody></table></div>
-        <div class="table-footer"><span id="table-result-count"></span><div id="pagination" class="pagination"></div></div>
-      </section>
-
-      <footer id="footer-note" class="footer-note"></footer>
-    </main>
-
-    <aside id="drawer" class="drawer" aria-hidden="true">
-      <div class="drawer-head"><div><span id="drawer-eyebrow" class="eyebrow"></span><h2 id="drawer-title"></h2></div><button id="drawer-close" class="icon-button" aria-label="Close">×</button></div>
-      <div id="drawer-body"></div>
-    </aside>
-
-    <section id="info-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <div class="modal-card"><div class="modal-head"><h2 id="modal-title"></h2><button class="icon-button" data-close-modal aria-label="Close">×</button></div><div id="modal-body"></div></div>
-    </section>
-  </div>
-  <script src="app.js"></script>
-</body>
+      </aside>
+      <div class="main">
+        <header class="topbar">
+          <button class="mobile-menu" id="mobile-menu" aria-label="Open menu">☰</button>
+          <div class="heading"><p>Portfolio / Overview</p><h1>Storage Signal</h1></div>
+          <div class="header-actions"><button class="icon-button" id="help-button" aria-label="About Storage Signal">?</button><span class="avatar" aria-label="Family Heirloom">FH</span></div>
+        </header>
+        <main id="content">
+          <section class="welcome-row">
+            <div><h2>Portfolio overview</h2><p>Real marketing demand and website behaviour, with unsupported outcomes kept visibly pending.</p></div>
+            <div class="freshness" id="freshness"><span class="freshness-dot"></span><div><strong>Snapshot loading</strong><small>Waiting for governed data</small></div></div>
+          </section>
+          <section class="filter-bar" aria-label="Dashboard filters">
+            <label><span>Reporting period</span><select id="period-filter"><option>Loading…</option></select></label>
+            <label><span>Brand</span><select id="brand-filter"><option value="all">All brands</option></select></label>
+            <label><span>Facility</span><select id="facility-filter"><option value="all">All facilities</option></select></label>
+            <label><span>Compare with</span><select id="compare-filter"><option value="previous">Previous period</option><option value="none">No comparison</option></select></label>
+            <button class="reset-button" id="reset-filters">Reset</button>
+          </section>
+          <section class="source-strip" id="source-strip" aria-label="Source freshness and status"></section>
+          <section class="kpi-grid" id="kpi-grid" aria-label="Portfolio headline metrics"></section>
+          <section class="chart-grid">
+            <article class="panel trend-panel">
+              <header class="panel-header"><div><h3>Demand and marketing investment</h3><p id="trend-subtitle">Governed portfolio trend</p></div><div class="chart-toggle" role="group" aria-label="Chart metric"><button class="active" data-chart="advertising_spend">Spend</button><button data-chart="leads">Leads</button><button data-chart="sessions">Sessions</button></div></header>
+              <div class="trend-summary"><div><span id="trend-label">Advertising spend</span><strong id="trend-total">PENDING</strong><small id="trend-delta">No comparison available</small></div><div class="legend"><span><i class="line-key"></i><b id="legend-primary">Snapshot value</b></span></div></div>
+              <div class="chart-area" id="trend-chart" role="img" aria-label="Portfolio reporting trend"></div>
+            </article>
+            <article class="panel confidence-panel">
+              <header class="panel-header"><div><h3>Outcome readiness</h3><p>CCStorage-dependent metrics remain pending until supported</p></div><button class="plain-icon panel-info" id="outcome-info" aria-label="Outcome boundary">i</button></header>
+              <div class="confidence-list outcome-list" id="outcome-list"></div>
+            </article>
+          </section>
+          <section class="lower-grid">
+            <article class="panel channel-panel"><header class="panel-header"><div><h3>Channel performance</h3><p>Platform delivery stays separate from internally proven revenue</p></div><span class="fixture-badge" id="channel-mode">Snapshot</span></header><div class="channel-list" id="channel-list"></div></article>
+            <article class="panel attention-panel"><header class="panel-header"><div><h3>Data health</h3><p>Freshness and trust boundaries</p></div><span class="attention-count" id="attention-count">Loading</span></header><div class="attention-list" id="attention-list"></div></article>
+          </section>
+          <section class="panel table-panel">
+            <header class="panel-header table-heading"><div><h3>Facility demand</h3><p>Only deterministically mapped facility metrics are reported</p></div><div class="table-tools"><label class="search"><span>⌕</span><input id="table-search" type="search" placeholder="Search facilities" /></label><select id="health-filter" aria-label="Filter mapping status"><option value="all">All mapping status</option><option value="deterministic">Deterministic</option><option value="review">Review</option></select></div></header>
+            <div class="table-scroll"><table><thead><tr><th class="sortable" data-sort="facility_label">Facility <span>↕</span></th><th class="sortable" data-sort="advertising_spend">Ad spend <span>↕</span></th><th class="sortable" data-sort="leads">Leads <span>↕</span></th><th>Cost / lead</th><th class="sortable" data-sort="sessions">Sessions <span>↕</span></th><th>Mapping</th></tr></thead><tbody id="facility-tbody"></tbody></table></div>
+            <footer class="table-footer"><span id="table-result-count">Loading facilities</span><div class="pagination" id="pagination"></div></footer>
+          </section>
+          <footer class="page-footer"><p id="footer-note"><strong>Governed snapshot:</strong> Loading reporting evidence.</p><button id="definitions-button">Metric definitions</button></footer>
+        </main>
+      </div>
+    </div>
+    <div class="backdrop hidden" id="backdrop"></div>
+    <aside class="drawer" id="drawer" aria-hidden="true"><header><div><p class="drawer-eyebrow" id="drawer-eyebrow">Facility detail</p><h2 id="drawer-title">Facility</h2></div><button class="close-button" id="drawer-close" aria-label="Close details">×</button></header><div id="drawer-body"></div></aside>
+    <section class="modal hidden" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header><div><p class="drawer-eyebrow">Storage Signal evidence</p><h2 id="modal-title">Metric definitions</h2></div><button class="close-button" data-close-modal aria-label="Close">×</button></header><div class="modal-body" id="modal-body"></div></section>
+    <div class="toast-region" id="toast-region" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
 </html>
