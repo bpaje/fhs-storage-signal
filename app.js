@@ -102,14 +102,14 @@ function renderFilters() {
   const brands = [...new Set(facilities.map((facility) => facility.brand))].sort();
   const brandLabels = { family: "Family Heirloom Storage", southeastern: "Southeastern Self Storage", eagles: "Eagles Landing Storage", other: "Other portfolio brands" };
   $("#brand-filter").innerHTML = `<option value="all">All brands</option>${brands.map((brand) => `<option value="${escapeHtml(brand)}">${escapeHtml(brandLabels[brand] || brand)}</option>`).join("")}`;
-  $("#facility-count").textContent = `${facilities.length} facility records`;
+  $("#facility-count").textContent = `${facilities.length} facilities currently in reporting registry`;
   renderFacilityOptions();
 }
 
 function renderFacilityOptions() {
   const facilities = bundle.documents["facilities.json"].facilities.filter((facility) => state.brand === "all" || facility.brand === state.brand);
   if (!facilities.some((facility) => String(facility.company_id) === state.facility)) state.facility = "all";
-  $("#facility-filter").innerHTML = `<option value="all">All facilities (${facilities.length})</option>${facilities.map((facility) => `<option value="${facility.company_id}">${escapeHtml(facility.facility_label)}</option>`).join("")}`;
+  $("#facility-filter").innerHTML = `<option value="all">Available facility records (${facilities.length})</option>${facilities.map((facility) => `<option value="${facility.company_id}">${escapeHtml(facility.facility_label)}</option>`).join("")}`;
   $("#facility-filter").value = state.facility;
 }
 
@@ -129,6 +129,11 @@ function renderKpis() {
 }
 
 function trendMetric(row, metricId) { return metricMap(row.metrics)[metricId]; }
+function trendIntervalLabel(row) {
+  const period = row.metrics[0]?.period;
+  if (period?.start === period?.end && !row.label.includes("partial")) return `${row.label} · partial`;
+  return row.label;
+}
 function renderTrend() {
   const rows = bundle.documents["portfolio.json"].trend;
   const metrics = rows.map((row) => trendMetric(row, state.chart));
@@ -141,8 +146,8 @@ function renderTrend() {
   const linePoints = points.filter((point) => point[1] !== null);
   const path = linePoints.map(([x, y], index) => `${index ? "L" : "M"}${x.toFixed(1)},${y.toFixed(1)}`).join(" ");
   const grid = [0, .25, .5, .75, 1].map((ratio) => { const y = top + (height - top - bottom) * (1 - ratio); return `<line class="grid-line" x1="${left}" y1="${y}" x2="${width-right}" y2="${y}"/>`; }).join("");
-  const dots = points.map(([x, y], index) => y === null ? "" : `<circle class="chart-dot" cx="${x}" cy="${y}" r="4"><title>${escapeHtml(rows[index].label)}: ${escapeHtml(formatValue(metrics[index]))}</title></circle>`).join("");
-  const labels = rows.map((row, index) => `<text class="axis-label" x="${points[index][0]}" y="${height-8}" text-anchor="middle">${escapeHtml(row.label)}</text>`).join("");
+  const dots = points.map(([x, y], index) => y === null ? "" : `<circle class="chart-dot" cx="${x}" cy="${y}" r="4"><title>${escapeHtml(trendIntervalLabel(rows[index]))}: ${escapeHtml(formatValue(metrics[index]))}</title></circle>`).join("");
+  const labels = rows.map((row, index) => `<text class="axis-label" x="${points[index][0]}" y="${height-8}" text-anchor="middle">${escapeHtml(trendIntervalLabel(row))}</text>`).join("");
   $("#trend-chart").innerHTML = linePoints.length ? `<svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none" aria-hidden="true">${grid}<path class="chart-path" d="${path}"/>${dots}${labels}</svg>` : `<div class="empty-chart">PENDING — no supported trend values</div>`;
   const label = metrics[0]?.label || state.chart.replaceAll("_", " ");
   $("#trend-label").textContent = label;
