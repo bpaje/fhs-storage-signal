@@ -102,14 +102,15 @@ function renderFilters() {
   const brands = [...new Set(facilities.map((facility) => facility.brand))].sort();
   const brandLabels = { family: "Family Heirloom Storage", southeastern: "Southeastern Self Storage", eagles: "Eagles Landing Storage", other: "Other portfolio brands" };
   $("#brand-filter").innerHTML = `<option value="all">All brands</option>${brands.map((brand) => `<option value="${escapeHtml(brand)}">${escapeHtml(brandLabels[brand] || brand)}</option>`).join("")}`;
-  $("#facility-count").textContent = `${facilities.length} facilities currently in reporting registry`;
+  $("#facility-count").textContent = `${facilities.length} location records currently represented`;
+  $(".table-heading p").textContent = "Partial location coverage — not all portfolio locations are included.";
   renderFacilityOptions();
 }
 
 function renderFacilityOptions() {
   const facilities = bundle.documents["facilities.json"].facilities.filter((facility) => state.brand === "all" || facility.brand === state.brand);
   if (!facilities.some((facility) => String(facility.company_id) === state.facility)) state.facility = "all";
-  $("#facility-filter").innerHTML = `<option value="all">Available facility records (${facilities.length})</option>${facilities.map((facility) => `<option value="${facility.company_id}">${escapeHtml(facility.facility_label)}</option>`).join("")}`;
+  $("#facility-filter").innerHTML = `<option value="all">Represented location records (${facilities.length})</option>${facilities.map((facility) => `<option value="${facility.company_id}">${escapeHtml(facility.facility_label)}</option>`).join("")}`;
   $("#facility-filter").value = state.facility;
 }
 
