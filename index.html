@@ -3,22 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Storage Signal governed portfolio reporting." />
+    <meta name="description" content="Monthly Google Ads, Meta Ads and CCStorage reporting." />
     <title>Storage Signal — Portfolio Overview</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div class="prototype-ribbon" id="mode-ribbon"><span class="ribbon-dot"></span>Loading governed snapshot…</div>
+    <div class="prototype-ribbon" id="mode-ribbon"><span class="ribbon-dot"></span>Loading monthly report…</div>
     <div class="shell">
       <aside class="sidebar" id="sidebar">
         <div class="brand"><div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div><div><strong>Storage Signal</strong><span>Portfolio intelligence</span></div></div>
         <nav aria-label="Storage Signal navigation">
           <p class="nav-label">Workspace</p>
           <button class="nav-item active"><span class="nav-glyph">⌂</span>Overview</button>
-          <button class="nav-item disabled" title="Future module"><span class="nav-glyph">▤</span>Reports<span class="soon">Soon</span></button>
-          <button class="nav-item disabled" title="Future module"><span class="nav-glyph">◇</span>Facilities<span class="soon">Soon</span></button>
-          <button class="nav-item disabled" title="Future module"><span class="nav-glyph">◎</span>Attribution<span class="soon">Soon</span></button>
-          <button class="nav-item disabled" title="Future module"><span class="nav-glyph">♡</span>Data health<span class="soon">Soon</span></button>
         </nav>
         <div class="sidebar-foot">
           <div class="workspace"><span class="workspace-avatar">FH</span><div><strong>Family Heirloom</strong><small id="facility-count">Portfolio</small></div></div>
@@ -33,13 +29,13 @@
         </header>
         <main id="content">
           <section class="welcome-row">
-            <div><h2>Portfolio overview</h2><p>Real marketing demand and website behaviour, with unsupported outcomes kept visibly pending.</p></div>
-            <div class="freshness" id="freshness"><span class="freshness-dot"></span><div><strong>Snapshot loading</strong><small>Waiting for governed data</small></div></div>
+            <div><h2>Portfolio overview</h2><p>Google Ads, Meta Ads and CCStorage — monthly reporting from June 2026.</p></div>
+            <div class="freshness" id="freshness"><span class="freshness-dot"></span><div><strong>Snapshot loading</strong><small>Loading source totals</small></div></div>
           </section>
           <section class="filter-bar" aria-label="Dashboard filters">
             <label><span>Reporting period</span><select id="period-filter"><option>Loading…</option></select></label>
-            <label><span>Brand</span><select id="brand-filter"><option value="all">All brands</option></select></label>
-            <label><span>Facility</span><select id="facility-filter"><option value="all">All facilities</option></select></label>
+            <label><span>Storage brand</span><select id="brand-filter"><option value="all">All brands</option></select></label>
+            <label><span>Storage facility</span><select id="facility-filter"><option value="all">All facilities</option></select></label>
             <label><span>Compare with</span><select id="compare-filter"><option value="previous">Previous period</option><option value="none">No comparison</option></select></label>
             <button class="reset-button" id="reset-filters">Reset</button>
           </section>
@@ -47,25 +43,25 @@
           <section class="kpi-grid" id="kpi-grid" aria-label="Portfolio headline metrics"></section>
           <section class="chart-grid">
             <article class="panel trend-panel">
-              <header class="panel-header"><div><h3>Demand and marketing investment</h3><p id="trend-subtitle">Governed portfolio trend</p></div><div class="chart-toggle" role="group" aria-label="Chart metric"><button class="active" data-chart="advertising_spend">Spend</button><button data-chart="leads">Leads</button><button data-chart="sessions">Sessions</button></div></header>
+              <header class="panel-header"><div><h3>Monthly trend</h3><p id="trend-subtitle">June onward</p></div><div class="chart-toggle" role="group" aria-label="Chart metric"><button class="active" data-chart="spend">Ad spend</button><button data-chart="net">Payments</button><button data-chart="moveIns">Move-ins</button></div></header>
               <div class="trend-summary"><div><span id="trend-label">Advertising spend</span><strong id="trend-total">PENDING</strong><small id="trend-delta">No comparison available</small></div><div class="legend"><span><i class="line-key"></i><b id="legend-primary">Snapshot value</b></span></div></div>
               <div class="chart-area" id="trend-chart" role="img" aria-label="Portfolio reporting trend"></div>
             </article>
             <article class="panel confidence-panel">
-              <header class="panel-header"><div><h3>Outcome readiness</h3><p>CCStorage-dependent metrics remain pending until supported</p></div><button class="plain-icon panel-info" id="outcome-info" aria-label="Outcome boundary">i</button></header>
+              <header class="panel-header"><div><h3>Storage operations</h3><p>CCStorage totals for the selected facilities</p></div><button class="plain-icon panel-info" id="outcome-info" aria-label="Payment and occupancy definitions">i</button></header>
               <div class="confidence-list outcome-list" id="outcome-list"></div>
             </article>
           </section>
           <section class="lower-grid">
-            <article class="panel channel-panel"><header class="panel-header"><div><h3>Channel performance</h3><p>Platform delivery stays separate from internally proven revenue</p></div><span class="fixture-badge" id="channel-mode">Snapshot</span></header><div class="channel-list" id="channel-list"></div></article>
-            <article class="panel attention-panel"><header class="panel-header"><div><h3>Data health</h3><p>Freshness and trust boundaries</p></div><span class="attention-count" id="attention-count">Loading</span></header><div class="attention-list" id="attention-list"></div></article>
+            <article class="panel channel-panel"><header class="panel-header"><div><h3>Channel performance</h3><p>Account-wide advertising results; facility filters apply to CCStorage</p></div><span class="fixture-badge" id="channel-mode">Snapshot</span></header><div class="channel-list" id="channel-list"></div></article>
+            <article class="panel attention-panel"><header class="panel-header"><div><h3>Data health</h3><p>Source coverage and reporting notes</p></div><span class="attention-count" id="attention-count">Loading</span></header><div class="attention-list" id="attention-list"></div></article>
           </section>
           <section class="panel table-panel">
-            <header class="panel-header table-heading"><div><h3>Facility demand</h3><p>Only deterministically mapped facility metrics are reported</p></div><div class="table-tools"><label class="search"><span>⌕</span><input id="table-search" type="search" placeholder="Search facilities" /></label><select id="health-filter" aria-label="Filter mapping status"><option value="all">All mapping status</option><option value="deterministic">Deterministic</option><option value="review">Review</option></select></div></header>
-            <div class="table-scroll"><table><thead><tr><th class="sortable" data-sort="facility_label">Facility <span>↕</span></th><th class="sortable" data-sort="advertising_spend">Ad spend <span>↕</span></th><th class="sortable" data-sort="leads">Leads <span>↕</span></th><th>Cost / lead</th><th class="sortable" data-sort="sessions">Sessions <span>↕</span></th><th>Mapping</th></tr></thead><tbody id="facility-tbody"></tbody></table></div>
+            <header class="panel-header table-heading"><div><h3>Facility performance</h3><p>CCStorage payments and operations for the selected month</p></div><div class="table-tools"><label class="search"><span>⌕</span><input id="table-search" type="search" placeholder="Search facilities" /></label><select id="health-filter" aria-label="Filter data coverage"><option value="all">All coverage</option><option value="available">Data available</option><option value="missing">Missing data</option></select></div></header>
+            <div class="table-scroll"><table><thead><tr><th class="sortable" data-sort="name">Facility <span>↕</span></th><th class="sortable" data-sort="net">Net payments <span>↕</span></th><th class="sortable" data-sort="moveIns">Move-ins <span>↕</span></th><th class="sortable" data-sort="moveOuts">Move-outs ↕</th><th class="sortable" data-sort="occupancy">Occupancy <span>↕</span></th><th>Coverage</th></tr></thead><tbody id="facility-tbody"></tbody></table></div>
             <footer class="table-footer"><span id="table-result-count">Loading facilities</span><div class="pagination" id="pagination"></div></footer>
           </section>
-          <footer class="page-footer"><p id="footer-note"><strong>Governed snapshot:</strong> Loading reporting evidence.</p><button id="definitions-button">Metric definitions</button></footer>
+          <footer class="page-footer"><p id="footer-note"><strong>Monthly report:</strong> Loading source totals.</p><button id="definitions-button">Metric definitions</button></footer>
         </main>
       </div>
     </div>
