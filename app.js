@@ -37,11 +37,15 @@ function comparison(key,source){
  return key==='occupancy'?`${((a-b)*100).toFixed(1)} pp vs prior month`:`${a>=b?'+':''}${((a-b)/b*100).toFixed(1)}% vs prior month`;
 }
 function renderFilters(){
- $('#period-filter').innerHTML=report.periods.map(p=>`<option value="${p.id}">${esc(p.label)}</option>`).join('');$('#period-filter').value=state.period;
- $('#brand-filter').innerHTML='<option value="all">All brands</option>'+[...new Set(current().facilities.map(f=>f.brand))].sort().map(b=>`<option>${esc(b)}</option>`).join('');$('#brand-filter').value=state.brand;
- $('#facility-filter').innerHTML='<option value="all">All facilities</option>'+current().facilities.filter(f=>state.brand==='all'||f.brand===state.brand).map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('');$('#facility-filter').value=state.facility;
+ const periods=typeof availablePeriods==='function'?availablePeriods():report.periods;
+ if(!periods.some(p=>p.id===state.period))state.period=(periods.find(p=>p.id==='2026-08')||periods.findLast(p=>!p.partial)||periods[0]).id;
+ $('#period-filter').innerHTML=periods.map(p=>`<option value="${esc(p.id)}">${esc(p.label)}</option>`).join('');$('#period-filter').value=state.period;
+ const facilities=(current()||report.periods[0]).facilities;
+ $('#brand-filter').innerHTML='<option value="all">All brands</option>'+[...new Set(facilities.map(f=>f.brand))].sort().map(b=>`<option>${esc(b)}</option>`).join('');$('#brand-filter').value=state.brand;
+ $('#facility-filter').innerHTML='<option value="all">All facilities</option>'+facilities.filter(f=>state.brand==='all'||f.brand===state.brand).map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('');$('#facility-filter').value=state.facility;
 }
 function render(){
+ if(typeof detail!=='undefined'&&detail.view!=='overview'){renderDetailViews();return;}
  const p=current(),rows=selected(p),cc=aggregate(rows);
  $('#mode-ribbon').textContent=`Monthly reporting · ${p.label} · USD`;
  $('#snapshot-label').textContent=`Updated ${report.refreshed}`;$('#facility-count').textContent=`${p.facilities.length} facilities`;
@@ -84,7 +88,7 @@ function openFacility(id){
  $('#backdrop').classList.remove('hidden');$('#drawer').classList.add('open');$('#drawer').setAttribute('aria-hidden','false');
 }
 function bindEvents(){
- for(const[id,key]of[['period-filter','period'],['brand-filter','brand'],['facility-filter','facility'],['compare-filter','compare']])$('#'+id).onchange=e=>{state[key]=e.target.value;if(key==='brand')state.facility='all';state.page=1;renderFilters();render();};
+ for(const[id,key]of[['period-filter','period'],['brand-filter','brand'],['facility-filter','facility'],['compare-filter','compare']])$('#'+id).onchange=e=>{state[key]=e.target.value;if(key==='brand')state.facility='all';if(key==='period'&&typeof detail!=='undefined')detail.periodNotice='';state.page=1;renderFilters();render();};
  $('#health-filter').onchange=e=>{state.coverage=e.target.value;state.page=1;renderTable();};$('#table-search').oninput=e=>{state.search=e.target.value.toLowerCase().trim();state.page=1;renderTable();};
  $('#reset-filters').onclick=()=>{Object.assign(state,{period:'2026-08',brand:'all',facility:'all',compare:'previous',coverage:'all',search:'',page:1,chart:'spend',sort:'net',direction:-1});$('#health-filter').value='all';$('#table-search').value='';$('#compare-filter').value='previous';renderFilters();render();};
  $$('.chart-toggle button').forEach(b=>b.onclick=()=>{state.chart=b.dataset.chart;renderTrend();});

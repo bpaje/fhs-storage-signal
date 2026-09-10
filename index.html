@@ -43,6 +43,7 @@
             <label><span>Compare with</span><select id="compare-filter"><option value="previous">Previous period</option><option value="none">No comparison</option></select></label>
             <button class="reset-button" id="reset-filters">Reset</button>
           </section>
+          <p class="detail-scope period-coverage" id="period-coverage" aria-live="polite"></p>
           <section class="source-strip" id="source-strip" aria-label="Source freshness and status"></section>
           <div id="overview-view">
           <section class="kpi-grid" id="kpi-grid" aria-label="Portfolio headline metrics"></section>
@@ -89,8 +90,9 @@
           <section id="meta-view" class="hidden" aria-label="Meta Ads details and insights"></section>
           <section id="analytics-view" class="hidden" aria-label="Google Analytics details">
             <p class="detail-scope" id="ga-scope">Loading website analytics…</p>
+            <div class="data-coverage" id="ga-data-coverage" role="status" hidden></div>
             <div class="kpi-grid" id="ga-kpis"></div>
-            <article class="panel detail-panel"><header class="panel-header"><div><h3>Website activity</h3><p>Monthly sessions · September covers days 1–9 only</p></div></header><div class="chart-area" id="ga-trend" role="img" aria-label="Monthly website sessions"></div></article>
+            <article class="panel detail-panel"><header class="panel-header"><div><h3>Website activity</h3><p id="ga-trend-note">Monthly sessions · September covers days 1–9 only</p></div></header><div class="chart-area" id="ga-trend" role="img" aria-label="Monthly website sessions" tabindex="0"></div></article>
             <article class="panel detail-panel">
               <header class="panel-header"><div><h3>Website breakdown</h3><p>Users can appear in multiple rows; headline totals come from the whole website report.</p></div><button class="export-button" id="ga-export">Download CSV</button></header>
               <div class="detail-toolbar"><div class="detail-toggle" aria-label="Analytics breakdown"><button data-ga-breakdown="channels" class="active">Traffic channels</button><button data-ga-breakdown="pages">Pages</button><button data-ga-breakdown="cities">Visitor cities</button></div><label class="sr-only" for="ga-search">Search Analytics rows</label><input id="ga-search" type="search" placeholder="Search rows" /></div>
