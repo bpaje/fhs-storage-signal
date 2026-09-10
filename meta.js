@@ -5,7 +5,18 @@ const metaPanel = (() => {
   const modes = { campaigns: 'Campaigns', adsets: 'Ad sets', ads: 'Ads', placements: 'Placements', demographics: 'Age / gender', regions: 'Regions', devices: 'Devices' };
   const hierarchy = new Set(['campaigns', 'adsets', 'ads']);
   const metricFields = ['spend', 'impressions', 'reach', 'frequency', 'clicks', 'linkClicks', 'leads', 'formLeads', 'websiteLeads', 'messages', 'landingViews', 'postEngagement', 'reactions', 'comments', 'saves', 'videoPlays'];
-  const ui = { campaign: 'all', adset: 'all', ad: 'all', mode: 'campaigns', search: '', sort: 'spend', direction: -1, page: 1, period: null };
+  const chartMetrics = [
+    { key: 'spend', label: 'Spend', kind: 'money' },
+    { key: 'leads', label: 'Meta leads', kind: 'number' },
+    { key: 'cpl', label: 'Cost per lead', kind: 'money' },
+    { key: 'linkClicks', label: 'Link clicks', kind: 'number' },
+    { key: 'linkCTR', label: 'Link CTR', kind: 'percent' },
+    { key: 'reach', label: 'Reach', kind: 'number' },
+    { key: 'frequency', label: 'Frequency', kind: 'number' },
+    { key: 'impressions', label: 'Impressions', kind: 'number' },
+    { key: 'messages', label: 'Conversations', kind: 'number' }
+  ];
+  const ui = { campaign: 'all', adset: 'all', ad: 'all', mode: 'campaigns', search: '', sort: 'spend', direction: -1, page: 1, period: null, chartMetric: 'spend' };
   let data = null, loading = false, failed = false;
   const rowsFor = (period, kind) => Array.isArray(period?.[kind]) ? period[kind] : [];
   const same = (a, b) => String(a) === String(b);
@@ -59,6 +70,7 @@ const metaPanel = (() => {
         <details class="meta-more"><summary>More delivery and engagement metrics</summary><div class="meta-support-grid" id="meta-more-metrics"></div></details>
         <p class="meta-explanation">Meta leads and messaging conversations can overlap. Grouped Meta leads and website pixel leads are source action buckets; use Meta leads as the total. These results do not establish qualified enquiries, rentals or revenue. n/a means the source did not provide a value.</p>
       </section>
+      <section class="panel monthly-panel" id="meta-monthly" aria-label="Meta monthly performance"></section>
       <section class="panel meta-insights-panel" aria-labelledby="meta-insights-title">
         <header class="panel-header"><div><h3 id="meta-insights-title">What to review next</h3><p id="meta-insights-scope"></p></div><span class="meta-scope-badge">Account-wide insights</span></header>
         <div class="meta-insight-grid" id="meta-insights"></div>
@@ -128,7 +140,7 @@ const metaPanel = (() => {
   }
 
   function reset() {
-    Object.assign(ui, { campaign: 'all', adset: 'all', ad: 'all', mode: 'campaigns', search: '', sort: 'spend', direction: -1, page: 1 });
+    Object.assign(ui, { campaign: 'all', adset: 'all', ad: 'all', mode: 'campaigns', search: '', sort: 'spend', direction: -1, page: 1, chartMetric: 'spend' });
     if ($('#meta-search')) $('#meta-search').value = '';
     render();
   }
@@ -203,6 +215,31 @@ const metaPanel = (() => {
       const basis = Array.isArray(item.basis) ? item.basis.join(' · ') : item.basis;
       return `<article class="meta-insight-card"><div class="meta-insight-heading"><h4>${esc(item.title)}</h4><span class="meta-confidence">${esc(item.confidence || 'Evidence to review')}</span></div><p><strong>Observation</strong>${esc(item.observation)}</p><p><strong>Suggested action</strong>${esc(item.action)}</p><p class="meta-insight-basis"><strong>Basis and limits</strong>${esc(basis || 'Source-reported Meta results; no confirmed rental or revenue link.')}</p></article>`;
     }).join('') : '<p class="detail-scope">No decision notes are available for this month yet. The source metrics remain available below.</p>';
+  }
+
+  function renderMonthlyMetrics(period) {
+    const selection = exactSummary(period);
+    const scope = selection.row?.name ? `${selection.level}: ${selection.row.name}` : selection.level;
+    const periods = report.periods.filter(month => /^\d{4}-\d{2}$/.test(month.id) && data.periods[month.id]).map(month => {
+      const row = exactSummary(data.periods[month.id]).row;
+      const value = row ? number(rates(row)[ui.chartMetric]) : null;
+      return {
+        id: month.id, label: month.label, start: month.start, end: month.end,
+        partial: month.partial, value,
+        note: !row ? 'No source summary for this selection in this month.' : value === null ? 'This metric is unavailable or its rate denominator is zero.' : ''
+      };
+    }).sort((a, b) => a.start.localeCompare(b.start));
+    renderMonthlyTrend('#meta-monthly', {
+      title: 'Meta Ads by month', metrics: chartMetrics, metric: ui.chartMetric, periods,
+      selectedPeriod: state.period,
+      selectedValue: number(rates(selection.row || {})[ui.chartMetric]),
+      scope: `${scope}. Monthly values follow the campaign, ad-set and ad dropdowns. Table search does not change this chart. Breakdown rows are not added; reach and frequency use each month's exact source summary. Available Meta history starts in June.`,
+      onMetricChange: key => {
+        if (!chartMetrics.some(metric => metric.key === key)) return;
+        ui.chartMetric = key;
+        renderMonthlyMetrics(data.periods[state.period]);
+      }
+    });
   }
 
   function tableRows(period) {
@@ -297,6 +334,7 @@ const metaPanel = (() => {
     if (ui.period !== state.period) { ui.period = state.period; ui.page = 1; }
     normaliseSelection(period);
     renderMetrics(period);
+    renderMonthlyMetrics(period);
     renderInsights(period);
     renderTable(period);
     const refreshed = data.refreshed ? ` · Refreshed ${data.refreshed}` : '';

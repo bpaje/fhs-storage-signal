@@ -7,6 +7,7 @@
     <title>Storage Signal — Portfolio Overview</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="meta.css" />
+    <link rel="stylesheet" href="monthly-trend.css" />
   </head>
   <body>
     <div class="prototype-ribbon" id="mode-ribbon"><span class="ribbon-dot"></span>Loading monthly report…</div>
@@ -78,6 +79,7 @@
             </div>
             <p class="detail-scope" id="ads-scope"></p>
             <div class="kpi-grid" id="ads-kpis"></div>
+            <article class="panel detail-panel" id="ads-monthly" aria-label="Monthly Google Ads performance"></article>
             <article class="panel detail-panel">
               <header class="panel-header"><div><h3>Performance breakdown</h3><p>Choose a campaign row to drill into its ad groups.</p></div><button class="export-button" id="ads-export">Download CSV</button></header>
               <div class="detail-toolbar"><div class="detail-toggle" aria-label="Ads breakdown"><button data-ads-breakdown="campaigns" class="active">Campaigns</button><button data-ads-breakdown="groups">Ad groups</button><button data-ads-breakdown="geography">Audience locations</button></div><label class="sr-only" for="ads-search">Search Ads rows</label><input id="ads-search" type="search" placeholder="Search rows" /></div>
@@ -92,7 +94,7 @@
             <p class="detail-scope" id="ga-scope">Loading website analytics…</p>
             <div class="data-coverage" id="ga-data-coverage" role="status" hidden></div>
             <div class="kpi-grid" id="ga-kpis"></div>
-            <article class="panel detail-panel"><header class="panel-header"><div><h3>Website activity</h3><p id="ga-trend-note">Monthly sessions · September covers days 1–9 only</p></div></header><div class="chart-area" id="ga-trend" role="img" aria-label="Monthly website sessions" tabindex="0"></div></article>
+            <article class="panel detail-panel" id="ga-monthly" aria-label="Monthly website activity"></article>
             <article class="panel detail-panel">
               <header class="panel-header"><div><h3>Website breakdown</h3><p>Users can appear in multiple rows; headline totals come from the whole website report.</p></div><button class="export-button" id="ga-export">Download CSV</button></header>
               <div class="detail-toolbar"><div class="detail-toggle" aria-label="Analytics breakdown"><button data-ga-breakdown="channels" class="active">Traffic channels</button><button data-ga-breakdown="pages">Pages</button><button data-ga-breakdown="cities">Visitor cities</button></div><label class="sr-only" for="ga-search">Search Analytics rows</label><input id="ga-search" type="search" placeholder="Search rows" /></div>
@@ -110,6 +112,7 @@
     <section class="modal hidden" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header><div><p class="drawer-eyebrow">Storage Signal evidence</p><h2 id="modal-title">Metric definitions</h2></div><button class="close-button" data-close-modal aria-label="Close">×</button></header><div class="modal-body" id="modal-body"></div></section>
     <div class="toast-region" id="toast-region" aria-live="polite"></div>
     <script src="app.js"></script>
+    <script src="monthly-trend.js"></script>
     <script src="details.js"></script>
     <script src="meta.js"></script>
   </body>

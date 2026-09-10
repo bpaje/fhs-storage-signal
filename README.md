@@ -24,6 +24,8 @@ Google Analytics reads `data/analytics.json`, scoped to the supplied website str
 
 Both tabs support searchable, sortable tables and CSV export of all matching rows, not only the visible page. Exported rates are numeric fractions. Website and advertising filters are independent of the storage filters.
 
+Google Ads, GA4 and Meta also share a monthly column chart with selectable metrics and an expandable monthly-values table. Google Ads follows the campaign, ad-group and audience-location dropdowns across all loaded months; Meta uses the exact account, campaign, ad-set or ad summary for each month. GA4 charts use whole-website monthly summaries. Table searches do not change chart totals. Rates are recalculated from each month's scoped totals, and users, reach and frequency are never added across rows. The selected-period figure can show a direct YTD result, but YTD is never an extra monthly column. Partial months and February's partial GA4 history are marked; unavailable metrics remain n/a.
+
 ## Meta reporting and decision notes
 
 The Meta tab reads `data/meta.json`: monthly account, campaign, ad-set and ad summaries; ad-set-level placement, demographic, region and device reports; plus two adjacent seven-day windows per reporting month. Filters use exact source summaries, so reach and frequency are never summed across ads or breakdown rows. Meta-reported leads, grouped Meta leads, website pixel leads and messaging conversations remain separate action categories. Regional total leads, website leads, conversations and landing-page views were not returned and remain null; regional grouped Meta leads are available.
