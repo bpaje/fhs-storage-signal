@@ -22,6 +22,14 @@ Google Analytics reads `data/analytics.json`, scoped to the supplied website str
 
 Both tabs support searchable, sortable tables and CSV export of all matching rows, not only the visible page. Exported rates are numeric fractions. Website and advertising filters are independent of the storage filters.
 
+## Meta reporting and decision notes
+
+The Meta tab reads `data/meta.json`: monthly account, campaign, ad-set and ad summaries; ad-set-level placement, demographic, region and device reports; plus two adjacent seven-day windows per reporting month. Filters use exact source summaries, so reach and frequency are never summed across ads or breakdown rows. Meta-reported leads, grouped Meta leads, website pixel leads and messaging conversations remain separate action categories. Regional total leads, website leads, conversations and landing-page views were not returned and remain null; regional grouped Meta leads are available.
+
+The account-wide decision notes cover monthly or matched-week CPL changes, ad-set lead efficiency, higher-cost enquiries, ad concentration and possible fatigue. Every note includes its evidence and limits. Low-volume candidates are screened; the thresholds are operational rules, not significance tests. No budget, audience, creative or tracking settings are changed by this dashboard. Lead quality, qualified enquiries, rentals and attributed revenue are not measured here.
+
+To refresh, retrieve the same bounded Meta reports with complete pagination, then run `python scripts/build-meta.py /private/path/meta-complete-source.json`. This writes the public aggregate Meta dataset and updates matching Meta overview totals. The source extract stays outside the public repository. Re-run `python scripts/validate-data.py` and browser checks. Insight rules are deterministic and regenerate with the snapshot; the browser does not make API or AI calls.
+
 For refreshes, use the same reporting dates as the overview. Retrieve Google Ads campaigns and ad groups by month, the city report and geographic names. Retrieve GA4 monthly totals directly, then separate channel, page and city reports with the same stream filter. Preserve threshold/sampling metadata. Run `python scripts/validate-data.py` before publication.
 
 ## Payment basis

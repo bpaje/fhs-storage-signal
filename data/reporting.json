@@ -4,7 +4,7 @@
   "currency": "USD",
   "adTimezone": "America/New_York",
   "ccExtractedAt": "2026-09-10T08:35:10.466+00:00",
-  "metaExtractedAt": "2026-09-10T09:08:57.9189535Z",
+  "metaExtractedAt": "2026-09-10T10:07:42.1022507Z",
   "periods": [
     {
       "id": "2026-06",
@@ -20,11 +20,11 @@
       },
       "meta": {
         "spend": 1314.17,
-        "impressions": 36969,
-        "clicks": 677,
-        "linkClicks": 394,
-        "reach": 14106,
-        "leads": 60
+        "impressions": 36969.0,
+        "clicks": 677.0,
+        "linkClicks": 394.0,
+        "reach": 14106.0,
+        "leads": 60.0
       },
       "facilities": [
         {
@@ -629,11 +629,11 @@
       },
       "meta": {
         "spend": 2169.78,
-        "impressions": 66073,
-        "clicks": 1089,
-        "linkClicks": 587,
-        "reach": 18429,
-        "leads": 80
+        "impressions": 66073.0,
+        "clicks": 1089.0,
+        "linkClicks": 587.0,
+        "reach": 18429.0,
+        "leads": 80.0
       },
       "facilities": [
         {
@@ -1238,11 +1238,11 @@
       },
       "meta": {
         "spend": 2168.06,
-        "impressions": 71682,
-        "clicks": 1299,
-        "linkClicks": 762,
-        "reach": 22416,
-        "leads": 85
+        "impressions": 71682.0,
+        "clicks": 1299.0,
+        "linkClicks": 762.0,
+        "reach": 22416.0,
+        "leads": 85.0
       },
       "facilities": [
         {
@@ -1846,12 +1846,12 @@
         "conversions": 37.98431
       },
       "meta": {
-        "spend": 628.2,
-        "impressions": 19771,
-        "clicks": 297,
-        "linkClicks": 218,
-        "reach": 9014,
-        "leads": 17
+        "spend": 628.27,
+        "impressions": 19773.0,
+        "clicks": 297.0,
+        "linkClicks": 218.0,
+        "reach": 9014.0,
+        "leads": 17.0
       },
       "facilities": [
         {
