@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Monthly Google Ads, Meta Ads and CCStorage reporting." />
+    <meta name="description" content="Monthly Google Ads, Meta Ads, Analytics and CCStorage reporting." />
     <title>Storage Signal — Portfolio Overview</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -14,7 +14,9 @@
         <div class="brand"><div class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></div><div><strong>Storage Signal</strong><span>Portfolio intelligence</span></div></div>
         <nav aria-label="Storage Signal navigation">
           <p class="nav-label">Workspace</p>
-          <button class="nav-item active"><span class="nav-glyph">⌂</span>Overview</button>
+          <button class="nav-item active" data-view="overview"><span class="nav-glyph">⌂</span>Overview</button>
+          <button class="nav-item" data-view="ads"><span class="nav-glyph">↗</span>Google Ads</button>
+          <button class="nav-item" data-view="analytics"><span class="nav-glyph">▥</span>Google Analytics</button>
         </nav>
         <div class="sidebar-foot">
           <div class="workspace"><span class="workspace-avatar">FH</span><div><strong>Family Heirloom</strong><small id="facility-count">Portfolio</small></div></div>
@@ -29,7 +31,7 @@
         </header>
         <main id="content">
           <section class="welcome-row">
-            <div><h2>Portfolio overview</h2><p>Google Ads, Meta Ads and CCStorage — monthly reporting from June 2026.</p></div>
+            <div><h2>Portfolio overview</h2><p>Google Ads, Meta Ads, Analytics and CCStorage — monthly reporting from June 2026.</p></div>
             <div class="freshness" id="freshness"><span class="freshness-dot"></span><div><strong>Snapshot loading</strong><small>Loading source totals</small></div></div>
           </section>
           <section class="filter-bar" aria-label="Dashboard filters">
@@ -40,7 +42,9 @@
             <button class="reset-button" id="reset-filters">Reset</button>
           </section>
           <section class="source-strip" id="source-strip" aria-label="Source freshness and status"></section>
+          <div id="overview-view">
           <section class="kpi-grid" id="kpi-grid" aria-label="Portfolio headline metrics"></section>
+          <section class="panel website-summary" id="website-summary" aria-label="Website activity"></section>
           <section class="chart-grid">
             <article class="panel trend-panel">
               <header class="panel-header"><div><h3>Monthly trend</h3><p id="trend-subtitle">June onward</p></div><div class="chart-toggle" role="group" aria-label="Chart metric"><button class="active" data-chart="spend">Ad spend</button><button data-chart="net">Payments</button><button data-chart="moveIns">Move-ins</button></div></header>
@@ -61,6 +65,37 @@
             <div class="table-scroll"><table><thead><tr><th class="sortable" data-sort="name">Facility <span>↕</span></th><th class="sortable" data-sort="net">Net payments <span>↕</span></th><th class="sortable" data-sort="moveIns">Move-ins <span>↕</span></th><th class="sortable" data-sort="moveOuts">Move-outs ↕</th><th class="sortable" data-sort="occupancy">Occupancy <span>↕</span></th><th>Coverage</th></tr></thead><tbody id="facility-tbody"></tbody></table></div>
             <footer class="table-footer"><span id="table-result-count">Loading facilities</span><div class="pagination" id="pagination"></div></footer>
           </section>
+          </div>
+          <section id="ads-view" class="hidden" aria-label="Google Ads details">
+            <div class="detail-filters">
+              <label>Campaign location<select id="ads-location"><option value="all">All locations</option></select></label>
+              <label>Campaign<select id="ads-campaign"><option value="all">All campaigns</option></select></label>
+              <label>Ad group<select id="ads-group"><option value="all">All ad groups</option></select></label>
+              <button class="reset-button" id="ads-reset">Clear Ads filters</button>
+            </div>
+            <p class="detail-scope" id="ads-scope"></p>
+            <div class="kpi-grid" id="ads-kpis"></div>
+            <article class="panel detail-panel">
+              <header class="panel-header"><div><h3>Performance breakdown</h3><p>Choose a campaign row to drill into its ad groups.</p></div><button class="export-button" id="ads-export">Download CSV</button></header>
+              <div class="detail-toolbar"><div class="detail-toggle" aria-label="Ads breakdown"><button data-ads-breakdown="campaigns" class="active">Campaigns</button><button data-ads-breakdown="groups">Ad groups</button><button data-ads-breakdown="geography">Audience locations</button></div><label class="sr-only" for="ads-search">Search Ads rows</label><input id="ads-search" type="search" placeholder="Search rows" /></div>
+              <div id="ads-geo-filters" class="detail-filters hidden"><label>Audience city<select id="ads-city"><option value="all">All cities</option></select></label><label>Location type<select id="ads-location-type"><option value="all">All types</option><option value="LOCATION_OF_PRESENCE">Presence</option><option value="AREA_OF_INTEREST">Interest</option></select></label></div>
+              <p class="detail-scope" id="ads-coverage"></p>
+              <div class="table-scroll"><table><thead id="ads-head"></thead><tbody id="ads-body"></tbody></table></div>
+              <footer class="table-footer"><span id="ads-count"></span><div class="pagination" id="ads-pages"></div></footer>
+            </article>
+          </section>
+          <section id="analytics-view" class="hidden" aria-label="Google Analytics details">
+            <p class="detail-scope" id="ga-scope">Loading website analytics…</p>
+            <div class="kpi-grid" id="ga-kpis"></div>
+            <article class="panel detail-panel"><header class="panel-header"><div><h3>Website activity</h3><p>Monthly sessions · September covers days 1–9 only</p></div></header><div class="chart-area" id="ga-trend" role="img" aria-label="Monthly website sessions"></div></article>
+            <article class="panel detail-panel">
+              <header class="panel-header"><div><h3>Website breakdown</h3><p>Users can appear in multiple rows; headline totals come from the whole website report.</p></div><button class="export-button" id="ga-export">Download CSV</button></header>
+              <div class="detail-toolbar"><div class="detail-toggle" aria-label="Analytics breakdown"><button data-ga-breakdown="channels" class="active">Traffic channels</button><button data-ga-breakdown="pages">Pages</button><button data-ga-breakdown="cities">Visitor cities</button></div><label class="sr-only" for="ga-search">Search Analytics rows</label><input id="ga-search" type="search" placeholder="Search rows" /></div>
+              <p class="detail-scope" id="ga-quality"></p>
+              <div class="table-scroll"><table><thead id="ga-head"></thead><tbody id="ga-body"></tbody></table></div>
+              <footer class="table-footer"><span id="ga-count"></span><div class="pagination" id="ga-pages"></div></footer>
+            </article>
+          </section>
           <footer class="page-footer"><p id="footer-note"><strong>Monthly report:</strong> Loading source totals.</p><button id="definitions-button">Metric definitions</button></footer>
         </main>
       </div>
@@ -70,5 +105,6 @@
     <section class="modal hidden" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header><div><p class="drawer-eyebrow">Storage Signal evidence</p><h2 id="modal-title">Metric definitions</h2></div><button class="close-button" data-close-modal aria-label="Close">×</button></header><div class="modal-body" id="modal-body"></div></section>
     <div class="toast-region" id="toast-region" aria-live="polite"></div>
     <script src="app.js"></script>
+    <script src="details.js"></script>
   </body>
 </html>

@@ -57,7 +57,7 @@ function render(){
  const anomalies=rows.filter(f=>f.occupancy>1);if(anomalies.length)notes.push(['Occupancy review',anomalies.map(f=>`${f.name}: ${f.leases} leases / ${f.units} units`).join('; ')]);
  $('#attention-count').textContent=`${notes.length} notes`;$('#attention-list').innerHTML=notes.map(([title,note])=>`<button type="button"><div><strong>${title}</strong><small>${esc(note)}</small></div><b>i</b></button>`).join('');$$('#attention-list button').forEach(b=>b.onclick=openDefinitions);
  $('#footer-note').textContent=`USD · Google Ads and Meta Ads: account-wide · CCStorage: selected facilities · Data through ${p.end}`;
- renderTrend();renderTable();
+ renderTrend();renderTable();if(typeof renderDetailViews==='function')renderDetailViews();
 }
 function renderTrend(){
  const metric=state.chart,kind=metric==='moveIns'?'number':'money',value=p=>metric==='spend'?p.google.spend+p.meta.spend:aggregate(selected(p))[metric];

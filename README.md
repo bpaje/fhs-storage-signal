@@ -1,6 +1,6 @@
 # Storage Signal reporting
 
-Static monthly reporting for Google Ads, Meta Ads and CCStorage. No attribution joins, advertising allocation to facilities, CAC or ROAS calculations.
+Static monthly reporting for Google Ads, Meta Ads, Google Analytics and CCStorage. No attribution joins, advertising allocation to facilities, CAC or ROAS calculations.
 
 The dashboard reads `data/reporting.json`. The current release covers June, July and August 2026, plus September 1–9 MTD. August is the default complete month. Storage filters affect CCStorage only; advertising remains account-wide.
 
@@ -13,6 +13,16 @@ The dashboard reads `data/reporting.json`. The current release covers June, July
 5. Check payment arithmetic, source totals, coverage and date alignment; preview month/filter changes, then publish the static files.
 
 Refreshes are currently manual. The browser never connects to source accounts. Historical results may change when sources revise payments or platform results.
+
+## Detail tabs
+
+Google Ads reads `data/google-ads.json`: monthly campaign totals, ad-group totals and the separate city report. Campaign-location labels are extracted from campaign names, not joined to storage facilities. Campaign rows drill into ad groups. Audience-city and presence/interest filters apply to the geography report; ad-group filtering is disabled there. Geographic totals do not cover all account delivery. Monetary sums retain source micros until display; rates are recomputed from totals. Fractional conversions can vary slightly between reporting levels; source values are retained and checked for agreement at the displayed two-decimal precision.
+
+Google Analytics reads `data/analytics.json`, scoped to the supplied website stream `G-TCSG6BY1KK`. It includes monthly summary metrics, traffic channels, page paths and visitor cities. Monthly users come from the summary report, not sums of daily or dimension rows. Page paths exclude query strings; customer-level data is not included. The Analytics Admin API was enabled on the existing reporting project to verify this stream. No tracking configuration was changed.
+
+Both tabs support searchable, sortable tables and CSV export of all matching rows, not only the visible page. Exported rates are numeric fractions. Website and advertising filters are independent of the storage filters.
+
+For refreshes, use the same reporting dates as the overview. Retrieve Google Ads campaigns and ad groups by month, the city report and geographic names. Retrieve GA4 monthly totals directly, then separate channel, page and city reports with the same stream filter. Preserve threshold/sampling metadata. Run `python scripts/validate-data.py` before publication.
 
 ## Payment basis
 
