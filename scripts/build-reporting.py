@@ -1,11 +1,15 @@
 """Build the cross-platform Overview reporting file (data/reporting.json) from local API extracts.
 
-Usage: python scripts/build-reporting.py <ccstorage-source.json> <google-report.json> <meta-report.json> [--refreshed YYYY-MM-DD]
+Usage: python scripts/build-reporting.py <ccstorage-source.json> <google-report.json> <meta-complete-source.json> [--refreshed YYYY-MM-DD]
 No credentials, source writes, budget changes or network calls.
 
-Period boundaries come entirely from meta-report.json's own periods array
-(each with an explicit start/end), so this script covers whatever months
-the raw extracts contain rather than a fixed list.
+Period boundaries come entirely from the 'account'-kind entries in the
+Meta extract's own reports array (each with an explicit start/end), so
+this script covers whatever months the raw extracts contain rather than
+a fixed list. Using the same meta-complete-source.json that build-meta.py
+also reads (instead of a separate Meta extract) avoids two different
+Meta snapshots, taken at different times, disagreeing for the
+still-moving current month.
 
 Run order matters: this script must run BEFORE scripts/build-meta.py.
 The Meta figures written here (period.meta.*, metaExtractedAt) are a
@@ -45,13 +49,14 @@ def period_label(start, end):
 
 def build(cc, google, meta, refreshed):
     periods = []
-    for period in meta['periods']:
+    account_reports = sorted((r for r in meta['reports'] if r['kind'] == 'account'), key=lambda r: r['start'])
+    for period in account_reports:
         start, end = period['start'], period['end']
         key = start[:7]
         g = [x for x in google if x['segments.date'].startswith(key) and x['segments.date'] <= end]
         assert len(g) == int(end.split('-')[2]), f'Incomplete Google daily response for {key}'
-        assert len(period['data']) == 1, f'Expected exactly one Meta account row for {key}'
-        m = period['data'][0]
+        assert len(period['rows']) == 1, f'Expected exactly one Meta account row for {key}'
+        m = period['rows'][0]
         assert m['date_start'] == start and m['date_stop'] == end, f'Meta period bounds mismatch for {key}'
         rows = []
         for c in cc['companies']:
@@ -105,9 +110,9 @@ def build(cc, google, meta, refreshed):
         'schema': 'storage-signal.reporting.v1',
         'refreshed': refreshed,
         'currency': 'USD',
-        'adTimezone': meta['account']['timezone_name'],
+        'adTimezone': meta['timezone'],
         'ccExtractedAt': cc['extractedAt'],
-        'metaExtractedAt': meta['extractedAt'],
+        'metaExtractedAt': meta['refreshed'],
         'periods': periods,
     }
 
