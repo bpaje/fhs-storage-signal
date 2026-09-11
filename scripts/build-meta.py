@@ -3,10 +3,24 @@
 Usage: python scripts/build-meta.py /private/path/meta-complete-source.json
 No credentials, source writes, budget changes or network calls.
 """
-import json, sys
+import calendar, json, sys
+from datetime import date
 from pathlib import Path
 
-MONTHS = {'2026-06':'June','2026-07':'July','2026-08':'August','2026-09':'September 1–9'}
+def month_name(month_key):
+    year, mon = map(int, month_key.split('-'))
+    return calendar.month_name[mon]
+def is_partial_month(month_key, through_date):
+    year, mon = map(int, month_key.split('-'))
+    through = date.fromisoformat(through_date)
+    if (through.year, through.month) != (year, mon):
+        return False
+    return through.day < calendar.monthrange(year, mon)[1]
+def period_label(month_key, through_date):
+    name = month_name(month_key)
+    if is_partial_month(month_key, through_date):
+        return f"{name} 1–{date.fromisoformat(through_date).day}"
+    return name
 ACTION_FIELDS = [('leads','lead'),('formLeads','onsite_conversion.lead_grouped'),('websiteLeads','offsite_conversion.fb_pixel_lead'),('messages','onsite_conversion.messaging_conversation_started_7d'),('landingViews','landing_page_view'),('postEngagement','post_engagement'),('reactions','post_reaction'),('comments','comment'),('saves','onsite_conversion.post_save')]
 def number(value):
     return float(value) if value is not None else None
@@ -33,9 +47,9 @@ def summarize(rows):
     return {k:sum((r.get(k) or 0) for r in rows) for k in ['spend','leads','impressions','linkClicks']}
 def insight(title, observation, action_text, confidence, basis):
     return dict(title=title, observation=observation, action=action_text, confidence=confidence, basis=basis)
-def make_insights(month, period, previous, weeks):
-    account = period['account']; average = cpl(account); name=MONTHS[month]; insights=[]
-    if previous and month != '2026-09':
+def make_insights(month, period, previous, weeks, through):
+    account = period['account']; average = cpl(account); name=period_label(month, through); partial=is_partial_month(month, through); insights=[]
+    if previous and not partial:
         old = previous['account']; old_cpl=cpl(old)
         if old_cpl and average:
             change=100*(average/old_cpl-1)
@@ -55,10 +69,10 @@ def make_insights(month, period, previous, weeks):
                 f"{name}: {usd(account['spend'])}, {count(account['leads'])} leads and {usd(average)} CPL. Prior month: {usd(old['spend'])}, {count(old['leads'])} leads and {usd(old_cpl)} CPL."+drivers,
                 'Review the largest declining ad set first and compare its offer, audience and ads with the prior month. Change one factor at a time.',
                 'Observed monthly change', 'Complete calendar months; Meta lead action only. Different month lengths and lead quality can affect interpretation.'))
-    if month == '2026-09':
+    if partial:
         recent, prior=weeks['recentWeek'],weeks['priorWeek'];new=summarize(recent['rows']);old=summarize(prior['rows'])
         recent_cpl=cpl(new);prior_cpl=cpl(old)
-        title='Compare September using equal seven-day windows'
+        title=f'Compare {month_name(month)} using equal seven-day windows'
         if recent_cpl and prior_cpl:
             change=100*(recent_cpl/prior_cpl-1)
             title=f'Latest seven-day CPL {abs(change):.1f}% '+('higher' if change>0 else 'lower')
@@ -151,7 +165,7 @@ def build(raw):
         for kind in ['campaigns','adsets','ads']:
             assert abs(sum(r['spend'] for r in p[kind])-p['account']['spend'])<.011,(month,kind,'spend')
             assert sum(r['leads'] for r in p[kind])==p['account']['leads'],(month,kind,'leads')
-        p['insights']=make_insights(month,p,previous,weekly[month]);p['weeklyEvidence']=weekly[month]
+        p['insights']=make_insights(month,p,previous,weekly[month],output['through']);p['weeklyEvidence']=weekly[month]
         previous=p
     return output
 
