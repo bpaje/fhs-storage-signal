@@ -6,21 +6,22 @@
 .monthly-trend-selected strong { color: var(--ink); font-size: 25px; font-variant-numeric: tabular-nums; }
 .monthly-trend-selected span { color: var(--muted); font-size: 12px; }
 .monthly-trend-controls { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px 12px; }
-.monthly-trend-controls button { min-height: 44px; padding: 8px 13px; border: 1px solid var(--line-dark); border-radius: 7px; background: white; color: var(--ink); font: inherit; font-size: 12px; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
-.monthly-trend-controls button:hover { background: var(--surface, #f3f7f5); }
-.monthly-trend-controls button[aria-pressed="true"] { background: var(--forest, #24634f); border-color: var(--forest, #24634f); color: white; }
-.monthly-trend-controls button:focus-visible, .monthly-trend-chart:focus-visible, .monthly-trend-values summary:focus-visible { outline: 3px solid #86b7a2; outline-offset: 3px; }
+.monthly-trend-controls button { min-height: 44px; padding: 8px 13px; border: 1px solid var(--control-border); border-radius: 7px; background: white; color: var(--ink); font: inherit; font-size: 12px; cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
+.monthly-trend-controls button:hover { background: var(--panel-soft); }
+.monthly-trend-controls button[aria-pressed="true"] { background: var(--brand-primary); border-color: var(--brand-primary); color: white; }
+.monthly-trend-controls button:focus-visible, .monthly-trend-chart:focus-visible, .monthly-trend-values summary:focus-visible { outline: 3px solid var(--brand-primary); outline-offset: 3px; }
 .monthly-trend-chart { width: 100%; min-width: 0; overflow-x: auto; overscroll-behavior-x: contain; }
 .monthly-trend-chart svg { display: block; width: 100%; max-width: none; font-family: inherit; }
-.monthly-trend-guide line { stroke: var(--line, #e0e7e3); stroke-width: 1; }
-.monthly-trend-guide text, .monthly-trend-month { fill: var(--muted, #62706a); font-size: 12px; }
-.monthly-trend-value { fill: var(--ink, #173f34); font-size: 12px; font-variant-numeric: tabular-nums; }
-.monthly-trend-baseline { stroke: #879990; stroke-width: 1; }
-.monthly-trend-bar { fill: #24634f; opacity: .67; }
-.monthly-trend-bar.is-partial { fill: #9ac6b3; stroke: #558772; stroke-width: 1; stroke-dasharray: 4 2; }
-.monthly-trend-bar.is-selected { opacity: 1; }
-.monthly-trend-month.is-selected { fill: var(--ink, #173f34); font-weight: 700; }
-.monthly-trend-missing { stroke: #7e8b85; stroke-width: 1.5; stroke-dasharray: 4 3; }
+.monthly-trend-guide line { stroke: var(--line, var(--line)); stroke-width: 1; }
+.monthly-trend-guide text, .monthly-trend-month { fill: var(--muted, var(--muted)); font-size: 12px; }
+.monthly-trend-value { fill: var(--ink, var(--brand-primary)); font-size: 12px; font-variant-numeric: tabular-nums; }
+.monthly-trend-baseline { stroke: var(--brand-accent); stroke-width: 1; }
+.monthly-trend-bar { fill: var(--brand-secondary); stroke: var(--brand-secondary); stroke-width: 1; opacity: .8; }
+.monthly-trend-bar.is-partial { fill: var(--brand-accent); stroke: var(--brand-secondary); stroke-width: 1; stroke-dasharray: 4 2; }
+.monthly-trend-bar.is-selected { fill: var(--brand-primary); opacity: 1; }
+.monthly-trend-bar.is-partial.is-selected { fill: var(--brand-accent); }
+.monthly-trend-month.is-selected { fill: var(--ink, var(--brand-primary)); font-weight: 700; }
+.monthly-trend-missing { stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
 .monthly-trend-caption { margin: 0; padding: 4px 20px 16px; color: var(--muted); font-size: 12px; line-height: 1.6; }
 .monthly-trend-values { border-top: 1px solid var(--line); }
 .monthly-trend-values summary { padding: 14px 20px; color: var(--ink); font-size: 12px; font-weight: 600; cursor: pointer; }
