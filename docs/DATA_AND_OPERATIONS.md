@@ -1,6 +1,6 @@
 # Data, connections and operations
 
-This guide describes the September 10, 2026 implementation. The cutoff is September 9. For status and ownership context, read [Phase 1 completion](PHASE_1_COMPLETE.md) and [Claude handover](CLAUDE_HANDOVER.md).
+This guide describes the September 10, 2026 implementation. The cutoff is September 9. For status and ownership context, read [Phase 1 completion](PHASE_1_COMPLETE.md) and [Claude handover](CLAUDE_HANDOVER.md). For the separate source-tracking audit (GTM/GA4/Meta fixes to `familyheirloomstorage.com`'s own tracking, not the dashboard) read [Tracking audit handover](TRACKING_AUDIT_HANDOVER.md).
 
 ## Connections and architecture
 
