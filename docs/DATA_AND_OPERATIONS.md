@@ -54,6 +54,10 @@ Campaign/ad identifiers in existing public files identify reporting entities, no
 
 Every current-roster facility remains represented even when earlier payment/occupancy history is missing. Missing history is null, not zero. Counts exceeding capacity are flagged, not capped. Percentage comparisons are suppressed when facilities with data differ. September MTD is not compared with a full prior month.
 
+**Known same-day turnover double-count (source-level, unresolved).** Verified directly against CCStorage's `leases` and `occupancy_by_date_and_company` tables on 2026-09-12: a lease counts as occupying a given date under the rule `move_in_date <= date AND (move_out_date IS NULL OR move_out_date >= date) AND void IS FALSE` (confirmed by reproducing the published daily count exactly — 92 leases for company 1175 on 2026-09-09 — from raw lease rows under this exact boundary). The rule is inclusive on both ends: a tenant who moves out *on* a given date and a tenant who moves into the same unit *on* that same date are both counted as occupying it. If a unit is ever vacated and re-rented on the same calendar day, that single physical unit is counted twice in that day's occupied-leases total, inflating occupancy for that day. This is a property of CCStorage's own view definitions, not of this dashboard's build scripts, and it cannot be corrected downstream without unit-level lease data (not currently part of the extracted aggregates).
+
+A full lease-level scan of June-September 2026 across all 39 facilities found **zero actual same-day turnovers** — the closest real cases have at least a 1-day vacancy gap — so no historical number shown on this dashboard is currently affected. The risk is latent: it would only distort a reported day's occupancy once a genuine same-day turnover occurs, and the effect would be small (one unit out of roughly 90-120 per facility).
+
 The separate CCStorage reporting view is disclosed for the full portfolio even when a facility filter is active. It is not the dashboard payment basis:
 
 | Period | Register net | Separate reporting-view volume |
