@@ -1,10 +1,10 @@
 {
   "schema": "storage-signal.reporting.v1",
-  "refreshed": "2026-09-10",
+  "refreshed": "2026-09-18",
   "currency": "USD",
   "adTimezone": "America/New_York",
   "ccExtractedAt": "2026-09-17T16:50:55.562+00:00",
-  "metaExtractedAt": "2026-09-10T10:07:42.1022507Z",
+  "metaExtractedAt": "2026-09-17T19:43:13.8285603Z",
   "periods": [
     {
       "id": "2026-06",
@@ -16,7 +16,7 @@
         "spend": 7133.85,
         "impressions": 9399,
         "clicks": 830,
-        "conversions": 59.994929
+        "conversions": 59.992295
       },
       "meta": {
         "spend": 1314.17,
@@ -1846,11 +1846,11 @@
         "conversions": 37.98431
       },
       "meta": {
-        "spend": 628.27,
-        "impressions": 19773.0,
+        "spend": 629.22,
+        "impressions": 19793.0,
         "clicks": 297.0,
         "linkClicks": 218.0,
-        "reach": 9014.0,
+        "reach": 9015.0,
         "leads": 17.0
       },
       "facilities": [
