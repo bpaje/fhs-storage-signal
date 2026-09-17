@@ -184,12 +184,30 @@ $209.08 (ACH payments later returned), August move-ins fell 135 to 134 (a lease 
 the previous pull), and September 1–9 net rose $9,787.29 as payments posted after the earlier
 snapshot. Treat each pull as a dated snapshot, not a correction of an error.
 
-**The scheduled refresh cannot run** and has not since 2026-09-11: `meta-complete-source.json`
-covers through September 11 while `google-report.json` stops at September 9, so
-`build-reporting.py` and `build-meta.py` both fail their own assertions. The CCStorage fields
-were therefore updated with `private-scripts/refresh-cc-fields.py`, which reuses
-`build-reporting.py`'s own row logic and touches nothing else. Re-pull Google and Meta to the
-same cutoff before using the normal refresh again.
+**The refresh was broken from 2026-09-11 to 2026-09-18 and is now working.** Meta had been
+pulled through September 11 while Google stopped at September 9, so `build-reporting.py` (which
+asserts one Google daily row per elapsed day) and `build-meta.py` (whose September campaign
+spend did not sum to the account total in that mid-day snapshot) both failed. Meta was re-pulled
+at the September 9 cutoff; its campaign spend then reconciled, and the whole chain now runs.
+
+**Every source must share one cutoff**, and the refresh script now enforces that instead of
+failing deep in a builder:
+
+- `-Through` defaults to the CCStorage source's own `cutoff`; passing a different one aborts
+  with an instruction to re-extract CCStorage first.
+- It aborts when `google-report.json` does not reach the cutoff (there is no headless Google Ads
+  fetcher configured; the OAuth variables are unset, so that file is reused between refreshes).
+- It skips rebuilding `data/google-ads.json` when `google-ads-source.json` has a different
+  cutoff, keeping the last-good build, because `validate-data.py` requires `google-ads.json`,
+  `analytics.json` and `reporting.json` to agree. That source currently runs to September 12,
+  three days past the cutoff, so the Google Ads tab stays at its September 9 build until Google
+  Ads is re-extracted at the shared cutoff.
+- After validating, it warns when `data/restricted` was built from a different CCStorage
+  extraction than `reporting.json`, which would make the Tenants tab disagree with the cards.
+
+**Moving the cutoff forward** means re-extracting CCStorage aggregates **and**, while the
+Tenants tab is in use, the tenants source, because `build-tenants.py` requires the source
+`extractedAt` to equal `reporting.json`'s `ccExtractedAt`.
 
 **Tenant metric definitions** match the published aggregates exactly: move-ins and move-outs are
 non-void lease events by date; payments are the four eligible statuses, summed on
