@@ -4,7 +4,7 @@
   "currency": "USD",
   "adTimezone": "America/New_York",
   "ccExtractedAt": "2026-09-17T16:50:55.562+00:00",
-  "metaExtractedAt": "2026-09-17T19:44:34.5232414Z",
+  "metaExtractedAt": "2026-09-17T19:53:29.6432430Z",
   "periods": [
     {
       "id": "2026-06",
@@ -1234,7 +1234,7 @@
         "spend": 6997.62,
         "impressions": 11589,
         "clicks": 943,
-        "conversions": 67.014969
+        "conversions": 67.025839
       },
       "meta": {
         "spend": 2168.06,
@@ -1843,7 +1843,7 @@
         "spend": 2222.71,
         "impressions": 3134,
         "clicks": 260,
-        "conversions": 37.98431
+        "conversions": 42.98431
       },
       "meta": {
         "spend": 629.22,
