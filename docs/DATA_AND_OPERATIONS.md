@@ -199,9 +199,23 @@ failing deep in a builder:
   fetcher configured; the OAuth variables are unset, so that file is reused between refreshes).
 - It skips rebuilding `data/google-ads.json` when `google-ads-source.json` has a different
   cutoff, keeping the last-good build, because `validate-data.py` requires `google-ads.json`,
-  `analytics.json` and `reporting.json` to agree. That source currently runs to September 12,
-  three days past the cutoff, so the Google Ads tab stays at its September 9 build until Google
-  Ads is re-extracted at the shared cutoff.
+  `analytics.json` and `reporting.json` to agree.
+
+**Google Ads was re-extracted at the shared cutoff on 2026-09-18**, so all three datasets now
+report September 9 and the full refresh runs every step. Both Google files were pulled through
+the Google Ads connector, since the `GOOGLE_ADS_*` OAuth variables are unset on this machine:
+
+- `private-scripts/assemble-google-ads-from-transcript.py` rebuilds `google-ads-source.json`
+  (account, accountYtd, campaigns, groups, geography; 9/1/137/827/827 rows). Geo target constant
+  names are static reference data, so the previous extract's 169 rows are reused after
+  confirming the id set is unchanged; the script refuses if any id is new.
+- `private-scripts/assemble-google-report-from-transcript.py` rebuilds the 101 daily rows in
+  `google-report.json`.
+
+Both read connector results verbatim out of the session transcript rather than retyping them.
+**Google revises conversions after the fact:** this pull moved September from 37.98 to 42.98 and
+August from 67.01 to 67.03, which is why the stale daily file failed the validator's
+account-versus-daily conversion check.
 - After validating, it warns when `data/restricted` was built from a different CCStorage
   extraction than `reporting.json`, which would make the Tenants tab disagree with the cards.
 
