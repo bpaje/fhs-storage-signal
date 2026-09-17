@@ -22,6 +22,7 @@
           <button class="nav-item" data-view="ads"><span class="nav-glyph">↗</span>Google Ads</button>
           <button class="nav-item" data-view="meta"><span class="nav-glyph">◎</span>Meta Ads</button>
           <button class="nav-item" data-view="analytics"><span class="nav-glyph">▥</span>Google Analytics</button>
+          <button class="nav-item tenant-nav-item" data-view="tenants"><span class="nav-glyph">◇</span>Tenants <span class="nav-restricted">Restricted</span></button>
         </nav>
         <div class="sidebar-foot">
           <div class="workspace"><span class="workspace-avatar">FH</span><div><strong>Family Heirloom</strong><small id="facility-count">Portfolio</small></div></div>
@@ -105,6 +106,9 @@
               <footer class="table-footer"><span id="ga-count"></span><div class="pagination" id="ga-pages"></div></footer>
             </article>
           </section>
+          <section id="tenants-view" class="hidden" aria-label="Restricted tenant reporting">
+            <div id="tenants-root"><p class="tenant-loading">Tenant data loads only when this tab is opened.</p></div>
+          </section>
           <footer class="page-footer"><p id="footer-note"><strong>Monthly report:</strong> Loading source totals.</p><button id="definitions-button">Metric definitions</button></footer>
         </main>
       </div>
@@ -112,10 +116,17 @@
     <div class="backdrop hidden" id="backdrop"></div>
     <aside class="drawer" id="drawer" aria-hidden="true"><header><div><p class="drawer-eyebrow" id="drawer-eyebrow">Facility detail</p><h2 id="drawer-title">Facility</h2></div><button class="close-button" id="drawer-close" aria-label="Close details">×</button></header><div id="drawer-body"></div></aside>
     <section class="modal hidden" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header><div><p class="drawer-eyebrow">Family Heirloom Storage</p><h2 id="modal-title">Metric definitions</h2></div><button class="close-button" data-close-modal aria-label="Close">×</button></header><div class="modal-body" id="modal-body"></div></section>
+    <dialog class="tenant-dialog" id="tenant-dialog" aria-labelledby="tenant-dialog-title">
+      <div class="tenant-dialog-shell">
+        <header><div class="tenant-dialog-heading-row"><button class="tenant-dialog-back" id="tenant-dialog-back" type="button" hidden>← Back to list</button><div><p class="drawer-eyebrow">Restricted tenant data</p><h2 id="tenant-dialog-title" tabindex="-1">Tenant details</h2></div></div><button class="close-button" id="tenant-dialog-close" type="button" aria-label="Close tenant details">×</button></header>
+        <div id="tenant-dialog-body" class="tenant-dialog-body"></div>
+      </div>
+    </dialog>
     <div class="toast-region" id="toast-region" aria-live="polite"></div>
     <script src="app.js"></script>
     <script src="monthly-trend.js"></script>
     <script src="details.js"></script>
     <script src="meta.js"></script>
+    <script src="tenants.js"></script>
   </body>
 </html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Synthetic Tenants visual fixture</title>
+  <link rel="stylesheet" href="../../styles.css" />
+  <style>.brand-logo-panel strong { display: block; color: var(--brand-primary); font-size: 22px; text-align: center; }</style>
+</head>
+<body>
+  <div class="prototype-ribbon" id="mode-ribbon"><span class="ribbon-dot"></span>Synthetic fixture · restricted tenant reporting</div>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-logo-panel"><strong>FHS</strong></div><span class="brand-caption">Storage Signal · Visual fixture</span></div>
+      <nav><p class="nav-label">Workspace</p><button class="nav-item active"><span class="nav-glyph">◇</span>Tenants <span class="nav-restricted">Restricted</span></button></nav>
+    </aside>
+    <div class="main">
+      <header class="topbar"><div class="heading"><p>Portfolio / Tenants</p><h1>Family Heirloom Storage</h1></div></header>
+      <main id="content">
+        <section class="welcome-row"><div><h2>Tenants</h2><p>Restricted CCStorage tenant activity, balances and account history.</p></div></section>
+        <section id="tenants-view" aria-label="Restricted tenant reporting"><div id="tenants-root"></div></section>
+      </main>
+    </div>
+  </div>
+  <dialog class="tenant-dialog" id="tenant-dialog" aria-labelledby="tenant-dialog-title">
+    <div class="tenant-dialog-shell">
+      <header>
+        <div class="tenant-dialog-heading-row">
+          <button class="tenant-dialog-back" id="tenant-dialog-back" type="button" hidden>← Back to list</button>
+          <div><p class="drawer-eyebrow">Restricted tenant data</p><h2 id="tenant-dialog-title" tabindex="-1">Tenant details</h2></div>
+        </div>
+        <button class="close-button" id="tenant-dialog-close" type="button" aria-label="Close tenant details">×</button>
+      </header>
+      <div id="tenant-dialog-body" class="tenant-dialog-body"></div>
+    </div>
+  </dialog>
+  <script src="tenants-visual-fixture.js"></script>
+  <script src="../../tenants.js"></script>
+  <script>
+    const fixture = globalThis.tenantsVisualFixture;
+    const view = globalThis.tenantDashboard.createInitialView(fixture.index);
+    const params = new URLSearchParams(location.search);
+    const mode = params.get("mode") || "view";
+    document.getElementById("tenants-root").innerHTML = globalThis.tenantDashboard.renderTenantView(fixture.index, view);
+    if (mode === "list") {
+      document.getElementById("tenant-dialog-title").textContent = "Collected";
+      document.getElementById("tenant-dialog-body").innerHTML = globalThis.tenantDashboard.renderScorecardDialog("Collected", "payments", fixture.index.payments);
+      document.getElementById("tenant-dialog").showModal();
+    }
+    if (mode === "profile") {
+      const profile = Object.values(fixture.facility.profiles)[0];
+      const back = document.getElementById("tenant-dialog-back");
+      back.hidden = false;
+      back.textContent = "← Back to Move-ins";
+      document.getElementById("tenant-dialog-title").textContent = profile.name;
+      document.getElementById("tenant-dialog-body").innerHTML = globalThis.tenantDashboard.renderProfile(profile, fixture.facility.facility.name);
+      document.getElementById("tenant-dialog").showModal();
+    }
+    document.body.dataset.ready = "true";
+  </script>
+</body>
+</html>

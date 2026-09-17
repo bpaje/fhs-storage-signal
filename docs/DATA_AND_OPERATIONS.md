@@ -172,6 +172,32 @@ The uppercase filenames are placeholders. Supply quoted real paths from the prot
 
 Google/GA4 converters are scoped to 2026. The Meta converter and several Overview labels are currently scoped to June–September 1–9, 2026. Extending dates requires reviewing hard-coded periods, weekly evidence and labels; it is not just a different file argument. The validator retains the current regional unsupported-metric contract. Resolve these limits before scheduled refreshes.
 
+## Restricted Tenants tab and the 2026-09-17 CCStorage re-extraction
+
+Full detail, including the extraction method and every verification, is in
+[the Tenants plan](RENTER_LISTS_PLAN.md). The contract points that affect numbers:
+
+**CCStorage figures were re-extracted on 2026-09-17** (`ccExtractedAt`
+`2026-09-17T16:50:55.562+00:00`), cutoff still September 9 so Google and Meta are unchanged.
+Sources revise history, and this refresh shows it: June net payments fell $106.00 and July
+$209.08 (ACH payments later returned), August move-ins fell 135 to 134 (a lease voided after
+the previous pull), and September 1–9 net rose $9,787.29 as payments posted after the earlier
+snapshot. Treat each pull as a dated snapshot, not a correction of an error.
+
+**The scheduled refresh cannot run** and has not since 2026-09-11: `meta-complete-source.json`
+covers through September 11 while `google-report.json` stops at September 9, so
+`build-reporting.py` and `build-meta.py` both fail their own assertions. The CCStorage fields
+were therefore updated with `private-scripts/refresh-cc-fields.py`, which reuses
+`build-reporting.py`'s own row logic and touches nothing else. Re-pull Google and Meta to the
+same cutoff before using the normal refresh again.
+
+**Tenant metric definitions** match the published aggregates exactly: move-ins and move-outs are
+non-void lease events by date; payments are the four eligible statuses, summed on
+`effective_amount`. Balances, past due, tenant status and upcoming rate changes are as of
+`balancesAsOf` (the extraction date), while the activity lists stop at the cutoff. The unit-size
+chart groups on the floor footprint ("10x10x8" becomes "10x10"); every table shows the raw unit
+type. `scripts/build-tenants.py` refuses to write unless every facility-month reconciles.
+
 ## Failure and freshness
 
 Missing history, a stale snapshot, failed source authorization and failed deployment are different conditions. Keep them distinct. Preserve the last validated published snapshot if a refresh fails and record the failed step. Sources revise history, so treat a refresh as a new dated snapshot with reconciliation evidence.

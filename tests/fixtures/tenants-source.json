@@ -1,0 +1,174 @@
+{
+  "extractedAt": "2026-09-10T08:35:10.466+00:00",
+  "cutoff": "2026-08-31",
+  "customers": [
+    {
+      "id": "customer-1",
+      "company_id": 100,
+      "customer_number": "C-FIX-001",
+      "name": "Avery Example",
+      "address": "101 Fiction Lane",
+      "address2": "Unit F",
+      "city": "Sampleville",
+      "state": "GA",
+      "postal_code": "30001",
+      "alternate_contact_name": "   ",
+      "active_military": true,
+      "do_not_rent": false,
+      "tax_exempt": false,
+      "pricing_type": "Standard"
+    },
+    {
+      "id": "customer-2",
+      "company_id": 100,
+      "customer_number": "C-FIX-002",
+      "name": "Morgan Sample",
+      "address": "202 Imaginary Road",
+      "address2": null,
+      "city": "Sampleville",
+      "state": "GA",
+      "postal_code": "30002",
+      "alternate_contact_name": "Taylor Synthetic",
+      "active_military": false,
+      "do_not_rent": true,
+      "tax_exempt": false,
+      "pricing_type": "Legacy"
+    },
+    {
+      "id": "customer-3",
+      "company_id": 200,
+      "customer_number": "C-FIX-003",
+      "name": "fixture@example.invalid",
+      "address": "303 Pretend Avenue",
+      "address2": null,
+      "city": "Demotown",
+      "state": "TN",
+      "postal_code": "37001",
+      "alternate_contact_name": "Riley Example",
+      "active_military": false,
+      "do_not_rent": false,
+      "tax_exempt": true,
+      "pricing_type": "Promotional"
+    }
+  ],
+  "leases": [
+    {
+      "id": "lease-1",
+      "company_id": 100,
+      "lease_number": "L-FIX-001",
+      "customer_id": "customer-1",
+      "storage_unit_id": "unit-1",
+      "unit_name": "A-01",
+      "unit_type": "5x10 climate",
+      "storage_unit_type_id": "type-1",
+      "move_in_date": "2026-08-03",
+      "move_out_date": null,
+      "scheduled_move_out": null,
+      "next_bill_date": "2026-09-03",
+      "cash_price": "125.00",
+      "billing_interval": "Monthly",
+      "void": false,
+      "auction_date": null
+    },
+    {
+      "id": "lease-2",
+      "company_id": 100,
+      "lease_number": "L-FIX-002",
+      "customer_id": "customer-2",
+      "storage_unit_id": "unit-2",
+      "unit_name": "B-04",
+      "unit_type": "10x10 drive-up",
+      "storage_unit_type_id": "type-2",
+      "move_in_date": "2026-08-05",
+      "move_out_date": "2026-08-20",
+      "scheduled_move_out": "2026-08-20",
+      "next_bill_date": null,
+      "cash_price": "175.00",
+      "billing_interval": "Monthly",
+      "void": false,
+      "auction_date": null
+    },
+    {
+      "id": "lease-3",
+      "company_id": 200,
+      "lease_number": "L-FIX-003",
+      "customer_id": "customer-3",
+      "storage_unit_id": "unit-3",
+      "unit_name": "C-07",
+      "unit_type": "10x15 climate",
+      "storage_unit_type_id": "type-3",
+      "move_in_date": "2026-07-15",
+      "move_out_date": null,
+      "scheduled_move_out": "2026-09-30",
+      "next_bill_date": "2026-09-15",
+      "cash_price": "210.00",
+      "billing_interval": "Monthly",
+      "void": false,
+      "auction_date": null
+    },
+    {
+      "id": "lease-void",
+      "company_id": 100,
+      "lease_number": "L-FIX-VOID",
+      "customer_id": "customer-1",
+      "storage_unit_id": "unit-4",
+      "unit_name": "V-01",
+      "unit_type": "5x5",
+      "storage_unit_type_id": "type-1",
+      "move_in_date": "2026-08-09",
+      "move_out_date": "2026-08-10",
+      "scheduled_move_out": null,
+      "next_bill_date": null,
+      "cash_price": "50.00",
+      "billing_interval": "Monthly",
+      "void": true,
+      "auction_date": null
+    }
+  ],
+  "unitTypes": [
+    {"id": "type-1", "company_id": 100, "name": "5x10 climate", "amenities": "Drive up, Gated", "length": "10", "width": "5"},
+    {"id": "type-2", "company_id": 100, "name": "10x10 drive-up", "amenities": "Drive-up", "length": "10", "width": "10"},
+    {"id": "type-3", "company_id": 200, "name": "10x15 climate", "amenities": "Climate controlled, Ground floor", "length": "15", "width": "10"}
+  ],
+  "leaseSigned": [
+    {"lease_id": "lease-1", "accepted_at": "2026-08-03T10:00:00Z"},
+    {"lease_id": "lease-2", "accepted_at": "2026-08-05T11:00:00Z"}
+  ],
+  "rateChanges": [
+    {"lease_id": "lease-1", "old_rate": "115.00", "new_rate": "125.00", "effective_date": "2026-08-15", "applied_at": "2026-08-15T08:00:00Z"},
+    {"lease_id": "lease-1", "old_rate": "125.00", "new_rate": "135.00", "effective_date": "2026-09-15", "applied_at": null}
+  ],
+  "leaseDiscounts": [
+    {"lease_id": "lease-1", "discount_name": "Fixture first month", "active_start": "2026-08-03", "active_end": "2026-09-02"}
+  ],
+  "leaseProtection": [
+    {"lease_id": "lease-1", "plan_name": "Fixture Protection", "monthly_amount": "12.00", "coverage_amount": "2000.00", "active_start": "2026-08-03", "active_end": null}
+  ],
+  "securityDeposits": [
+    {"lease_id": "lease-1", "collected_amount": "25.00", "returned_amount": null, "collected_at": "2026-08-03", "returned_at": null},
+    {"lease_id": "lease-2", "collected_amount": "30.00", "returned_amount": "30.00", "collected_at": "2026-08-05", "returned_at": "2026-08-20"}
+  ],
+  "autopay": [
+    {"customer_id": "customer-1", "active": true},
+    {"customer_id": "customer-2", "active": false},
+    {"customer_id": "customer-3", "active": true}
+  ],
+  "invoices": [
+    {"id": "invoice-1", "company_id": 100, "invoice_number": "INV-FIX-001", "customer_id": "customer-2", "total_billed": "200.00", "total_paid": "100.00", "balance_due": "100.00", "due_date": "2026-08-10", "created_at": "2026-08-05T11:05:00Z"},
+    {"id": "invoice-2", "company_id": 100, "invoice_number": "INV-FIX-002", "customer_id": "customer-1", "total_billed": "50.00", "total_paid": "0.00", "balance_due": "50.00", "due_date": "2026-09-10", "created_at": "2026-08-25T09:00:00Z"},
+    {"id": "invoice-3", "company_id": 200, "invoice_number": "INV-FIX-003", "customer_id": "customer-3", "total_billed": "25.00", "total_paid": "0.00", "balance_due": "25.00", "due_date": "2026-08-15", "created_at": "2026-08-01T09:00:00Z"}
+  ],
+  "invoiceLeases": [
+    {"invoice_id": "invoice-1", "lease_id": "lease-2"}
+  ],
+  "payments": [
+    {"id": "payment-1", "company_id": 100, "payment_number": "PAY-FIX-001", "customer_id": "customer-1", "payment_method": "Card", "status": "Partially Refunded", "original_amount": "100.00", "refund_amount": "10.00", "effective_amount": "90.00", "effective_date": "2026-08-10", "source": "Fixture terminal"},
+    {"id": "payment-2", "company_id": 100, "payment_number": "PAY-FIX-002", "customer_id": "customer-2", "payment_method": "Cash", "status": "Complete", "original_amount": "10.00", "refund_amount": "0.00", "effective_amount": "10.00", "effective_date": "2026-08-12", "source": "Fixture office"},
+    {"id": "payment-3", "company_id": 200, "payment_number": "PAY-FIX-003", "customer_id": "customer-3", "payment_method": "ACH", "status": "Complete", "original_amount": "50.00", "refund_amount": "0.00", "effective_amount": "50.00", "effective_date": "2026-08-18", "source": "Fixture autopay"},
+    {"id": "payment-4", "company_id": 100, "payment_number": "PAY-FIX-004", "customer_id": "customer-1", "payment_method": "Card", "status": "Declined", "original_amount": "20.00", "refund_amount": "0.00", "effective_amount": "0.00", "effective_date": "2026-08-19", "source": "Fixture terminal"}
+  ],
+  "occupancyDaily": [
+    {"company_id": 100, "date": "2026-08-31", "leases": 1, "auto_pay_leases": 1, "storage_units": 10},
+    {"company_id": 200, "date": "2026-08-31", "leases": 1, "auto_pay_leases": 1, "storage_units": 8}
+  ]
+}

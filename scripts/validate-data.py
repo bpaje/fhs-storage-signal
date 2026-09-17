@@ -5,8 +5,10 @@ import math
 import re
 from datetime import date
 from pathlib import Path
+from restricted_data_guard import assert_restricted_data_untracked
 
 root = Path(__file__).resolve().parents[1]
+assert_restricted_data_untracked(root)
 read = lambda name: json.loads((root / 'data' / name).read_text(encoding='utf-8'))
 overview, ads, ga = map(read, ['reporting.json', 'google-ads.json', 'analytics.json'])
 meta = read('meta.json') if (root / 'data' / 'meta.json').exists() else None

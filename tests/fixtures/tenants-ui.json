@@ -1,0 +1,61 @@
+{
+  "index": {
+    "schema": "storage-signal.tenants.v2",
+    "cutoff": "2026-08-31",
+    "extractedAt": "2026-09-10T08:35:10.466+00:00",
+    "facilities": [
+      {"id": "100", "name": "Fixture Storage North"},
+      {"id": "200", "name": "Fixture Storage South"}
+    ],
+    "moveIns": [
+      {"company_id": "100", "facility": "Fixture Storage North", "date": "2026-08-03", "customer_id": "customer-1", "customer_number": "C-FIX-001", "name": "Avery Example", "lease_number": "L-FIX-001", "unit": "A-01", "unitType": "5x10 climate", "rate": "125.00", "tenantStatus": "Current", "moveInInvoice": null},
+      {"company_id": "100", "facility": "Fixture Storage North", "date": "2026-08-05", "customer_id": "customer-2", "customer_number": "C-FIX-002", "name": "Morgan Sample", "lease_number": "L-FIX-002", "unit": "B-04", "unitType": "10x10 drive-up", "rate": "175.00", "tenantStatus": "Moved out", "moveInInvoice": {"invoice_number": "INV-FIX-001", "total_billed": "200.00", "total_paid": "100.00"}}
+    ],
+    "moveOuts": [
+      {"company_id": "100", "facility": "Fixture Storage North", "date": "2026-08-20", "customer_id": "customer-2", "customer_number": "C-FIX-002", "name": "Morgan Sample", "lease_number": "L-FIX-002", "unit": "B-04", "unitType": "10x10 drive-up", "rate": "175.00", "tenantStatus": "Moved out", "move_in_date": "2026-08-05"}
+    ],
+    "payments": [
+      {"company_id": "100", "facility": "Fixture Storage North", "date": "2026-08-10", "customer_id": "customer-1", "customer_number": "C-FIX-001", "name": "Avery Example", "payment_number": "PAY-FIX-001", "payment_method": "Card", "status": "Partially Refunded", "original_amount": "100.00", "refund_amount": "10.00", "effective_amount": "90.00", "source": "Fixture terminal"}
+    ],
+    "pastDue": [
+      {"company_id": "100", "facility": "Fixture Storage North", "date": "2026-08-10", "customer_id": "customer-2", "customer_number": "C-FIX-002", "name": "Morgan Sample", "invoice_number": "INV-FIX-001", "lease_number": "L-FIX-002", "unit": "B-04", "balance_due": "100.00", "days_late": 21, "tenantStatus": "Moved out"}
+    ],
+    "rateChanges": [
+      {"company_id": "100", "facility": "Fixture Storage North", "date": "2026-09-15", "customer_id": "customer-1", "customer_number": "C-FIX-001", "name": "Avery Example", "lease_number": "L-FIX-001", "unit": "A-01", "unitType": "5x10 climate", "old_rate": "125.00", "new_rate": "135.00", "applied_at": null, "upcoming": true}
+    ],
+    "occupancyDaily": [
+      {"company_id": "100", "facility": "Fixture Storage North", "date": "2026-08-31", "leases": 1, "auto_pay_leases": 1, "storage_units": 10}
+    ]
+  },
+  "facility": {
+    "schema": "storage-signal.tenants.v2",
+    "cutoff": "2026-08-31",
+    "facility": {"id": "100", "name": "Fixture Storage North"},
+    "profiles": {
+      "customer-1": {
+        "customer_id": "customer-1",
+        "company_id": "100",
+        "customer_number": "C-FIX-001",
+        "name": "Avery Example",
+        "address": "101 Fiction Lane",
+        "address2": "Unit F",
+        "city": "Sampleville",
+        "state": "GA",
+        "postal_code": "30001",
+        "alternate_contact_name": "Name withheld",
+        "flags": {"active_military": true, "do_not_rent": false, "tax_exempt": false},
+        "pricing_type": "Standard",
+        "autopay": true,
+        "tenantStatus": "Current",
+        "tenantSince": "2026-08-03",
+        "balanceDue": "50.00",
+        "pastDue": "0.00",
+        "lifetimePaid": "90.00",
+        "firstPaymentDate": "2026-08-10",
+        "leases": [{"lease_number": "L-FIX-001", "unit": "A-01", "unitType": {"name": "5x10 climate", "length": "10", "width": "5", "amenities": ["Climate controlled"]}, "signedDate": "2026-08-03T10:00:00Z", "move_in_date": "2026-08-03", "move_out_date": null, "scheduled_move_out": null, "currentRate": "125.00", "rateHistory": [{"old_rate": "115.00", "new_rate": "125.00", "effective_date": "2026-08-15"}], "discounts": [{"discount_name": "Fixture first month", "active_start": "2026-08-03", "active_end": "2026-09-02"}], "protection": [{"plan_name": "Fixture Protection", "monthly_amount": "12.00", "coverage_amount": "2000.00"}], "deposits": [{"collected_amount": "25.00", "returned_amount": "0.00"}]}],
+        "payments": [{"effective_date": "2026-08-10", "payment_number": "PAY-FIX-001", "payment_method": "Card", "status": "Partially Refunded", "original_amount": "100.00", "refund_amount": "10.00", "effective_amount": "90.00", "source": "Fixture terminal"}],
+        "invoices": [{"invoice_number": "INV-FIX-002", "created_at": "2026-08-25T09:00:00Z", "due_date": "2026-09-10", "total_billed": "50.00", "total_paid": "0.00", "balance_due": "50.00"}]
+      }
+    }
+  }
+}

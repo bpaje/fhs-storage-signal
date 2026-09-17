@@ -1,2 +1,7 @@
 private-scripts/
+private-scripts/ccstorage-tenants-source.json
+data/restricted/
 scripts/__pycache__/
+
+tests/__pycache__/
+.claude/

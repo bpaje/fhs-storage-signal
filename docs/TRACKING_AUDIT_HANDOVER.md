@@ -136,6 +136,39 @@ portal** — if extending `contact`/`generate_lead`-equivalent tracking into the
 portal is wanted, the CCStorage-side dataLayer-push pattern (not a GTM
 trigger fix) is the only mechanism that can reach that cross-origin iframe.
 
+### 2026-09-12: confirmed — channel attribution (organic/paid/social) cannot reach the rental event today
+
+The owner asked whether a completed online rental can be tied back to organic,
+paid, or social. **Tested live: no, and the gap is structural, not a config
+fix.** Loaded a facility page with `utm_source=google&utm_medium=cpc&gclid=...`
+appended, then inspected the CCStorage rental iframe that renders on it. Its
+`src` was `https://familyheirloomstoragehwy58.ccstorage.com/locations` —
+**no query parameters at all**: no UTM values, no `gclid`, no `fbclid`, no
+client/session id. Checked the fallback too: the site sets no
+`<meta name="referrer">` override, so under the browser's default
+`strict-origin-when-cross-origin` policy, `document.referrer` inside that
+cross-origin iframe is truncated to `https://familyheirloomstorage.com/` —
+origin only, no path or query string.
+
+Net effect: the actual rental transaction completes on a different domain
+(`*.ccstorage.com`) than the one GA4/Meta/Ads tagged the visitor's session on.
+Different domain means a different first-party cookie jar, so nothing links
+"arrived via a Google/Meta ad" to "completed a rental" — whatever channel
+GA4 assigns to a `ccstorage_rental_completed` event (once CCStorage confirms
+it's actually firing) will not be the true acquisition channel.
+
+**Fix requires CCStorage's side, not GTM.** The iframe embed would need to
+receive something to re-establish the session across origins — e.g. the
+parent page appending `client_id`/`gclid`/UTM values onto the iframe `src`
+when it's built, and CCStorage's GTM using that to set a GA4 client_id
+override (or at minimum log it as an event parameter) instead of starting a
+disconnected session. This sharpens item (2)/(3) in the drafted CCStorage
+email above — "extend the dataLayer approach" should explicitly include
+passing acquisition/session data into the iframe, not just transaction value.
+**Do not report rental-level organic/paid/social attribution as available
+until this is built and verified with a real test rental carrying real UTM/
+gclid values.**
+
 ## Architecture notes and gotchas for whoever picks this up
 
 - **This GTM container serves 39 facilities from one shared codebase**, all

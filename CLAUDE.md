@@ -15,6 +15,26 @@ Phase 1 is a manual, static reporting product with four tabs: Overview, Google A
 - Keep the interface readable. Explain source coverage, incomplete months and materially different metric meanings where the user needs them.
 - Challenge unsupported conclusions. An observation and a plausible cause are different statements; recommendations must retain their evidence and limitations.
 
+## Restricted tenant data (owner-approved exception, 2026-09-17)
+
+The owner approved showing renter names behind the **Tenants** tab, for their own login only,
+on the private host — never on GitHub Pages. Read [the Tenants plan](docs/RENTER_LISTS_PLAN.md)
+before touching any of it. Boundaries:
+
+- Names live only in `data/restricted/tenants-*.json`, built by `scripts/build-tenants.py` from
+  `private-scripts/ccstorage-tenants-source.json`. Both paths are git-ignored. Never commit
+  them, never copy names into `data/*.json`, and never add an export of them.
+- Rows carry name, IDs, unit, rate, dates, amounts, address and account flags. **Never**
+  phone, email, gate codes, free-text notes, or message bodies. Email- and phone-like values in
+  name and address fields are withheld by the builder.
+- The build aborts unless every facility-month reconciles with `data/reporting.json` and the
+  source `extractedAt` equals `reporting.json`'s `ccExtractedAt`. Build both from one extraction.
+- Activity lists stop at the reporting `cutoff`; balances, past due, tenant status and upcoming
+  rate changes are as of `balancesAsOf` (the extraction date). Do not relabel one as the other.
+- `refresh-dashboard.ps1` and `validate-data.py` fail if anything under `data/restricted/` is
+  tracked. Keep those guards.
+- Access is the owner's login alone. **If access widens, stop and re-confirm with the owner.**
+
 ## Data and engineering rules
 
 1. Verify the current branch, working tree and deployed revision before acting; preserve other work. This document records a baseline, not a promise that later checkouts are unchanged.
