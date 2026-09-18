@@ -4,7 +4,7 @@
   "currency": "USD",
   "adTimezone": "America/New_York",
   "ccExtractedAt": "2026-09-18T05:38:22.141+00:00",
-  "metaExtractedAt": "2026-09-18T05:45:32.9766664Z",
+  "metaExtractedAt": "2026-09-18T14:16:15.8902531Z",
   "periods": [
     {
       "id": "2026-06",
@@ -1846,8 +1846,8 @@
         "conversions": 63.97344
       },
       "meta": {
-        "spend": 1193.51,
-        "impressions": 34791.0,
+        "spend": 1193.78,
+        "impressions": 34803.0,
         "clicks": 588.0,
         "linkClicks": 410.0,
         "reach": 13363.0,
