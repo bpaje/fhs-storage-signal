@@ -78,7 +78,7 @@ def make_insights(month, period, previous, weeks, through):
             title=f'Latest seven-day CPL {abs(change):.1f}% '+('higher' if change>0 else 'lower')
         insights.append(insight(title,
             f"{recent['start']}–{recent['end']}: {usd(new['spend'])}, {count(new['leads'])} leads, {usd(cpl(new))} CPL. {prior['start']}–{prior['end']}: {usd(old['spend'])}, {count(old['leads'])} leads, {usd(cpl(old))} CPL.",
-            'Keep the full September month-to-date total separate; use these equal windows to assess the latest movement.',
+            f'Keep the full {name} total separate; use these equal windows to assess the latest movement.',
             'Limited recent volume' if min(new['leads'],old['leads'])<10 else 'Observed weekly change',
             'Each window is seven days. Platform results can be revised after reporting.'))
     qualified=[r for r in period['adsets'] if r['leads']>=10 and r['spend']>0]
