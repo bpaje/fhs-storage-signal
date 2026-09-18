@@ -1,4 +1,5 @@
 """Validate source reconciliation without credentials or network calls."""
+import argparse
 import json
 import calendar
 import math
@@ -9,9 +10,12 @@ from restricted_data_guard import assert_restricted_data_untracked
 
 root = Path(__file__).resolve().parents[1]
 assert_restricted_data_untracked(root)
-read = lambda name: json.loads((root / 'data' / name).read_text(encoding='utf-8'))
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--data-dir', type=Path, default=root / 'data')
+args = parser.parse_args()
+read = lambda name: json.loads((args.data_dir / name).read_text(encoding='utf-8'))
 overview, ads, ga = map(read, ['reporting.json', 'google-ads.json', 'analytics.json'])
-meta = read('meta.json') if (root / 'data' / 'meta.json').exists() else None
+meta = read('meta.json') if (args.data_dir / 'meta.json').exists() else None
 assert ads['through'] == ga['through'] == overview['periods'][-1]['end']
 assert ga['measurementId'] == 'G-TCSG6BY1KK'
 cutoff = date.fromisoformat(ads['through'])
@@ -23,6 +27,26 @@ assert set(ga['periods']) == set(period_ids)
 account_totals = {row['month']: row for row in ads['accountTotals']}
 assert set(account_totals) == set(period_ids)
 additive = ['costMicros', 'impressions', 'clicks', 'conversions']
+conversion_tolerance = ads.get('validation', {}).get('conversionTolerance', .005)
+conversion_group_keys = {'leads_and_calls', 'phone_clicks', 'button_clicks', 'store_visits', 'rentals', 'other'}
+
+
+def assert_conversion_split(row, label, tolerance=conversion_tolerance):
+    groups = row.get('conversionsByGroup')
+    if groups is None:
+        return
+    assert groups, (label, 'empty conversionsByGroup')
+    assert set(groups) == conversion_group_keys, (label, 'unexpected conversionsByGroup keys', sorted(groups))
+    assert all(isinstance(value, (int, float)) and math.isfinite(value) and value >= 0 for value in groups.values()), (label, 'invalid conversionsByGroup')
+    assert abs(sum(groups.values()) - row['conversions']) <= tolerance, (
+        label, 'conversionsByGroup', sum(groups.values()), row['conversions'],
+    )
+    actions = row.get('conversionsByAction')
+    if actions is not None:
+        assert all(math.isfinite(action['conversions']) and action['conversions'] >= 0 for action in actions), (label, 'invalid conversionsByAction')
+        assert abs(sum(action['conversions'] for action in actions) - row['conversions']) <= tolerance, (
+            label, 'conversionsByAction', sum(action['conversions'] for action in actions), row['conversions'],
+        )
 
 for period in ads['periods']:
     month = period['id']
@@ -30,6 +54,7 @@ for period in ads['periods']:
     end = cutoff if month == ytd_id or month == month_ids[-1] else date(start.year, start.month, calendar.monthrange(start.year, start.month)[1])
     assert period['start'] == start.isoformat() and period['end'] == end.isoformat()
     account = account_totals[month]
+    assert_conversion_split(account, f'{month} Google Ads account')
     for kind in ['campaigns', 'groups']:
         rows = [r for r in ads[kind] if r['month'] == month]
         assert all(math.isfinite(r[k]) and r[k] >= 0 for r in rows for k in additive)
@@ -40,6 +65,8 @@ for period in ads['periods']:
             else:
                 assert total == account[key], (month, kind, key, total, account[key])
     campaigns = [r for r in ads['campaigns'] if r['month'] == month]
+    for campaign in campaigns:
+        assert_conversion_split(campaign, f"{month} campaign {campaign['id']}")
     groups = [r for r in ads['groups'] if r['month'] == month]
     campaign_ids = {r['id'] for r in campaigns}
     assert len(campaign_ids) == len(campaigns), (month, 'duplicate campaign')
@@ -74,6 +101,7 @@ for metric in additive:
 
 for period in overview['periods']:
     month = period['id']
+    assert_conversion_split(period['google'], f'{month} Overview Google Ads')
     totals = []
     for kind in ['campaigns', 'groups']:
         rows = [r for r in ads[kind] if r['month'] == month]

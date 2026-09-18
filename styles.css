@@ -218,6 +218,7 @@ button { color: inherit; }
 .channel-lead small, .channel-lead strong { display: block; }
 .channel-lead small { color: var(--faint); font-size: 6px; line-height: 1.25; }
 .channel-lead strong { margin-top: 2px; color: var(--ink); font-size: 8px; }
+.channel-lead .channel-subresult { margin-top: 4px; max-width: 190px; white-space: normal; }
 .channel-row > span.good { color: var(--brand-secondary); font-weight: 750; }
 .attention-list { padding: 0 15px 14px; }
 .attention-list > button { display: flex; width: 100%; align-items: center; gap: 9px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--line); background: transparent; cursor: pointer; text-align: left; }
@@ -361,8 +362,13 @@ tbody tr:hover { background: var(--panel-soft); }
   .kpi-foot small { width: 100%; white-space: normal; }
   .confidence-content { grid-template-columns: 1fr; justify-items: center; }
   .confidence-list { width: 100%; }
-  .channel-list { overflow-x: auto; }
-  .channel-head, .channel-row { min-width: 390px; }
+  .channel-list { overflow-x: visible; }
+  .channel-head { display: none; }
+  .channel-row { grid-template-columns: repeat(2,minmax(0,1fr)); min-width: 0; gap: 12px 18px; padding: 14px 0; }
+  .channel-name { grid-column: 1 / -1; }
+  .channel-row > span { min-width: 0; overflow-wrap: anywhere; }
+  .channel-row > span::before { display: block; margin-bottom: 4px; color: var(--faint); content: attr(data-label); font-size: 9px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
+  .channel-lead .channel-subresult { max-width: none; }
   .table-heading { align-items: flex-start; flex-direction: column; }
   .table-tools { width: 100%; }
   .search { flex: 1; }
@@ -400,12 +406,28 @@ tbody tr:hover { background: var(--panel-soft); }
 .detail-panel td { font-size: 12px; }
 .detail-panel th:first-child, .detail-panel td:first-child { min-width: 240px; max-width: 430px; white-space: normal; overflow-wrap: anywhere; }
 .detail-panel table { min-width: 820px; }
+.conversion-breakdown { margin-bottom: 14px; overflow: hidden; }
+.conversion-breakdown-table { padding: 0 16px 12px; }
+.conversion-breakdown table { table-layout: fixed; }
+.conversion-breakdown th, .conversion-breakdown td { padding: 10px 8px; font-size: 12px; }
+.conversion-breakdown th:first-child { width: 62%; white-space: normal; }
+.conversion-breakdown td { font-variant-numeric: tabular-nums; text-align: right; white-space: normal; }
+.conversion-actions { border-top: 1px solid var(--line); }
+.conversion-actions summary { min-height: 44px; padding: 14px 20px; color: var(--brand-primary); cursor: pointer; font-size: 12px; font-weight: 700; }
+.conversion-actions ul { display: grid; gap: 0; margin: 0; padding: 0 20px 16px; list-style: none; }
+.conversion-actions li { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; border-bottom: 1px solid var(--line); padding: 10px 0; font-size: 12px; }
+.conversion-actions li:last-child { border-bottom: 0; }
+.conversion-actions li div { min-width: 0; }
+.conversion-actions strong, .conversion-actions small { display: block; overflow-wrap: anywhere; }
+.conversion-actions small { margin-top: 4px; color: var(--muted); font-size: 10px; }
+.conversion-actions li > span { flex: 0 0 auto; color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; }
+.conversion-action-empty { color: var(--muted); }
 .campaign-drill { padding: 0; border: 0; background: transparent; color: var(--brand-primary); font-size: 12px; cursor: pointer; text-align: left; font-weight: 650; }
 .campaign-drill:hover { text-decoration: underline; }
 .pagination span { font-size: 11px; color: var(--muted); }
 .page-button:disabled { opacity: .35; cursor: default; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-@media(max-width:650px) { .detail-period { grid-template-columns: 1fr; } .detail-filters label { min-width: 100%; } .detail-toolbar input { width: 100%; } .website-summary > div:first-child { min-width: 100%; } .detail-panel .panel-header { flex-wrap: wrap; } }
+@media(max-width:650px) { .detail-period { grid-template-columns: 1fr; } .detail-filters label { min-width: 100%; } .detail-toolbar input { width: 100%; } .website-summary > div:first-child { min-width: 100%; } .detail-panel .panel-header { flex-wrap: wrap; } .conversion-actions li { align-items: flex-start; flex-direction: column; gap: 5px; } .conversion-actions li > span { text-align: left; } }
 
 /* FHS identity and native interaction surfaces. */
 ::selection { color: var(--brand-white); background: var(--brand-primary); }

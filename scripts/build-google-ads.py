@@ -20,6 +20,32 @@ METRICS = {
 }
 CONVERSION_TOLERANCE = 0.005
 
+# Google Ads conversion-action categories are grouped by business meaning. The
+# category is the contract: action names are retained for display but never used
+# to decide whether a conversion is a lead, click, visit or completed rental.
+CONVERSION_GROUPS = {
+    'SUBMIT_LEAD_FORM': 'leads_and_calls',
+    'PHONE_CALL_LEAD': 'leads_and_calls',
+    'CONTACT': 'phone_clicks',
+    'BEGIN_CHECKOUT': 'button_clicks',
+    'STORE_VISIT': 'store_visits',
+    'PURCHASE': 'rentals',
+}
+CONVERSION_GROUP_ORDER = (
+    'leads_and_calls', 'phone_clicks', 'button_clicks',
+    'store_visits', 'rentals', 'other',
+)
+CONVERSION_SPLIT_REPORTS = (
+    'conversionsByAction', 'campaignConversionsByAction', 'conversionActions',
+)
+CONVERSION_SPLIT_NOTE = (
+    'Primary conversions are grouped by Google Ads conversion-action category: '
+    'lead-form submissions and completed ad calls are Leads & calls; CONTACT is '
+    'a phone-number click; BEGIN_CHECKOUT is a Rent Now / Pay bill button click '
+    'imported from GA4, not a lead; STORE_VISIT is modeled; PURCHASE is a rental; '
+    'unmapped categories are Other.'
+)
+
 
 def source_metrics(row):
     return {public: row[source] for public, source in METRICS.items()}
@@ -61,20 +87,106 @@ def assert_reconciles(actual, expected, label):
         assert delta <= limit, (label, metric, actual[metric], expected[metric])
 
 
-def build(source):
+def conversion_action_id(value):
+    return str(value).rsplit('/', 1)[-1]
+
+
+def empty_conversion_groups():
+    return {group: 0 for group in CONVERSION_GROUP_ORDER}
+
+
+def conversion_split(rows):
+    """Aggregate conversion-action rows without using all_conversions."""
+    actions = {}
+    groups = empty_conversion_groups()
+    for row in rows:
+        action_id = conversion_action_id(row['segments.conversion_action'])
+        name = row['segments.conversion_action_name']
+        category = row['segments.conversion_action_category']
+        group = CONVERSION_GROUPS.get(category, 'other')
+        conversions = row['metrics.conversions']
+        if action_id in actions:
+            existing = actions[action_id]
+            assert (existing['name'], existing['category'], existing['group']) == (name, category, group), (
+                'Conflicting conversion-action metadata', action_id,
+            )
+            existing['conversions'] += conversions
+        else:
+            actions[action_id] = {
+                'id': action_id, 'name': name, 'category': category,
+                'group': group, 'conversions': conversions,
+            }
+        groups[group] += conversions
+    return groups, sorted(actions.values(), key=lambda action: (action['name'].lower(), action['id']))
+
+
+def attach_conversion_splits(reports, account_totals, campaigns):
+    account_rows = reports['conversionsByAction']['rows']
+    campaign_rows = reports['campaignConversionsByAction']['rows']
+    for account in account_totals:
+        month = account['month']
+        rows = account_rows if month == '2026-ytd' else [
+            row for row in account_rows if row['segments.month'][:7] == month
+        ]
+        groups, actions = conversion_split(rows)
+        action_total = sum(action['conversions'] for action in actions)
+        assert abs(action_total - account['conversions']) <= CONVERSION_TOLERANCE, (
+            f'{month} conversion-action reconciliation', action_total, account['conversions'],
+        )
+        account['conversionsByGroup'] = groups
+        account['conversionsByAction'] = actions
+
+    by_campaign_month = defaultdict(list)
+    for row in campaign_rows:
+        by_campaign_month[(row['segments.month'][:7], str(row['campaign.id']))].append(row)
+    for campaign in campaigns:
+        month, campaign_id = campaign['month'], campaign['id']
+        rows = []
+        if month == '2026-ytd':
+            for (row_month, row_campaign_id), matching in by_campaign_month.items():
+                if row_campaign_id == campaign_id:
+                    rows.extend(matching)
+        else:
+            rows = by_campaign_month.get((month, campaign_id), [])
+        groups, actions = conversion_split(rows)
+        action_total = sum(action['conversions'] for action in actions)
+        assert abs(action_total - campaign['conversions']) <= CONVERSION_TOLERANCE, (
+            f'{month} campaign {campaign_id} conversion-action reconciliation',
+            action_total, campaign['conversions'],
+        )
+        campaign['conversionsByGroup'] = groups
+        campaign['conversionsByAction'] = actions
+
+
+def build(source, require_conversion_split=False):
     assert source['schema'] == 'storage-signal.google-ads-source.v1'
     start, through = date.fromisoformat(source['start']), date.fromisoformat(source['through'])
     assert start == date(2026, 1, 1) and through.year == 2026
     reports = source['reports']
     required = ['account', 'accountYtd', 'campaigns', 'groups', 'geography', 'geonames']
+    present_split_reports = [name for name in CONVERSION_SPLIT_REPORTS if name in reports]
+    if present_split_reports and len(present_split_reports) != len(CONVERSION_SPLIT_REPORTS):
+        missing = ', '.join(name for name in CONVERSION_SPLIT_REPORTS if name not in reports)
+        raise AssertionError(f'Google Ads conversion split is incomplete; missing report(s): {missing}')
+    has_conversion_split = len(present_split_reports) == len(CONVERSION_SPLIT_REPORTS)
+    if require_conversion_split and not has_conversion_split:
+        raise AssertionError(
+            'Google Ads source predates conversion-action reports; rerun the fetcher '
+            'to include conversionsByAction, campaignConversionsByAction and conversionActions.'
+        )
+    if has_conversion_split:
+        required += list(CONVERSION_SPLIT_REPORTS)
     counts = {}
     for name in required:
         report = reports[name]
         limit = report['query']['limit']
         counts[name] = len(report['rows'])
         assert counts[name] < limit, f'{name} reached the query cap; retrieve bounded partitions before building'
-        if name != 'geonames':
+        if name not in ('geonames', 'conversionActions'):
             assert report['query']['conditions'] == [f"segments.date BETWEEN '{start}' AND '{through}'"]
+        elif name == 'conversionActions':
+            # Windows PowerShell 5.1's ConvertTo-Json writes an empty array as null.
+            assert report['query']['conditions'] in ([], None)
         assert str(report['query']['customer_id']) == str(source['account']['customer_client.id'])
     assert len(reports['accountYtd']['rows']) <= 1
     names = {
@@ -132,6 +244,8 @@ def build(source):
     account_ytd = source_metrics(reports['accountYtd']['rows'][0]) if reports['accountYtd']['rows'] else {metric: 0 for metric in METRICS}
     assert_reconciles(totals(account_totals), account_ytd, 'Monthly account sum versus independent YTD')
     account_totals.append(with_rates({'month': '2026-ytd', **account_ytd}))
+    if has_conversion_split:
+        attach_conversion_splits(reports, account_totals, campaigns)
     coverage['2026-ytd'] = {
         'status': 'available' if any(account_ytd.values()) else 'no_delivery',
         'note': f'January 1–{through.strftime("%B")} {through.day}, 2026. Future dates are not included.',
@@ -168,7 +282,7 @@ def build(source):
             'City delivery does not cover all account activity. City rows describe audience geography, not facility attribution.',
             'Conversions are Google Ads reported conversions, not verified storage rentals. Historical source metrics can be revised.',
             'This is a manual reporting snapshot through the last included date, not a complete future calendar year.',
-        ],
+        ] + ([CONVERSION_SPLIT_NOTE] if has_conversion_split else []),
     }
 
 
@@ -176,7 +290,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('source', type=Path)
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parents[1] / 'data' / 'google-ads.json')
+    parser.add_argument('--require-conversion-split', action='store_true', help='Fail if the source predates conversion-action reports.')
     args = parser.parse_args()
-    result = build(json.loads(args.source.read_text(encoding='utf-8-sig')))
+    result = build(
+        json.loads(args.source.read_text(encoding='utf-8-sig')),
+        require_conversion_split=args.require_conversion_split,
+    )
     args.output.write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf-8')
     print(json.dumps({'periods': len(result['periods']), 'through': result['through'], 'accountTotals': result['accountTotals'], 'rows': result['validation']['sourceRowCounts']}, indent=2))

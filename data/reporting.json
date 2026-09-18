@@ -1,10 +1,10 @@
 {
   "schema": "storage-signal.reporting.v1",
-  "refreshed": "2026-09-18",
+  "refreshed": "2026-09-19",
   "currency": "USD",
   "adTimezone": "America/New_York",
   "ccExtractedAt": "2026-09-18T05:38:22.141+00:00",
-  "metaExtractedAt": "2026-09-18T14:16:15.8902531Z",
+  "metaExtractedAt": "2026-09-18T16:31:39.1907254Z",
   "periods": [
     {
       "id": "2026-06",
@@ -16,7 +16,15 @@
         "spend": 7133.85,
         "impressions": 9399,
         "clicks": 830,
-        "conversions": 59.992295
+        "conversions": 59.992295,
+        "conversionsByGroup": {
+          "leads_and_calls": 36.994929,
+          "phone_clicks": 0,
+          "button_clicks": 0,
+          "store_visits": 23,
+          "rentals": 0,
+          "other": 0
+        }
       },
       "meta": {
         "spend": 1314.17,
@@ -625,7 +633,15 @@
         "spend": 6655.49,
         "impressions": 10971,
         "clicks": 905,
-        "conversions": 63.999223
+        "conversions": 63.999223,
+        "conversionsByGroup": {
+          "leads_and_calls": 27.999223,
+          "phone_clicks": 0,
+          "button_clicks": 0,
+          "store_visits": 36,
+          "rentals": 0,
+          "other": 0
+        }
       },
       "meta": {
         "spend": 2169.78,
@@ -1234,7 +1250,15 @@
         "spend": 6997.62,
         "impressions": 11589,
         "clicks": 943,
-        "conversions": 67.025839
+        "conversions": 67.025839,
+        "conversionsByGroup": {
+          "leads_and_calls": 35.999279,
+          "phone_clicks": 0,
+          "button_clicks": 10.02656,
+          "store_visits": 21,
+          "rentals": 0,
+          "other": 0
+        }
       },
       "meta": {
         "spend": 2168.06,
@@ -1843,11 +1867,19 @@
         "spend": 4137.96,
         "impressions": 5310,
         "clicks": 448,
-        "conversions": 63.97344
+        "conversions": 63.97344,
+        "conversionsByGroup": {
+          "leads_and_calls": 14,
+          "phone_clicks": 1,
+          "button_clicks": 39.97344,
+          "store_visits": 9,
+          "rentals": 0,
+          "other": 0
+        }
       },
       "meta": {
-        "spend": 1193.78,
-        "impressions": 34803.0,
+        "spend": 1194.54,
+        "impressions": 34807.0,
         "clicks": 588.0,
         "linkClicks": 410.0,
         "reach": 13363.0,

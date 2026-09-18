@@ -74,6 +74,18 @@ The cause of these differences remains unresolved. Do not substitute the series 
 - Source measures are cost in micros, impressions, clicks and reported conversions. Retain micros until display; dollars are `costMicros / 1,000,000`.
 - CTR is clicks/impressions; CPC is spend/clicks; cost per conversion is spend/conversions. Undefined denominators produce null.
 - Conversions can be fractional. Preserve precision. Campaign/ad-group and independent account delivery reconcile exactly; the validator requires conversion differences below 0.005. A permitted source difference can cross a displayed rounding boundary.
+- Primary conversions are also split by conversion-action category. The split uses `metrics.conversions`, never `metrics.all_conversions`, and must reconcile to the unchanged Google-reported conversion total within 0.005:
+
+  | Dashboard group | Google Ads conversion-action category | Meaning in this dashboard |
+  | --- | --- | --- |
+  | Leads & calls | `SUBMIT_LEAD_FORM`, `PHONE_CALL_LEAD` | Submitted lead forms and completed calls from ads |
+  | Phone-number clicks | `CONTACT` | Click on a phone-number link, not a completed call |
+  | Rent Now / Pay bill button clicks | `BEGIN_CHECKOUT` | GA4-imported button click, not a lead; the import has recorded from 2026-08-28 |
+  | Store visits (modeled) | `STORE_VISIT` | Google-modeled store visits |
+  | Rentals | `PURCHASE` | Completed rental action; currently zero in the verified source read |
+  | Other | Any other category | Primary conversions not mapped above |
+
+  Action names are display labels only; category determines the group. `Clicks to call` and `Local actions - *` can appear in `all_conversions` without being primary conversions and therefore do not enter this split. Old source extracts without the action reports remain buildable and omit split fields; use `--require-conversion-split` when a refresh must include them.
 - Detail YTD sums additive monthly values and recomputes rates. Independent direct account YTD provides reconciliation evidence.
 - Campaign-location labels come from campaign names, not a facility attribution join.
 - Audience-city coverage is incomplete. Presence/interest are advertising geography categories, not necessarily renter addresses or facility locations.
@@ -152,7 +164,7 @@ These are operational filters, not significance or causation tests. Notes retain
 This procedure requires authorized source access and private extraction context beyond this repository.
 
 1. **Choose cutoff and scope.** Define included dates in source reporting time zones. Record timestamps and account/stream verification privately. Keep incomplete months labeled and overlapping source dates aligned.
-2. **Extract Google Ads.** Retrieve elapsed 2026 months plus independent direct account YTD; campaign/ad-group, city and geographic-label reports. Verify reports did not reach the cap; partition bounded requests if needed. Keep query/response evidence private.
+2. **Extract Google Ads.** Retrieve elapsed 2026 months plus independent direct account YTD; campaign/ad-group, city and geographic-label reports; account- and campaign-level primary conversions by action; and conversion-action definitions. Verify reports did not reach the cap; partition bounded requests if needed. Keep query/response evidence private.
 3. **Extract GA4.** Apply the verified stream filter to monthly and direct-YTD summary/channel/page/city reports, plus a YTD daily-coverage report. Complete pagination with continuous offsets and retain metadata.
 4. **Extract Meta.** Retrieve monthly account/campaign/ad-set/ad and four dimension reports, plus adjacent seven-day ad-set windows for each month. Complete pagination and retain unsupported-category/date evidence.
 5. **Extract CCStorage.** Read roster, eligible payments, lease events and period-end occupancy via CC-Storage MCP. Keep every roster facility, null history and alternate reporting-view totals.
@@ -162,7 +174,7 @@ This procedure requires authorized source access and private extraction context 
 9. **Publish the reviewed scope.** Follow applicable owner authorization for the actual public payload, then verify the deployed revision and behavior using [the release guide](VALIDATION_AND_RELEASE.md).
 
 ```text
-python scripts/build-google-ads.py PRIVATE_GOOGLE_ADS_SOURCE.json
+python scripts/build-google-ads.py PRIVATE_GOOGLE_ADS_SOURCE.json --require-conversion-split
 python scripts/build-analytics.py PRIVATE_GA4_SOURCE.json
 python scripts/build-meta.py PRIVATE_META_SOURCE.json
 python scripts/validate-data.py
