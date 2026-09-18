@@ -1,0 +1,17 @@
+{
+  "schema": "storage-signal.ga4-events.v1",
+  "fetchedAt": "2026-09-01T12:00:00Z",
+  "start": "2026-08-13",
+  "through": "2026-08-31",
+  "dataset": "synthetic_analytics_fixture",
+  "events": [
+    {"user_pseudo_id": "pseudo-fixture-alpha", "event_timestamp": "1786622400000000", "event_name": "page_view", "ga_session_id": "1234567890123", "ga_session_number": "1", "host": "familyheirloomstorage.com", "path": "/storage?ignored=yes", "utm_source": "google", "utm_medium": "cpc", "utm_campaign": "synthetic-fall", "has_gclid": true, "has_fbclid": false, "manual_source": null, "manual_medium": null, "manual_campaign": null, "first_source": "google", "first_medium": "cpc", "first_campaign": "synthetic-fall", "device": "desktop", "city": "Sampleville", "region": "Georgia"},
+    {"user_pseudo_id": "pseudo-fixture-alpha", "event_timestamp": "1786622460000000", "event_name": "contact", "ga_session_id": "1234567890123", "ga_session_number": "1", "host": "familyheirloomstorage.com", "path": "/contact", "has_gclid": true, "has_fbclid": false, "device": "desktop", "city": "Sampleville", "region": "Georgia"},
+    {"user_pseudo_id": "pseudo-fixture-alpha", "event_timestamp": "1787227200000000", "event_name": "page_view", "ga_session_id": "1234567890999", "ga_session_number": "2", "host": "familyheirloomstorage.com", "path": "/locations/north", "has_gclid": false, "has_fbclid": false, "first_source": "google", "first_medium": "cpc", "first_campaign": "synthetic-fall", "device": "mobile", "city": "Sampleville", "region": "Georgia"},
+    {"user_pseudo_id": "pseudo-fixture-beta", "event_timestamp": "1786795200000000", "event_name": "page_view", "ga_session_id": "2234567890123", "ga_session_number": "1", "host": "familyheirloomstorage.com", "path": "/units", "has_gclid": false, "has_fbclid": true, "manual_source": "facebook", "manual_medium": "paid-social", "manual_campaign": "fixture-leads", "device": "mobile", "city": "Demotown", "region": "Tennessee"},
+    {"user_pseudo_id": "pseudo-fixture-beta", "event_timestamp": "1786795260000000", "event_name": "form_submit", "ga_session_id": "2234567890123", "ga_session_number": "1", "host": "familyheirloomstorage.com", "path": "/units", "has_gclid": false, "has_fbclid": true, "manual_source": "facebook", "manual_medium": "paid-social", "manual_campaign": "fixture-leads", "device": "mobile", "city": "Demotown", "region": "Tennessee"},
+    {"user_pseudo_id": "pseudo-fixture-beta", "event_timestamp": "1786795270000000", "event_name": "generate_lead", "ga_session_id": "2234567890123", "ga_session_number": "1", "host": "familyheirloomstorage.com", "path": "/units", "has_gclid": false, "has_fbclid": true, "manual_source": "facebook", "manual_medium": "paid-social", "manual_campaign": "fixture-leads", "device": "mobile", "city": "Demotown", "region": "Tennessee"},
+    {"user_pseudo_id": "pseudo-fixture-portal", "event_timestamp": "1786968000000000", "event_name": "begin_checkout", "ga_session_id": "3234567890123", "ga_session_number": "1", "host": "fixture.ccstorage.com", "path": "/rent", "has_gclid": false, "has_fbclid": false, "device": "mobile", "city": "Example City", "region": "Florida"},
+    {"user_pseudo_id": "pseudo-fixture-portal", "event_timestamp": "1786968060000000", "event_name": "ccstorage_rental_completed", "ga_session_id": "3234567890123", "ga_session_number": "1", "host": "fixture.ccstorage.com", "path": "/complete", "has_gclid": false, "has_fbclid": false, "device": "mobile", "city": "Example City", "region": "Florida"}
+  ]
+}

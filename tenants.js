@@ -265,7 +265,19 @@
   return items?.length ? `<ul class="tenant-inline-list">${items.map(item => `<li>${formatter(item)}</li>`).join("")}</ul>` : "None recorded";
  }
 
- function renderProfile(profile, facilityName) {
+ function renderJourneySection(profile, journeyLeads = []) {
+  if (journeyLeads === null) return '<section class="tenant-profile-section journey-profile-section"><h4>Journey</h4><p class="tenant-empty">Lead journey data isn\'t available on this site.</p></section>';
+  if (!journeyLeads.length) return '<section class="tenant-profile-section journey-profile-section"><h4>Journey</h4><p class="tenant-empty">No Meta lead found for this renter.</p></section>';
+  const items=journeyLeads.map(lead=>{
+   const match=lead.match?.matches?.find(item=>String(item.customer_id)===String(profile.customer_id));
+   const badge=lead.match?.status==='possible'?'Possible match - unconfirmed':`Confirmed via ${html(match?.via||"contact")}`;
+   const answers=Object.entries(lead.answers||{}).map(([question,answer])=>`<li><span>${html(question.replaceAll("_"," "))}</span><strong>${html(answer)}</strong></li>`).join("");
+   return `<article class="journey-profile-lead"><header><div><strong>${html(dateOnly(lead.created_date))} · ${html(lead.campaign?.name||"Unknown campaign")}</strong><span>${html(lead.form||"Unknown form")}</span></div><span class="journey-match-badge ${lead.match?.status||"none"}">${badge}</span></header>${answers?`<ul>${answers}</ul>`:""}</article>`;
+  }).join("");
+  return `<section class="tenant-profile-section journey-profile-section"><h4>Journey</h4><div class="journey-profile-list">${items}</div></section>`;
+ }
+
+ function renderProfile(profile, facilityName, journeyLeads = []) {
   const flags = Object.entries(profile.flags || {}).filter(([,active])=>active).map(([key])=>key.replaceAll("_"," "));
   const address = [profile.address,profile.address2,[profile.city,profile.state,profile.postal_code].filter(Boolean).join(" ")].filter(Boolean).join(", ") || "Not recorded";
   const leases = profile.leases?.map(lease => {
@@ -277,6 +289,7 @@
   return `<section class="tenant-profile-head"><div><p>${html(facilityName)}</p><h3>${html(profile.name)}</h3><span>Customer #${html(profile.customer_number)} · ${html(profile.tenantStatus)}</span></div><div class="tenant-flags">${flags.map(flag=>`<span>${html(flag)}</span>`).join("")}${profile.pricing_type?`<span>${html(profile.pricing_type)}</span>`:""}</div></section>
    <section class="tenant-profile-stats">${[["Balance due",currency(profile.balanceDue)],["Past due",currency(profile.pastDue)],["Autopay",profile.autopay?"Active":"Not active"],[`Lifetime paid since ${dateOnly(profile.firstPaymentDate)}`,currency(profile.lifetimePaid)],["Tenant since",dateOnly(profile.tenantSince)]].map(([label,value])=>`<div><span>${html(label)}</span><strong>${html(value)}</strong></div>`).join("")}</section>
    <section class="tenant-profile-contact"><div><h4>Address</h4><p>${html(address)}</p></div><div><h4>Alternate contact</h4><p>${html(profile.alternate_contact_name||"Not recorded")}</p></div></section>
+   ${renderJourneySection(profile,journeyLeads)}
    <section class="tenant-profile-section"><h4>Leases</h4><div class="tenant-table-scroll" tabindex="0"><table class="tenant-table tenant-profile-table"><thead><tr><th>Lease #</th><th>Unit</th><th>Size and amenities</th><th>Signed</th><th>Move-in</th><th>Move-out / scheduled</th><th class="tenant-number">Current rate</th><th>Rate history</th><th>Discounts</th><th>Protection plan</th><th>Deposit</th></tr></thead><tbody>${leases}</tbody></table></div></section>
    <section class="tenant-profile-section"><div class="tenant-profile-title"><h4>Payments</h4><p>Payment history starts when this facility joined CCStorage.</p></div><div class="tenant-table-scroll" tabindex="0"><table class="tenant-table"><thead><tr><th>Date</th><th>Payment #</th><th>Method</th><th>Status</th><th class="tenant-number">Original</th><th class="tenant-number">Refund</th><th class="tenant-number">Net</th><th>Source</th></tr></thead><tbody>${payments}</tbody></table></div></section>
    <section class="tenant-profile-section"><h4>Invoices</h4><div class="tenant-table-scroll" tabindex="0"><table class="tenant-table"><thead><tr><th>Invoice #</th><th>Created</th><th>Due</th><th class="tenant-number">Billed</th><th class="tenant-number">Paid</th><th class="tenant-number">Balance</th></tr></thead><tbody>${invoices}</tbody></table></div></section>`;
@@ -356,10 +369,12 @@
   return profilePromises.get(companyId);
  }
 
- function openProfile(companyId,customerId){
-  const body=document.getElementById("tenant-dialog-body"),title=document.getElementById("tenant-dialog-title");dialogState.scroll=body.scrollTop;title.textContent="Tenant profile";body.innerHTML='<p class="tenant-loading" role="status">Loading tenant profile…</p>';
-  const back=document.getElementById("tenant-dialog-back");if(back){back.hidden=false;back.textContent=`← Back to ${dialogState?.title||"list"}`;back.onclick=()=>{renderDialogList(true);requestAnimationFrame(()=>document.getElementById("tenant-dialog-title")?.focus());};}
-  loadProfiles(companyId).then(data=>{const profile=data.profiles?.[customerId];if(!profile)throw new Error("Profile missing");title.textContent=profile.name;body.innerHTML=renderProfile(profile,data.facility?.name||companyId);}).catch(()=>{body.innerHTML='<p class="tenant-empty">Tenant data isn\'t available on this site.</p>';});
+ function openProfile(companyId,customerId,options={}){
+  const body=document.getElementById("tenant-dialog-body"),title=document.getElementById("tenant-dialog-title");if(dialogState)dialogState.scroll=body.scrollTop;title.textContent="Tenant profile";body.innerHTML='<p class="tenant-loading" role="status">Loading tenant profile…</p>';
+  const back=document.getElementById("tenant-dialog-back"),backLabel=options.backLabel||dialogState?.title||"list";
+  if(back){back.hidden=false;back.textContent=`← Back to ${backLabel}`;back.onclick=()=>{if(typeof options.onBack==="function")options.onBack();else renderDialogList(true);requestAnimationFrame(()=>document.getElementById("tenant-dialog-title")?.focus());};}
+  const journeys=globalThis.journeyDashboard?.loadLeadsIndex?globalThis.journeyDashboard.loadLeadsIndex().then(()=>globalThis.journeyDashboard.getCustomerLeads(customerId)):Promise.resolve(null);
+  Promise.all([loadProfiles(companyId),journeys]).then(([data,journeyLeads])=>{const profile=data.profiles?.[customerId];if(!profile)throw new Error("Profile missing");title.textContent=profile.name;body.innerHTML=renderProfile(profile,data.facility?.name||companyId,journeyLeads);}).catch(()=>{body.innerHTML='<p class="tenant-empty">Tenant data isn\'t available on this site.</p>';});
  }
 
  function openForFacility(companyId,from,to){
@@ -375,5 +390,5 @@
   dialog?.addEventListener("close",()=>{const target=findDialogReturnTarget(dialogTrigger);dialogTrigger=null;dialogState=null;target?.focus?.();});
  }
 
- return {createInitialView,renderTenantView,renderScorecardDialog,renderProfile,scorecardModels,scoped,normalizeUnitFootprint,weeklyChart,sizeMixChart,openForFacility,render,dialogHeaderText,findDialogReturnTarget};
+ return {createInitialView,renderTenantView,renderScorecardDialog,renderProfile,renderJourneySection,scorecardModels,scoped,normalizeUnitFootprint,weeklyChart,sizeMixChart,openForFacility,openProfileInDialog:openProfile,showDialog,render,dialogHeaderText,findDialogReturnTarget};
 });

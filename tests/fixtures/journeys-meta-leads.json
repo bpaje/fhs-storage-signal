@@ -1,0 +1,123 @@
+{
+  "schema": "storage-signal.meta-leads.v1",
+  "fetchedAt": "2026-09-01T12:00:00Z",
+  "through": "2026-08-31",
+  "pageId": "synthetic-page",
+  "forms": [
+    {"id": "form-single", "name": "Synthetic Storage Interest", "status": "ACTIVE", "questionKeys": []},
+    {"id": "form-direct", "name": "Demonstration Rental Request", "status": "ACTIVE", "questionKeys": []}
+  ],
+  "formAds": {
+    "form-single": [
+      {"ad_id": "333333333333333", "ad_name": "Synthetic Ad A", "adset_id": "222222222222222", "adset_name": "Synthetic Ad Set", "campaign_id": "111111111111111", "campaign_name": "Synthetic Campaign"},
+      {"ad_id": "444444444444444", "ad_name": "Synthetic Ad B", "adset_id": "222222222222222", "adset_name": "Synthetic Ad Set", "campaign_id": "111111111111111", "campaign_name": "Synthetic Campaign"}
+    ],
+    "form-direct": []
+  },
+  "leads": [
+    {
+      "lead_id": "900000000000001",
+      "created_time": "2026-07-20T14:00:00Z",
+      "form_id": "form-single",
+      "form_name": "Synthetic Storage Interest",
+      "ad_id": "",
+      "ad_name": "",
+      "adset_id": "",
+      "adset_name": "",
+      "campaign_id": "",
+      "campaign_name": "",
+      "is_organic": false,
+      "platform": "facebook",
+      "full_name": "Avery Example",
+      "email_sha256": "52a5a9193d0a9f3c3501cf7fbd00801bb25cfb8112febe886b8a5629920fd388",
+      "phone_sha256": null,
+      "answers": {"when_do_you_need_storage?": "Within a month", "preferred_area": "North fixture"}
+    },
+    {
+      "lead_id": "900000000000002",
+      "created_time": "2026-07-15T10:00:00Z",
+      "form_id": "form-direct",
+      "form_name": "Demonstration Rental Request",
+      "ad_id": "555555555555555",
+      "ad_name": "Demonstration Ad",
+      "adset_id": "666666666666666",
+      "adset_name": "Demonstration Ad Set",
+      "campaign_id": "777777777777777",
+      "campaign_name": "Demonstration Campaign",
+      "is_organic": false,
+      "platform": "instagram",
+      "full_name": "Morgan Sample",
+      "email_sha256": null,
+      "phone_sha256": null,
+      "answers": {"storage_size": "Medium"}
+    },
+    {
+      "lead_id": "900000000000003",
+      "created_time": "2026-08-10T09:00:00Z",
+      "form_id": "form-direct",
+      "form_name": "Demonstration Rental Request",
+      "ad_id": "555555555555555",
+      "ad_name": "Demonstration Ad",
+      "adset_id": "666666666666666",
+      "adset_name": "Demonstration Ad Set",
+      "campaign_id": "777777777777777",
+      "campaign_name": "Demonstration Campaign",
+      "is_organic": false,
+      "platform": "facebook",
+      "full_name": "Casey Fiction",
+      "email_sha256": null,
+      "phone_sha256": "fac4b523f5469419fa021cd61b5e3d2439e5b67b6f7aed017a09deb75e27b28f",
+      "answers": {"rental_timing": "This week"}
+    },
+    {
+      "lead_id": "900000000000004",
+      "created_time": "2026-08-15T11:30:00Z",
+      "form_id": "form-direct",
+      "form_name": "Demonstration Rental Request",
+      "ad_id": "555555555555555",
+      "ad_name": "Demonstration Ad",
+      "adset_id": "666666666666666",
+      "adset_name": "Demonstration Ad Set",
+      "campaign_id": "777777777777777",
+      "campaign_name": "Demonstration Campaign",
+      "is_organic": false,
+      "platform": "facebook",
+      "full_name": "Shared Contact Example",
+      "email_sha256": null,
+      "phone_sha256": "fac4b523f5469419fa021cd61b5e3d2439e5b67b6f7aed017a09deb75e27b28f",
+      "answers": {"preferred_area": "South fixture"}
+    },
+    {
+      "lead_id": "900000000000005",
+      "created_time": "2026-08-22T08:00:00Z",
+      "form_id": "form-direct",
+      "form_name": "Demonstration Rental Request",
+      "ad_id": "555555555555555",
+      "ad_name": "Demonstration Ad",
+      "adset_id": "666666666666666",
+      "adset_name": "Demonstration Ad Set",
+      "campaign_id": "777777777777777",
+      "campaign_name": "Demonstration Campaign",
+      "is_organic": true,
+      "platform": "facebook",
+      "full_name": "Taylor Fiction",
+      "email_sha256": null,
+      "phone_sha256": null,
+      "answers": {"storage_use": "Synthetic household items"}
+    },
+    {
+      "lead_id": "900000000000006",
+      "created_time": "2026-09-01T08:00:00Z",
+      "form_id": "form-direct",
+      "form_name": "Demonstration Rental Request",
+      "campaign_id": "777777777777777",
+      "campaign_name": "Demonstration Campaign",
+      "is_organic": false,
+      "platform": "facebook",
+      "full_name": "Future Fixture",
+      "email_sha256": null,
+      "phone_sha256": null,
+      "answers": {}
+    }
+  ]
+}

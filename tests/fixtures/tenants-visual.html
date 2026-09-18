@@ -12,13 +12,15 @@
   <div class="shell">
     <aside class="sidebar">
       <div class="brand"><div class="brand-logo-panel"><strong>FHS</strong></div><span class="brand-caption">Storage Signal · Visual fixture</span></div>
-      <nav><p class="nav-label">Workspace</p><button class="nav-item active"><span class="nav-glyph">◇</span>Tenants <span class="nav-restricted">Restricted</span></button></nav>
+      <nav><p class="nav-label">Workspace</p><button class="nav-item active"><span class="nav-glyph">◇</span>Tenants <span class="nav-restricted">Restricted</span></button><button class="nav-item"><span class="nav-glyph">◎</span>Leads <span class="nav-restricted">Restricted</span></button><button class="nav-item"><span class="nav-glyph">◌</span>Visitors <span class="nav-restricted">Restricted</span></button></nav>
     </aside>
     <div class="main">
       <header class="topbar"><div class="heading"><p>Portfolio / Tenants</p><h1>Family Heirloom Storage</h1></div></header>
       <main id="content">
         <section class="welcome-row"><div><h2>Tenants</h2><p>Restricted CCStorage tenant activity, balances and account history.</p></div></section>
         <section id="tenants-view" aria-label="Restricted tenant reporting"><div id="tenants-root"></div></section>
+        <section id="leads-view" class="hidden" aria-label="Restricted lead reporting"><div id="leads-root"></div></section>
+        <section id="visitors-view" class="hidden" aria-label="Restricted visitor reporting"><div id="visitors-root"></div></section>
       </main>
     </div>
   </div>
@@ -27,7 +29,7 @@
       <header>
         <div class="tenant-dialog-heading-row">
           <button class="tenant-dialog-back" id="tenant-dialog-back" type="button" hidden>← Back to list</button>
-          <div><p class="drawer-eyebrow">Restricted tenant data</p><h2 id="tenant-dialog-title" tabindex="-1">Tenant details</h2></div>
+          <div><p class="drawer-eyebrow">Restricted data</p><h2 id="tenant-dialog-title" tabindex="-1">Tenant details</h2></div>
         </div>
         <button class="close-button" id="tenant-dialog-close" type="button" aria-label="Close tenant details">×</button>
       </header>
@@ -35,9 +37,12 @@
     </div>
   </dialog>
   <script src="tenants-visual-fixture.js"></script>
+  <script src="journeys-visual-fixture.js"></script>
   <script src="../../tenants.js"></script>
+  <script src="../../journeys.js"></script>
   <script>
     const fixture = globalThis.tenantsVisualFixture;
+    const journeys = globalThis.journeysVisualFixture;
     const view = globalThis.tenantDashboard.createInitialView(fixture.index);
     const params = new URLSearchParams(location.search);
     const mode = params.get("mode") || "view";
@@ -53,8 +58,34 @@
       back.hidden = false;
       back.textContent = "← Back to Move-ins";
       document.getElementById("tenant-dialog-title").textContent = profile.name;
-      document.getElementById("tenant-dialog-body").innerHTML = globalThis.tenantDashboard.renderProfile(profile, fixture.facility.facility.name);
+      const journeyLeads = journeys.leads.leads.filter(lead => (journeys.leads.byCustomer[profile.customer_id] || []).includes(lead.id));
+      document.getElementById("tenant-dialog-body").innerHTML = globalThis.tenantDashboard.renderProfile(profile, fixture.facility.facility.name, journeyLeads);
       document.getElementById("tenant-dialog").showModal();
+    }
+    if (["leads", "lead", "visitors", "visitor"].includes(mode)) {
+      document.getElementById("tenants-view").classList.add("hidden");
+      document.querySelector(".welcome-row h2").textContent = mode.startsWith("lead") ? "Leads" : "Visitors";
+    }
+    if (mode === "leads" || mode === "lead") {
+      document.getElementById("leads-view").classList.remove("hidden");
+      const leadView = globalThis.journeyDashboard.initialLeadView(journeys.leads);
+      document.getElementById("leads-root").innerHTML = globalThis.journeyDashboard.renderLeadsView(journeys.leads, leadView);
+      if (mode === "lead") {
+        document.getElementById("tenant-dialog-title").textContent = "Lead journey";
+        document.getElementById("tenant-dialog-body").innerHTML = globalThis.journeyDashboard.renderLeadDialog(journeys.leads.leads[0]);
+        document.getElementById("tenant-dialog").showModal();
+      }
+    }
+    if (mode === "visitors" || mode === "visitor") {
+      document.getElementById("visitors-view").classList.remove("hidden");
+      const visitorView = globalThis.journeyDashboard.initialVisitorView(journeys.visitors);
+      document.getElementById("visitors-root").innerHTML = globalThis.journeyDashboard.renderVisitorsView(journeys.visitors, visitorView);
+      if (mode === "visitor") {
+        const visitor = journeys.visitors.visitors[0];
+        document.getElementById("tenant-dialog-title").textContent = "Visitor timeline";
+        document.getElementById("tenant-dialog-body").innerHTML = globalThis.journeyDashboard.renderVisitorDialog(visitor, journeys.timelines[visitor.vid]);
+        document.getElementById("tenant-dialog").showModal();
+      }
     }
     document.body.dataset.ready = "true";
   </script>

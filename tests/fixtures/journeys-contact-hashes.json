@@ -1,0 +1,21 @@
+{
+  "extractedAt": "2026-09-10T08:35:10.466+00:00",
+  "method": "synthetic documented-normalization fixture",
+  "customers": [
+    {
+      "customer_id": "customer-1",
+      "email_sha256": "52a5a9193d0a9f3c3501cf7fbd00801bb25cfb8112febe886b8a5629920fd388",
+      "phone_sha256": "fac4b523f5469419fa021cd61b5e3d2439e5b67b6f7aed017a09deb75e27b28f"
+    },
+    {
+      "customer_id": "customer-2",
+      "email_sha256": "54a0da2bd50d7b73012c0fc26dc4074e35ac749f08dcfb630affebc7cbf7abc3",
+      "phone_sha256": "e1bfd73a5dc6262163ec42add4ebe0229f929db9b23644c1485dbccd05a36363"
+    },
+    {
+      "customer_id": "customer-3",
+      "email_sha256": "d0913148d42890c0d9e9bbc6687253571811a0bbb2a6fd4d4dc06098c08e421f",
+      "phone_sha256": "fac4b523f5469419fa021cd61b5e3d2439e5b67b6f7aed017a09deb75e27b28f"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "storage-signal.meta.v1",
+  "through": "2026-08-31",
+  "periods": {
+    "2026-07": {
+      "account": {"leads": 3},
+      "campaigns": [
+        {"campaignId": "111111111111111", "name": "Synthetic Campaign", "spend": 120.50},
+        {"campaignId": "777777777777777", "name": "Demonstration Campaign", "spend": 80.25}
+      ]
+    },
+    "2026-08": {
+      "account": {"leads": 4},
+      "campaigns": [
+        {"campaignId": "111111111111111", "name": "Synthetic Campaign", "spend": 140.00},
+        {"campaignId": "777777777777777", "name": "Demonstration Campaign", "spend": 210.75}
+      ]
+    }
+  }
+}

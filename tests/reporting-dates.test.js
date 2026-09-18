@@ -42,7 +42,7 @@ assert.match(fullLabels.periodRefresh, /^Complete calendar month\. Refreshed Oct
 assert.equal(fullLabels.trend, "June–September · account-wide");
 assert.doesNotMatch(fullRendered, /covers days|partial|not compared with a full prior month|1–9|September 9|September 10|Sep 9/);
 
-const cutoffSensitiveFiles = ["app.js", "details.js", "meta.js", "monthly-trend.js", "tenants.js", "index.html"];
+const cutoffSensitiveFiles = ["app.js", "details.js", "meta.js", "monthly-trend.js", "tenants.js", "journeys.js", "index.html"];
 for (const file of cutoffSensitiveFiles) {
   const source = fs.readFileSync(path.join(ROOT, file), "utf8");
   assert.doesNotMatch(source, /1–9|September 9|September 10|Sep 9/i, `${file} contains a fixed cutoff label`);
