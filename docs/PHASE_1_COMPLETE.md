@@ -35,20 +35,20 @@ A separate CCStorage Excel workbook was produced for June, July, August and Sept
 
 ## Coverage at acceptance
 
-The included dates end September 9, 2026; refresh date is September 10. Currency is USD.
+At acceptance the included dates ended September 9, 2026 and the refresh date was September 10. The cutoff has since moved to September 17, 2026 (2026-09-18); the table shows the coverage as accepted, with the current cutoff noted in each Cutoff cell. Currency is USD.
 
 | Source/view | Requested start | Cutoff | Period choices | Qualification |
 | --- | --- | --- | --- | --- |
-| Overview / CCStorage | June 1 | September 9 | June, July, August, September MTD | All 39 roster facilities represented; historical coverage varies |
-| Google Ads detail | January 1 | September 9 | January–September, 2026 YTD | Independent account/YTD totals reconcile to detail delivery |
-| GA4 | January 1 | September 9 | January–September, 2026 YTD | First recorded activity February 13; earlier history unavailable |
-| Meta detail | June 1 | September 9 | June, July, August, September MTD | Some regional conversion categories unsupported, retained as null |
+| Overview / CCStorage | June 1 | September 9 at acceptance; September 17 now | June, July, August, September MTD | All 39 roster facilities represented; historical coverage varies |
+| Google Ads detail | January 1 | September 9 at acceptance; September 17 now | January–September, 2026 YTD | Independent account/YTD totals reconcile to detail delivery |
+| GA4 | January 1 | September 9 at acceptance; September 17 now | January–September, 2026 YTD | First recorded activity February 13; earlier history unavailable |
+| Meta detail | June 1 | September 9 at acceptance; September 17 now | June, July, August, September MTD | Some regional conversion categories unsupported, retained as null |
 
 “Complete 2026 data” means all elapsed 2026 dates through the reporting cutoff for Google Ads/GA4. It does not include future months or fill the GA4 gap with invented values. Meta and CCStorage were not expanded to January. August remains the default complete month.
 
 ## Snapshot reference values
 
-These are checks against the accepted JSON, not a promise that later source reads will be identical. Payment and occupancy coverage happen to match in this snapshot; their meanings remain separate.
+These are the values as accepted on September 10 (cutoff September 9), checks against the accepted JSON, not a promise that later source reads will be identical. The current files (cutoff September 17) differ because of the later cutoff and re-extractions; read `data/*.json` for current values. Payment and occupancy coverage happen to match in this snapshot; their meanings remain separate.
 
 | Period | Google spend | Meta spend | Meta leads | Net recorded payments | Payment / occupancy coverage |
 | --- | ---: | ---: | ---: | ---: | --- |

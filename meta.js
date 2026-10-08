@@ -51,6 +51,7 @@ const metaPanel = (() => {
     } finally {
       loading = false;
       render();
+      if (typeof detail !== 'undefined' && detail.view === 'meta') renderDetailViews();
     }
   }
 
@@ -337,12 +338,12 @@ const metaPanel = (() => {
     renderMonthlyMetrics(period);
     renderInsights(period);
     renderTable(period);
-    const refreshed = data.refreshed ? ` · Refreshed ${data.refreshed}` : '';
+    const refreshed = data.refreshed ? ` · Refreshed ${reportingDates.formatDate(data.refreshed)}` : '';
     const footer = $('#footer-note');
     if (footer && !root.classList.contains('hidden')) footer.textContent = `Meta Ads · ${periodLabel()} · USD · America/New_York${refreshed}. Manual snapshots; platform results can be revised.`;
   }
 
-  return { render, reset };
+  return { render, reset, source: () => data, failed: () => failed };
 })();
 
 function renderMeta() { metaPanel.render(); }

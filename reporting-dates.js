@@ -69,6 +69,22 @@
     return `Google Ads and GA4 offer monthly reporting and a year-to-date view through ${formatDate(last.end)}. The year is still in progress. Overview, Meta and CCStorage retain their available ${monthSpan(report.periods)} periods. The selected period falls back to August when it is unavailable in the next view.`;
   }
 
+  // Freshness: whole calendar days from a source's own cutoff date to the local date of `now` (always passed in, never read here).
+  const STALE_AFTER_DAYS = 7;
+
+  function ageInDays(iso, now) {
+    const [y, m, d] = String(iso).slice(0, 10).split("-").map(Number);
+    return Math.max(0, Math.round((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - Date.UTC(y, m - 1, d)) / 86400000));
+  }
+
+  function freshness(iso, now) {
+    if (!/^\d{4}-\d{2}-\d{2}/.test(String(iso ?? ""))) return { days: null, stale: true, label: "Data date unavailable", warning: "Freshness unknown", text: "Data date unavailable · Freshness unknown" };
+    const days = ageInDays(iso, now), stale = days > STALE_AFTER_DAYS;
+    const label = `Data through ${formatDate(iso.slice(0, 10))} (${days} ${days === 1 ? "day" : "days"} old)`;
+    const warning = stale ? `Stale: older than ${STALE_AFTER_DAYS} days` : "";
+    return { days, stale, label, warning, text: warning ? `${label} · ${warning}` : label };
+  }
+
   function dashboardLabels(report) {
     const last = latestPeriod(report);
     return {
@@ -82,11 +98,13 @@
   }
 
   return {
+    ageInDays,
     chartPeriodLabel,
     comparisonDefinition,
     dashboardLabels,
     detailCoverageDefinition,
     formatDate,
+    freshness,
     latestPeriod,
     occupancyDefinition,
     partialPeriodSentence,

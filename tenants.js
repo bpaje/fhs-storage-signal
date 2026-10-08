@@ -29,6 +29,7 @@
  const number = value => value == null ? "No data" : new Intl.NumberFormat("en-US", { maximumFractionDigits: 2 }).format(Number(value));
  const currency = value => value == null ? "n/a" : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(Number(value));
  const percent = value => value == null ? "No data" : new Intl.NumberFormat("en-US", { style: "percent", maximumFractionDigits: 1 }).format(Number(value));
+ const ageText = value => globalThis.reportingDates?.freshness(value, new Date()).text ?? `Data through ${value}`;
  const dateOnly = value => value ? String(value).slice(0, 10) : "Not recorded";
  const sumMoney = (rows, key) => rows.reduce((total, row) => total + Number(row[key] || 0), 0);
  const uniqueTenants = rows => new Set(rows.map(row => `${row.company_id}:${row.customer_id}`)).size;
@@ -234,7 +235,7 @@
    <label><span>From</span><input id="tenant-from" type="date" min="${minimum}" max="${data.cutoff}" value="${currentView.from}" ${currentView.preset==='custom'?'':'disabled'}></label>
    <label><span>To</span><input id="tenant-to" type="date" min="${minimum}" max="${data.cutoff}" value="${currentView.to}" ${currentView.preset==='custom'?'':'disabled'}></label>
    <label class="tenant-search"><span>Search</span><input id="tenant-search" type="search" value="${html(currentView.search)}" placeholder="Name, customer #, lease # or unit"></label>
-   <span class="tenant-cutoff">Data through ${html(data.cutoff)}</span>
+   <span class="tenant-cutoff">${html(ageText(data.cutoff))}</span>
   </section>
   <section class="tenant-scorecards" aria-label="Tenant activity summary">${cards.map(card => `<button type="button" class="tenant-scorecard" data-tenant-scorecard="${card.key}" aria-haspopup="dialog"><span>${html(card.label)}</span><strong>${html(card.value)}</strong><small>${html(card.note)}${searchNote}</small></button>`).join("")}</section>
   <section class="tenant-chart-grid">
@@ -322,7 +323,7 @@
   if(typeof document==="undefined")return;
   const rootElement=document.getElementById("tenants-root");if(!rootElement)return;
   document.getElementById("mode-ribbon").textContent="Restricted tenant reporting · CCStorage";
-  document.getElementById("snapshot-label").textContent=tenantIndex?`Data through ${tenantIndex.cutoff}`:"Restricted data";
+  document.getElementById("snapshot-label").textContent=tenantIndex?ageText(tenantIndex.cutoff):"Restricted data";globalThis.setFreshness?.("Tenants",tenantIndex?.cutoff,undefined,!tenantIndex&&!unavailable);
   document.getElementById("footer-note").textContent="Restricted tenant data · No export controls · CCStorage history varies by facility";
   if(unavailable){rootElement.innerHTML='<section class="panel tenant-unavailable" role="status">Tenant data isn\'t available on this site.</section>';return;}
   if(!tenantIndex){rootElement.innerHTML='<p class="tenant-loading" role="status">Loading restricted tenant data…</p>';loadIndex().then(()=>{if(!document.getElementById("tenants-view")?.classList.contains("hidden"))render();});return;}

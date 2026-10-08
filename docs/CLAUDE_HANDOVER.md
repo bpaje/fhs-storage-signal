@@ -7,7 +7,7 @@ This is the public handover for Storage Signal as accepted September 10, 2026. R
 - The owner accepted Phase 1: **"Consider this as phase 1 complete."**
 - The implementation baseline is `5dddd4ce09535c848d7fa722fca1bff89945846e` on `bpaje/fhs-storage-signal`, deployed to [the public dashboard](https://bpaje.github.io/fhs-storage-signal/).
 - Pages run `34468500012` succeeded for that implementation revision.
-- The cutoff is September 9, 2026; refresh date September 10. A later current date does not imply current data.
+- The cutoff is now September 17, 2026 (the accepted Phase 1 baseline was cut off September 9 and refreshed September 10; the cutoff moved on 2026-09-18). The data files carry refresh dates of September 18–19. A later current date does not imply current data; the dashboard shows each source's cutoff and age and warns when it is more than 7 days old.
 - Four tabs are delivered: Overview, Google Ads, Google Analytics and Meta Ads. Selectable monthly charts are live in all three detail tabs.
 - This is a manually refreshed reporting product. There is no running source ingestion service or automatic refresh behind the page.
 - The next requested deliverable is this handover and repository documentation. Proposed Phase 2 items below have not started and are not accepted implementation work.
@@ -65,7 +65,7 @@ The older **FHS Reporting Automation** repository is a separate workstream with 
 
 **GA4 history.** January 1–February 12 returned no recorded activity. January's summary is null; February is partial recorded history. The property/stream existed before 2026, so February 13 is an observation date, not proof of tracking installation. No alternate accessible same-site history was found. Completeness after that date was not independently established. Latest-day results can still process; see [Google's freshness guidance](https://support.google.com/analytics/answer/11198161?hl=en).
 
-**GA4 key events.** The snapshot reports 20 in July, 174 in August and 322 in September 1–9. These configured events are not validated leads. The increase warrants a definition/collection review; it does not prove business demand rose. No key-event audit or tracking correction was completed.
+**GA4 key events.** The snapshot reports 20 in July, 174 in August and 708 in September 1–17 (the accepted September 10 snapshot reported 322 for September 1–9). These configured events are not validated leads. The increase warrants a definition/collection review; it does not prove business demand rose. No key-event audit or tracking correction was completed.
 
 **CCStorage.** Use payment-register net amounts, non-void lease-event counts and period-end occupancy. The roster is 39; historical payment/occupancy coverage progresses from 28 to 33 to 38 facilities. Consider coverage before inferring portfolio growth. The payment-register/reporting-view discrepancy is unresolved. Occupancy above capacity is flagged rather than silently capped.
 
@@ -73,7 +73,7 @@ The older **FHS Reporting Automation** repository is a separate workstream with 
 
 **Insights.** Account-wide notes are independent of hierarchy filters. Volume/fatigue thresholds are operational screens, not significance tests. No fatigue flag does not prove no fatigue. Notes propose checks or controlled tests; the dashboard does not execute campaign changes.
 
-**Dates and updates.** September 1–9 is not compared against a full prior month in Overview. Meta uses equal seven-day windows for recent movement. Sources can revise history. Refreshing a detail dataset while leaving its overlapping Overview values stale breaks consistency.
+**Dates and updates.** September 1–17 (MTD) is not compared against a full prior month in Overview. Meta uses equal seven-day windows for recent movement. Sources can revise history. Refreshing a detail dataset while leaving its overlapping Overview values stale breaks consistency.
 
 ## Proposed Phase 2 — not started
 

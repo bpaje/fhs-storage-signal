@@ -1,6 +1,6 @@
 # Data, connections and operations
 
-This guide describes the September 10, 2026 implementation. The cutoff is September 9. For status and ownership context, read [Phase 1 completion](PHASE_1_COMPLETE.md) and [Claude handover](CLAUDE_HANDOVER.md). For the separate source-tracking audit (GTM/GA4/Meta fixes to `familyheirloomstorage.com`'s own tracking, not the dashboard) read [Tracking audit handover](TRACKING_AUDIT_HANDOVER.md).
+This guide describes the Phase 1 implementation accepted September 10, 2026, kept current for later data refreshes. The cutoff is now September 17, 2026 (it was September 9 at acceptance; moved 2026-09-18). For status and ownership context, read [Phase 1 completion](PHASE_1_COMPLETE.md) and [Claude handover](CLAUDE_HANDOVER.md). For the separate source-tracking audit (GTM/GA4/Meta fixes to `familyheirloomstorage.com`'s own tracking, not the dashboard) read [Tracking audit handover](TRACKING_AUDIT_HANDOVER.md).
 
 ## Connections and architecture
 
@@ -48,11 +48,11 @@ Campaign/ad identifiers in existing public files identify reporting entities, no
 | Net recorded payments | Eligible gross minus current refunds | Per-facility `gross - refunds = net` |
 | Eligible payments | Complete, Manually Entered, Partially Refunded and Refunded payment count | Declined, Void and Pending Approval excluded |
 | Move-ins / move-outs | Current non-void leases by respective event date | Lease events, not distinct customers; successful query with no event is zero |
-| Occupied leases / units | Snapshot at month end or September 9 for MTD | Missing historical snapshot is unavailable |
+| Occupied leases / units | Snapshot at month end, or at the reporting cutoff (currently September 17) for MTD | Missing historical snapshot is unavailable |
 | Occupancy | Occupied leases divided by storage units | Unit-weighted over available snapshots; never average facility percentages |
 | Autopay leases | Source count at occupancy snapshot | Not payment-method share or collection-success rate |
 
-Every current-roster facility remains represented even when earlier payment/occupancy history is missing. Missing history is null, not zero. Counts exceeding capacity are flagged, not capped. Percentage comparisons are suppressed when facilities with data differ. September MTD is not compared with a full prior month.
+Every current-roster facility remains represented even when earlier payment/occupancy history is missing. Missing history is null, not zero. Counts exceeding capacity are flagged, not capped. Percentage comparisons are suppressed when facilities with data differ. September MTD (September 1–17) is not compared with a full prior month.
 
 **Known same-day turnover double-count (source-level, unresolved).** Verified directly against CCStorage's `leases` and `occupancy_by_date_and_company` tables on 2026-09-12: a lease counts as occupying a given date under the rule `move_in_date <= date AND (move_out_date IS NULL OR move_out_date >= date) AND void IS FALSE` (confirmed by reproducing the published daily count exactly — 92 leases for company 1175 on 2026-09-09 — from raw lease rows under this exact boundary). The rule is inclusive on both ends: a tenant who moves out *on* a given date and a tenant who moves into the same unit *on* that same date are both counted as occupying it. If a unit is ever vacated and re-rented on the same calendar day, that single physical unit is counted twice in that day's occupied-leases total, inflating occupancy for that day. This is a property of CCStorage's own view definitions, not of this dashboard's build scripts, and it cannot be corrected downstream without unit-level lease data (not currently part of the extracted aggregates).
 
@@ -62,10 +62,12 @@ The separate CCStorage reporting view is disclosed for the full portfolio even w
 
 | Period | Register net | Separate reporting-view volume |
 | --- | ---: | ---: |
-| June | $374,747.87 | $347,120.79 |
-| July | $425,911.92 | $398,203.33 |
-| August | $467,763.25 | $432,019.05 |
-| September 1–9 | $324,306.85 | $315,980.42 |
+| June | $374,641.87 | $347,120.79 |
+| July | $425,702.84 | $398,203.33 |
+| August | $467,756.34 | $432,019.05 |
+| September 1–17 | $369,503.90 | $347,212.47 |
+
+Values are read from the public `data/reporting.json` (each period's `reportingViewVolume`, and register net as the sum of its facilities' `net`), as of the 2026-09-17 CCStorage re-extraction. They replace the September 10 acceptance values (for example June $374,747.87 and September 1–9 $324,306.85), which later extractions revised.
 
 The cause of these differences remains unresolved. Do not substitute the series or describe either as bank reconciliation.
 
@@ -182,15 +184,17 @@ python scripts/validate-data.py
 
 The uppercase filenames are placeholders. Supply quoted real paths from the protected operational workspace. Do not copy private extracts into this public repository to run the scripts.
 
-Google/GA4 converters are scoped to 2026. The Meta converter and several Overview labels are currently scoped to June–September 1–9, 2026. Extending dates requires reviewing hard-coded periods, weekly evidence and labels; it is not just a different file argument. The validator retains the current regional unsupported-metric contract. Resolve these limits before scheduled refreshes.
+Google/GA4 converters are scoped to 2026. The Meta converter and several Overview labels are currently scoped to June–September 1–17, 2026 (the current cutoff; labels derive it from `data/reporting.json`). Extending dates requires reviewing hard-coded periods, weekly evidence and labels; it is not just a different file argument. The validator retains the current regional unsupported-metric contract. Resolve these limits before scheduled refreshes.
 
 ## Restricted Tenants tab and the 2026-09-17 CCStorage re-extraction
+
+*Dated record.* The paragraphs below describe the 2026-09-17 and 2026-09-18 refresh work as it happened, when the shared cutoff was September 9. The cutoff was moved to September 17 on 2026-09-18; the current public datasets and the Tenants source share that cutoff.
 
 Full detail, including the extraction method and every verification, is in
 [the Tenants plan](RENTER_LISTS_PLAN.md). The contract points that affect numbers:
 
 **CCStorage figures were re-extracted on 2026-09-17** (`ccExtractedAt`
-`2026-09-17T16:50:55.562+00:00`), cutoff still September 9 so Google and Meta are unchanged.
+`2026-09-17T16:50:55.562+00:00`), cutoff still September 9 at that date so Google and Meta were unchanged.
 Sources revise history, and this refresh shows it: June net payments fell $106.00 and July
 $209.08 (ACH payments later returned), August move-ins fell 135 to 134 (a lease voided after
 the previous pull), and September 1–9 net rose $9,787.29 as payments posted after the earlier
@@ -213,8 +217,8 @@ failing deep in a builder:
   cutoff, keeping the last-good build, because `validate-data.py` requires `google-ads.json`,
   `analytics.json` and `reporting.json` to agree.
 
-**Google Ads was re-extracted at the shared cutoff on 2026-09-18**, so all three datasets now
-report September 9 and the full refresh runs every step. Both Google files were pulled through
+**Google Ads was re-extracted at the shared cutoff on 2026-09-18**, so all three datasets then
+reported September 9 (since moved to September 17) and the full refresh ran every step. Both Google files were pulled through
 the Google Ads connector, since the `GOOGLE_ADS_*` OAuth variables are unset on this machine:
 
 - `private-scripts/assemble-google-ads-from-transcript.py` rebuilds `google-ads-source.json`

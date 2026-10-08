@@ -15,10 +15,15 @@ The accepted implementation baseline is [`5dddd4c`](https://github.com/bpaje/fhs
 
 | Tab | Coverage | Main capabilities |
 | --- | --- | --- |
-| Overview | June–August 2026; September 1–9 MTD | Account advertising totals; CCStorage payments, moves and occupancy; brand/facility filters; monthly trends and facility detail |
-| Google Ads | January 1–September 9; monthly and YTD | Campaign/ad-group drilldown; campaign-location labels; separate audience-city report; spend, conversions, clicks and efficiency metrics |
-| Google Analytics | Every elapsed 2026 month queried; first activity February 13; through September 9; direct YTD | Users, sessions, views, engagement and key events; channel, page and visitor-city tables |
-| Meta Ads | June–August; September 1–9 MTD | Campaign/ad-set/ad drilldown; placement, age/gender, region and device reports; evidence-backed decision notes |
+| Overview | June–August 2026; September 1–17 MTD | Account advertising totals; CCStorage payments, moves and occupancy; brand/facility filters; monthly trends and facility detail |
+| Google Ads | January 1–September 17; monthly and YTD | Campaign/ad-group drilldown; campaign-location labels; separate audience-city report; spend, conversions, clicks and efficiency metrics |
+| Google Analytics | Every elapsed 2026 month queried; first activity February 13; through September 17; direct YTD | Users, sessions, views, engagement and key events; channel, page and visitor-city tables |
+| Meta Ads | June–August; September 1–17 MTD | Campaign/ad-set/ad drilldown; placement, age/gender, region and device reports; evidence-backed decision notes |
+| Tenants (private host only) | CCStorage activity through the reporting cutoff, September 17; balances as of the extraction date | Owner-login-only renter lists, scorecards and profiles. Never served on GitHub Pages |
+| Leads (private host only) | Meta lead records through the cutoff | Identity-matched lead-to-renter results: Confirmed means an exact normalized email or phone match; Possible (name and timing) is unconfirmed and counted separately |
+| Visitors (private host only) | Anonymous GA4 website journeys through the cutoff | One-way visitor aliases, first-touch channel mix and event timelines. Not linked to named renters |
+
+The four public tabs are Overview, Google Ads, Meta Ads and Google Analytics. The Tenants, Leads and Visitors tabs exist only under owner-approved exceptions (September 17 and 18, 2026) and appear only on the private host; the public site hides them and never fetches their data. Every tab shows each source's own cutoff and age, and warns when it is more than 7 days old.
 
 Google Ads, GA4 and Meta have selectable monthly column charts and expandable monthly-values tables. Detail tables support search, sorting and CSV export of all matching rows. August is the default complete month. September is partial; future months are not included.
 
@@ -33,7 +38,7 @@ Authorized connectors and APIs are read outside the browser application. Private
 | Google Analytics | Direct GA4 Data API using authorized Google credentials; Analytics Admin API verified the website stream |
 | CCStorage | CC-Storage MCP with bounded read-only aggregate reporting queries |
 
-There are no attribution joins, facility advertising allocations, CAC calculations or ROAS claims. Storage filters change CCStorage only; advertising retains its own source scope. Google conversions, Meta leads and GA4 key events are separate measures, not verified renters.
+There is no attribution: no facility advertising allocations, CAC calculations, ROAS claims or modelled or estimated renter credit. The one owner-approved exception (2026-09-18) is identity-based lead matching, shown only on the private host: a Meta lead is linked to a CCStorage renter only on an exact normalized email or phone match (Confirmed); a name-plus-timing match is labelled Possible, stays unconfirmed and is kept out of confirmed totals. Contact values stay hashed and are never output. Storage filters change CCStorage only; advertising retains its own source scope. Google conversions, Meta leads and GA4 key events are separate measures, not verified renters.
 
 ## Local validation and operation
 

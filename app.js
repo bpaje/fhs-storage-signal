@@ -4,6 +4,16 @@ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const fmt=(v,kind='number')=>v==null?'n/a':new Intl.NumberFormat('en-US',kind==='money'?{style:'currency',currency:'USD',maximumFractionDigits:2}:kind==='percent'?{style:'percent',maximumFractionDigits:1}:{maximumFractionDigits:2}).format(v);
 const state={period:'2026-08',brand:'all',facility:'all',compare:'previous',chart:'spend',coverage:'all',search:'',sort:'net',direction:-1,page:1};
 let report;
+const onPublicHost=publicHost.isPublicHost(location.hostname);
+const freshnessOf=iso=>reportingDates.freshness(iso,new Date());
+function setFreshness(title,through,refreshed,loading){
+ const f=freshnessOf(through);
+ $('#freshness').innerHTML=`<span class="freshness-dot${loading||!f.stale?'':' stale'}"></span><div><strong>${esc(title)}</strong><small>${esc(loading?'Loading data date…':f.label)}${refreshed?` · Refreshed ${esc(reportingDates.formatDate(refreshed))}`:''}</small>${loading||!f.stale?'':`<small class="freshness-warn">${esc(f.warning)}</small>`}</div>`;
+}
+function sourceItem(cls,icon,name,through,note='',id=''){
+ const f=freshnessOf(through),loading=note==='Loading',status=loading?note:[note,f.warning].filter(Boolean).join(' · ');
+ return `<div class="source-item"${id?` id="${id}"`:''}><i class="source-logo ${cls}">${icon}</i><strong>${name}</strong><span>${esc(loading?'Loading data date…':f.label)}</span><b class="state ${loading?'pending':status?'warn':'ok'}">${esc(status||'Within 7 days')}</b></div>`;
+}
 const current=()=>report.periods.find(p=>p.id===state.period);
 const selected=p=>p.facilities.filter(f=>(state.brand==='all'||f.brand===state.brand)&&(state.facility==='all'||f.id===state.facility));
 function aggregate(rows){
@@ -20,8 +30,17 @@ const definitions=[
  ['Occupancy',()=>reportingDates.occupancyDefinition(report)],
  ['Coverage and comparisons',()=>reportingDates.comparisonDefinition(report)]
 ];
-function openDefinitions(){ $('#modal-title').textContent='Reporting definitions';$('#modal-body').innerHTML=definitions.map(([title,body])=>`<div class="definition-card"><strong>${esc(title)}</strong><p>${esc(typeof body==='function'?body():body)}</p></div>`).join('');$('#backdrop').classList.remove('hidden');$('#info-modal').classList.remove('hidden'); }
-function closeOverlays(){ $('#drawer').classList.remove('open');$('#drawer').setAttribute('aria-hidden','true');$('#info-modal').classList.add('hidden');$('#backdrop').classList.add('hidden'); }
+function openDefinitions(){ opener=document.activeElement;$('#modal-title').textContent='Reporting definitions';$('#modal-body').innerHTML=definitions.map(([title,body])=>`<div class="definition-card"><strong>${esc(title)}</strong><p>${esc(typeof body==='function'?body():body)}</p></div>`).join('');$('#backdrop').classList.remove('hidden');$('#info-modal').classList.remove('hidden');$('#info-modal .close-button').focus(); }
+let opener=null;
+function closeOverlays(){ $('#drawer').classList.remove('open');$('#drawer').setAttribute('aria-hidden','true');$('#info-modal').classList.add('hidden');$('#backdrop').classList.add('hidden');if(opener?.isConnected)opener.focus();opener=null; }
+const overlayBox=()=>$('#info-modal').classList.contains('hidden')?($('#drawer').classList.contains('open')?$('#drawer'):null):$('#info-modal');
+function trapTab(e){
+ const box=overlayBox();if(e.key!=='Tab'||!box)return;
+ const items=[...box.querySelectorAll('button:not([disabled]),a[href],input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null||el===document.activeElement),first=items[0],last=items.at(-1);
+ if(!items.length||!box.contains(document.activeElement)){e.preventDefault();(first||box).focus();}
+ else if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+ else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+}
 function comparison(key,source){
  if(state.compare==='none')return '';
  const p=current(),prev=report.periods[report.periods.indexOf(p)-1];
@@ -49,8 +68,7 @@ function render(){
  const p=current(),rows=selected(p),cc=aggregate(rows);
  $('#mode-ribbon').textContent=`Monthly reporting · ${p.label} · USD`;
  $('#snapshot-label').textContent=`Updated ${reportingDates.formatDate(report.refreshed)}`;$('#facility-count').textContent=`${p.facilities.length} facilities`;
- $('#freshness').innerHTML=`<span class="freshness-dot"></span><div><strong>${esc(p.label)}</strong><small>Sources refreshed ${esc(reportingDates.formatDate(report.refreshed))}</small></div>`;
- $('#source-strip').innerHTML=[['google','G','Google Ads'],['meta','M','Meta Ads'],['cc','CC','CCStorage']].map(([cls,icon,name])=>`<div class="source-item"><i class="source-logo ${cls}">${icon}</i><strong>${name}</strong><span>${p.start} – ${p.end}</span><b class="state ok">Loaded</b></div>`).join('');
+ setFreshness(p.label,reportingDates.latestPeriod(report).end,report.refreshed);
  const cards=[['Google Ads spend',p.google.spend,'money','spend','google','Account-wide'],['Meta Ads spend',p.meta.spend,'money','spend','meta','Account-wide'],['Net recorded payments',cc.net,'money','net',null,`${cc.coverage}/${cc.total} facilities with payments`],['Move-ins',cc.moveIns,'number','moveIns',null,'CCStorage lease events'],['Move-outs',cc.moveOuts,'number','moveOuts',null,'CCStorage lease events'],['Occupancy',cc.occupancy,'percent','occupancy',null,`${rows.filter(f=>f.units!=null).length}/${cc.total} facilities · ${p.end}`]];
  $('#kpi-grid').innerHTML=cards.map(([label,value,kind,key,source,note])=>`<article class="kpi-card"><div class="kpi-head">${label}</div><div class="kpi-value">${fmt(value,kind)}</div><div class="report-note">${esc(note)}</div><div class="report-comparison">${esc(comparison(key,source))}</div></article>`).join('');
  const ops=[['Gross recorded payments',cc.gross,'money','Before current refunds'],['Refund adjustments',cc.refunds,'money','Applied to original payment month'],['Eligible payments',cc.payments,'number','Payments included in register totals'],['Occupied leases / units',`${fmt(cc.leases)} / ${fmt(cc.units)}`,'text',`Snapshot: ${p.end}`],['Leases on autopay',cc.autopay,'number','At the occupancy snapshot']];
@@ -61,7 +79,7 @@ function render(){
  const notes=[['Historical coverage',`${cc.coverage} of ${cc.total} selected facilities have payment data; ${rows.filter(f=>f.units!=null).length} have occupancy. Missing history is n/a.`],['Payment basis',`Net payments use the payment register. The separate CCStorage reporting-view volume is ${fmt(p.reportingViewVolume,'money')} for the full portfolio; the difference is unresolved.`],['Period and refresh',reportingDates.periodRefresh(p,report.refreshed)]];
  const anomalies=rows.filter(f=>f.occupancy>1);if(anomalies.length)notes.push(['Occupancy review',anomalies.map(f=>`${f.name}: ${f.leases} leases / ${f.units} units`).join('; ')]);
  $('#attention-count').textContent=`${notes.length} notes`;$('#attention-list').innerHTML=notes.map(([title,note])=>`<button type="button"><div><strong>${title}</strong><small>${esc(note)}</small></div><b>i</b></button>`).join('');$$('#attention-list button').forEach(b=>b.onclick=openDefinitions);
- $('#footer-note').textContent=`USD · Google Ads and Meta Ads: account-wide · CCStorage: selected facilities · Data through ${p.end}`;
+ $('#footer-note').textContent=`USD · Google Ads and Meta Ads: account-wide · CCStorage: selected facilities · ${freshnessOf(reportingDates.latestPeriod(report).end).label}`;
  renderTrend();renderTable();if(typeof renderDetailViews==='function')renderDetailViews();
 }
 function renderTrend(){
@@ -79,23 +97,24 @@ function renderTable(){
  rows.sort((a,b)=>{const x=a[state.sort],y=b[state.sort];if(x==null)return y==null?0:1;if(y==null)return -1;return(typeof x==='string'?x.localeCompare(y):x-y)*state.direction;});
  const pages=Math.max(1,Math.ceil(rows.length/8));state.page=Math.min(state.page,pages);const start=(state.page-1)*8;
  $('#facility-tbody').innerHTML=rows.slice(start,start+8).map(f=>`<tr><td><button class="facility-open" data-id="${f.id}">${esc(f.name)}</button><small class="report-note">${esc(f.brand)}</small></td><td>${fmt(f.net,'money')}</td><td>${fmt(f.moveIns)}</td><td>${fmt(f.moveOuts)}</td><td>${fmt(f.occupancy,'percent')}${f.occupancy>1?' ⚠':''}</td><td><span class="state ${f.net!=null&&f.units!=null?'ok':'warn'}">${f.net!=null&&f.units!=null?'Available':'Missing history'}</span></td></tr>`).join('')||'<tr><td colspan="6">No facilities match these filters.</td></tr>';
+ $$('th.sortable').forEach(th=>{const key=th.querySelector('[data-sort]').dataset.sort;th.setAttribute('aria-sort',state.sort===key?(state.direction===1?'ascending':'descending'):'none');});
  $('#table-result-count').textContent=rows.length?`${start+1}–${Math.min(start+8,rows.length)} of ${rows.length} facilities`:'No matching facilities';
  $('#pagination').innerHTML=Array.from({length:pages},(_,i)=>`<button class="page-button ${i+1===state.page?'active':''}" data-page="${i+1}" aria-label="Page ${i+1}">${i+1}</button>`).join('');
  $$('[data-page]').forEach(b=>b.onclick=()=>{state.page=Number(b.dataset.page);renderTable();});$$('.facility-open').forEach(b=>b.onclick=()=>openFacility(b.dataset.id));
 }
 function openFacility(id){
  const p=current(),f=p.facilities.find(f=>f.id===id);$('#drawer-title').textContent=f.name;$('#drawer-eyebrow').textContent=p.label;
- $('#drawer-body').innerHTML=`<p class="drawer-note">CCStorage · ${p.start} through ${p.end}</p><div class="drawer-kpis">${[['Net payments',f.net,'money'],['Gross payments',f.gross,'money'],['Refund adjustments',f.refunds,'money'],['Move-ins',f.moveIns],['Move-outs',f.moveOuts],['Occupancy',f.occupancy,'percent'],['Occupied leases',f.leases],['Storage units',f.units],['Autopay leases',f.autopay]].map(([label,value,kind])=>`<div class="drawer-kpi"><span>${label}</span><strong>${fmt(value,kind)}</strong></div>`).join('')}</div><button type="button" class="tenant-facility-link" id="tenant-facility-link">View tenants at this facility</button><p class="drawer-note">${f.net==null?'No payment history returned for this period. ':''}${f.units==null?'No occupancy snapshot returned. ':''}${f.occupancy>1?'Source leases exceed reported units; review this occupancy count. ':''}Advertising totals are account-wide.</p>`;
- $('#backdrop').classList.remove('hidden');$('#drawer').classList.add('open');$('#drawer').setAttribute('aria-hidden','false');
- $('#tenant-facility-link').onclick=()=>{closeOverlays();globalThis.tenantDashboard?.openForFacility(id,p.start,p.end);};
+ $('#drawer-body').innerHTML=`<p class="drawer-note">CCStorage · ${p.start} through ${p.end}</p><div class="drawer-kpis">${[['Net payments',f.net,'money'],['Gross payments',f.gross,'money'],['Refund adjustments',f.refunds,'money'],['Move-ins',f.moveIns],['Move-outs',f.moveOuts],['Occupancy',f.occupancy,'percent'],['Occupied leases',f.leases],['Storage units',f.units],['Autopay leases',f.autopay]].map(([label,value,kind])=>`<div class="drawer-kpi"><span>${label}</span><strong>${fmt(value,kind)}</strong></div>`).join('')}</div>${onPublicHost?'':'<button type="button" class="tenant-facility-link" id="tenant-facility-link">View tenants at this facility</button>'}<p class="drawer-note">${f.net==null?'No payment history returned for this period. ':''}${f.units==null?'No occupancy snapshot returned. ':''}${f.occupancy>1?'Source leases exceed reported units; review this occupancy count. ':''}Advertising totals are account-wide.</p>`;
+ opener=document.activeElement;$('#backdrop').classList.remove('hidden');$('#drawer').classList.add('open');$('#drawer').setAttribute('aria-hidden','false');$('#drawer-close').focus();
+ if($('#tenant-facility-link'))$('#tenant-facility-link').onclick=()=>{closeOverlays();globalThis.tenantDashboard?.openForFacility(id,p.start,p.end);};
 }
 function bindEvents(){
  for(const[id,key]of[['period-filter','period'],['brand-filter','brand'],['facility-filter','facility'],['compare-filter','compare']])$('#'+id).onchange=e=>{state[key]=e.target.value;if(key==='brand')state.facility='all';if(key==='period'&&typeof detail!=='undefined')detail.periodNotice='';state.page=1;renderFilters();render();};
  $('#health-filter').onchange=e=>{state.coverage=e.target.value;state.page=1;renderTable();};$('#table-search').oninput=e=>{state.search=e.target.value.toLowerCase().trim();state.page=1;renderTable();};
  $('#reset-filters').onclick=()=>{Object.assign(state,{period:'2026-08',brand:'all',facility:'all',compare:'previous',coverage:'all',search:'',page:1,chart:'spend',sort:'net',direction:-1});$('#health-filter').value='all';$('#table-search').value='';$('#compare-filter').value='previous';renderFilters();render();};
  $$('.chart-toggle button').forEach(b=>b.onclick=()=>{state.chart=b.dataset.chart;renderTrend();});
- $$('[data-sort]').forEach(b=>{b.tabIndex=0;b.onclick=()=>{state.direction=state.sort===b.dataset.sort?-state.direction:-1;state.sort=b.dataset.sort;renderTable();};b.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();b.click();}};});
+ $$('button[data-sort]').forEach(b=>b.onclick=()=>{state.direction=state.sort===b.dataset.sort?-state.direction:-1;state.sort=b.dataset.sort;renderTable();});
  ['definitions-button','outcome-info','help-button'].forEach(id=>$('#'+id).onclick=openDefinitions);['drawer-close','backdrop'].forEach(id=>$('#'+id).onclick=closeOverlays);$('[data-close-modal]').onclick=closeOverlays;
- document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOverlays();$('#sidebar').classList.remove('open');}});$('#mobile-menu').onclick=()=>$('#sidebar').classList.toggle('open');
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOverlays();$('#sidebar').classList.remove('open');}else trapTab(e);});$('#mobile-menu').onclick=()=>$('#sidebar').classList.toggle('open');
 }
 (async()=>{try{const response=await fetch('data/reporting.json',{cache:'no-store'});if(!response.ok)throw new Error('Report unavailable');report=await response.json();if(report.schema!=='storage-signal.reporting.v1'||!report.periods?.length)throw new Error('Invalid report');renderFilters();render();bindEvents();}catch(error){$('#mode-ribbon').textContent='Report could not be loaded';$('#content').innerHTML='<section class="panel load-failure"><h2>Reporting data is unavailable</h2><p>Please reload the page or check the published data file.</p></section>';console.error(error);}})();

@@ -44,6 +44,12 @@
     };
   }
 
+  // Per-campaign cost per lead and call: spend divided by that campaign's Leads & calls count; null when the count is 0 or the split is missing.
+  function costPerLeadAndCall(row) {
+    const leadsAndCalls = row?.conversionsByGroup?.leads_and_calls;
+    return leadsAndCalls ? row.costMicros / 1e6 / leadsAndCalls : null;
+  }
+
   function renderLeadCard(spend, split, formatMoney=money) {
     const result = summary(spend, split);
     if (!result) return "";
@@ -64,5 +70,5 @@
     return `<article class="panel conversion-breakdown" aria-labelledby="conversion-breakdown-title"><header class="panel-header"><div><h3 id="conversion-breakdown-title">Conversions by type</h3><p>Google Ads primary conversions, separated by conversion-action meaning.</p></div></header><div class="conversion-breakdown-table"><table><caption class="sr-only">Primary conversions by type</caption><thead><tr><th scope="col">Type</th><th scope="col">Count</th><th scope="col">Share</th></tr></thead><tbody>${rows}</tbody></table></div><details class="conversion-actions"><summary>View conversion actions</summary><ul>${actions}</ul></details></article>`;
   }
 
-  return {GROUPS, aggregate, summary, renderLeadCard, renderBreakdown, labels, money};
+  return {GROUPS, aggregate, summary, costPerLeadAndCall, renderLeadCard, renderBreakdown, labels, money};
 });

@@ -71,7 +71,7 @@
           </section>
           <section class="panel table-panel">
             <header class="panel-header table-heading"><div><h3>Facility performance</h3><p>CCStorage payments and operations for the selected month</p></div><div class="table-tools"><label class="search"><span>⌕</span><input id="table-search" type="search" placeholder="Search facilities" /></label><select id="health-filter" aria-label="Filter data coverage"><option value="all">All coverage</option><option value="available">Data available</option><option value="missing">Missing data</option></select></div></header>
-            <div class="table-scroll"><table><thead><tr><th class="sortable" data-sort="name">Facility <span>↕</span></th><th class="sortable" data-sort="net">Net payments <span>↕</span></th><th class="sortable" data-sort="moveIns">Move-ins <span>↕</span></th><th class="sortable" data-sort="moveOuts">Move-outs ↕</th><th class="sortable" data-sort="occupancy">Occupancy <span>↕</span></th><th>Coverage</th></tr></thead><tbody id="facility-tbody"></tbody></table></div>
+            <div class="table-scroll"><table><thead><tr><th class="sortable" aria-sort="none"><button type="button" class="sort-button" data-sort="name">Facility <span aria-hidden="true">↕</span></button></th><th class="sortable" aria-sort="none"><button type="button" class="sort-button" data-sort="net">Net payments <span aria-hidden="true">↕</span></button></th><th class="sortable" aria-sort="none"><button type="button" class="sort-button" data-sort="moveIns">Move-ins <span aria-hidden="true">↕</span></button></th><th class="sortable" aria-sort="none"><button type="button" class="sort-button" data-sort="moveOuts">Move-outs <span aria-hidden="true">↕</span></button></th><th class="sortable" aria-sort="none"><button type="button" class="sort-button" data-sort="occupancy">Occupancy <span aria-hidden="true">↕</span></button></th><th>Coverage</th></tr></thead><tbody id="facility-tbody"></tbody></table></div>
             <footer class="table-footer"><span id="table-result-count">Loading facilities</span><div class="pagination" id="pagination"></div></footer>
           </section>
           </div>
@@ -123,8 +123,8 @@
       </div>
     </div>
     <div class="backdrop hidden" id="backdrop"></div>
-    <aside class="drawer" id="drawer" aria-hidden="true"><header><div><p class="drawer-eyebrow" id="drawer-eyebrow">Facility detail</p><h2 id="drawer-title">Facility</h2></div><button class="close-button" id="drawer-close" aria-label="Close details">×</button></header><div id="drawer-body"></div></aside>
-    <section class="modal hidden" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><header><div><p class="drawer-eyebrow">Family Heirloom Storage</p><h2 id="modal-title">Metric definitions</h2></div><button class="close-button" data-close-modal aria-label="Close">×</button></header><div class="modal-body" id="modal-body"></div></section>
+    <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true" tabindex="-1"><header><div><p class="drawer-eyebrow" id="drawer-eyebrow">Facility detail</p><h2 id="drawer-title">Facility</h2></div><button class="close-button" id="drawer-close" aria-label="Close details">×</button></header><div id="drawer-body"></div></aside>
+    <section class="modal hidden" id="info-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" tabindex="-1"><header><div><p class="drawer-eyebrow">Family Heirloom Storage</p><h2 id="modal-title">Metric definitions</h2></div><button class="close-button" data-close-modal aria-label="Close">×</button></header><div class="modal-body" id="modal-body"></div></section>
     <dialog class="tenant-dialog" id="tenant-dialog" aria-labelledby="tenant-dialog-title">
       <div class="tenant-dialog-shell">
         <header><div class="tenant-dialog-heading-row"><button class="tenant-dialog-back" id="tenant-dialog-back" type="button" hidden>← Back to list</button><div><p class="drawer-eyebrow">Restricted data</p><h2 id="tenant-dialog-title" tabindex="-1">Tenant details</h2></div></div><button class="close-button" id="tenant-dialog-close" type="button" aria-label="Close tenant details">×</button></header>
@@ -133,6 +133,7 @@
     </dialog>
     <div class="toast-region" id="toast-region" aria-live="polite"></div>
     <script src="reporting-dates.js"></script>
+    <script src="public-host.js"></script>
     <script src="app.js"></script>
     <script src="monthly-trend.js"></script>
     <script src="google-ads-conversions.js"></script>

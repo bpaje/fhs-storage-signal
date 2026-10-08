@@ -17,14 +17,14 @@
 .meta-explanation { margin: 17px 0 0; max-width: 1000px; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .meta-insights-panel { margin-bottom: 14px; overflow: hidden; }
 .meta-insights-panel .panel-header { align-items: flex-start; gap: 12px; }
-.meta-scope-badge { flex: 0 0 auto; padding: 5px 8px; border: 1px solid var(--line); border-radius: 15px; background: var(--brand-soft); color: var(--brand-primary); font-size: 10px; font-weight: 650; }
+.meta-scope-badge { flex: 0 0 auto; padding: 5px 8px; border: 1px solid var(--line); border-radius: 15px; background: var(--brand-soft); color: var(--brand-primary); font-size: 11px; font-weight: 650; }
 .meta-insight-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 0 16px 16px; }
 .meta-insight-card { min-width: 0; padding: 15px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel-soft); }
 .meta-insight-heading { display: flex; align-items: flex-start; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
 .meta-insight-heading h4 { flex: 1 1 180px; margin: 0; color: var(--ink); font-size: 13px; line-height: 1.45; }
-.meta-confidence { display: inline-block; max-width: 100%; padding: 3px 7px; border-radius: 5px; background: var(--brand-soft); color: var(--brand-primary); font-size: 10px; line-height: 1.5; }
+.meta-confidence { display: inline-block; max-width: 100%; padding: 3px 7px; border-radius: 5px; background: var(--brand-soft); color: var(--brand-primary); font-size: 11px; line-height: 1.5; }
 .meta-insight-card p { margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.65; overflow-wrap: anywhere; }
-.meta-insight-card p > strong { display: block; margin-bottom: 3px; color: var(--brand-primary); font-size: 10px; font-weight: 750; letter-spacing: .025em; text-transform: uppercase; }
+.meta-insight-card p > strong { display: block; margin-bottom: 3px; color: var(--brand-primary); font-size: 11px; font-weight: 750; letter-spacing: .025em; text-transform: uppercase; }
 .meta-insight-card .meta-insight-basis { padding-top: 10px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
 .meta-table-panel .panel-header { gap: 12px; }
 .meta-table-panel .detail-toolbar { align-items: flex-start; }

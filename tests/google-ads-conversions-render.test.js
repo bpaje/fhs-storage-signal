@@ -47,7 +47,28 @@ function run() {
   assert.equal(aggregate.conversionsByGroup.rentals, 1);
   assert.equal(aggregate.conversionsByAction.find(action => action.id === "1").conversions, 5);
 
+  // Campaign table: cost per lead and call = that campaign's cost / its Leads & calls count (not a cost per renter).
+  const campaign = counts => ({costMicros: 400_000_000, conversionsByGroup: {...split.conversionsByGroup, leads_and_calls: counts}, conversionsByAction: split.conversionsByAction});
+  assert.equal(conversions.costPerLeadAndCall(campaign(4)), 100);
+  assert.equal(conversions.costPerLeadAndCall(campaign(3)), 400 / 3, "no rounding before display");
+  assert.equal(conversions.costPerLeadAndCall(campaign(2.5)), 160, "fractional counts divide as given");
+  assert.equal(conversions.costPerLeadAndCall(campaign(0)), null, "zero Leads & calls is null, never Infinity or 0");
+  assert.equal(conversions.costPerLeadAndCall({costMicros: 0, conversionsByGroup: {leads_and_calls: 2}}), 0);
+  assert.equal(conversions.costPerLeadAndCall({costMicros: 400_000_000}), null, "rows without the conversion split stay null");
+  assert.equal(conversions.costPerLeadAndCall(null), null);
+  assert.equal(conversions.costPerLeadAndCall(campaign(4)), conversions.summary(400, split).costPerLeadAndCall, "matches the account-level card arithmetic");
+  const published = JSON.parse(fs.readFileSync(path.join(ROOT, "data", "google-ads.json"), "utf8"));
+  const withLeads = published.campaigns.filter(row => row.conversionsByGroup?.leads_and_calls > 0);
+  assert.ok(withLeads.length > 0);
+  for (const row of published.campaigns) {
+    const leads = row.conversionsByGroup?.leads_and_calls;
+    assert.equal(conversions.costPerLeadAndCall(row), leads ? row.costMicros / 1e6 / leads : null);
+  }
+
   const details = fs.readFileSync(path.join(ROOT, "details.js"), "utf8");
+  assert.match(details, /row\.costPerLeadAndCall=googleAdsConversions\.costPerLeadAndCall\(row\)/);
+  assert.match(details, /\['costPerLeadAndCall','Cost \/ lead & call','money'\]/);
+  assert.match(details, /not a cost per renter/);
   const overview = fs.readFileSync(path.join(ROOT, "app.js"), "utf8");
   const styles = fs.readFileSync(path.join(ROOT, "styles.css"), "utf8");
   assert.match(details, /Conversions \(Google, all primary\)/);
