@@ -1,10 +1,10 @@
 {
   "schema": "storage-signal.reporting.v1",
-  "refreshed": "2026-10-21",
+  "refreshed": "2026-10-22",
   "currency": "USD",
   "adTimezone": "America/New_York",
-  "ccExtractedAt": "2026-10-21T13:31:19.383+00:00",
-  "metaExtractedAt": "2026-10-21T13:36:35.7856498Z",
+  "ccExtractedAt": "2026-10-21T17:55:28.637+00:00",
+  "metaExtractedAt": "2026-10-21T18:04:40.9985781Z",
   "periods": [
     {
       "id": "2026-06",
