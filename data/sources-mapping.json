@@ -1,0 +1,5 @@
+{
+  "schema": "storage-signal.sources-mapping.v1",
+  "note": "Owner-maintained. Each entry ties one CCStorage campaign slug (utm_campaign) to the Meta and Google campaign ids that spend its budget. No text matching is ever used. Empty until campaigns are created and tagged under docs/ATTRIBUTION_NAMING_STANDARD.md.",
+  "campaigns": []
+}

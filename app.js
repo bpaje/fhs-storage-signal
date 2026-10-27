@@ -5,6 +5,7 @@ const fmt=(v,kind='number')=>v==null?'n/a':new Intl.NumberFormat('en-US',kind===
 const state={period:'2026-08',brand:'all',facility:'all',compare:'previous',chart:'spend',coverage:'all',search:'',sort:'net',direction:-1,page:1};
 let report;
 const onPublicHost=publicHost.isPublicHost(location.hostname);
+if(onPublicHost)$('#sources-panel')?.remove();
 const freshnessOf=iso=>reportingDates.freshness(iso,new Date());
 function setFreshness(title,through,refreshed,loading){
  const f=freshnessOf(through);
@@ -30,7 +31,7 @@ const definitions=[
  ['Occupancy',()=>reportingDates.occupancyDefinition(report)],
  ['Coverage and comparisons',()=>reportingDates.comparisonDefinition(report)]
 ];
-function openDefinitions(){ opener=document.activeElement;$('#modal-title').textContent='Reporting definitions';$('#modal-body').innerHTML=definitions.map(([title,body])=>`<div class="definition-card"><strong>${esc(title)}</strong><p>${esc(typeof body==='function'?body():body)}</p></div>`).join('');$('#backdrop').classList.remove('hidden');$('#info-modal').classList.remove('hidden');$('#info-modal .close-button').focus(); }
+function openDefinitions(){ opener=document.activeElement;$('#modal-title').textContent='Reporting definitions';$('#modal-body').innerHTML=definitions.concat(onPublicHost?[]:globalThis.sourcesPanel?.definitions||[]).map(([title,body])=>`<div class="definition-card"><strong>${esc(title)}</strong><p>${esc(typeof body==='function'?body():body)}</p></div>`).join('');$('#backdrop').classList.remove('hidden');$('#info-modal').classList.remove('hidden');$('#info-modal .close-button').focus(); }
 let opener=null;
 function closeOverlays(){ $('#drawer').classList.remove('open');$('#drawer').setAttribute('aria-hidden','true');$('#info-modal').classList.add('hidden');$('#backdrop').classList.add('hidden');if(opener?.isConnected)opener.focus();opener=null; }
 const overlayBox=()=>$('#info-modal').classList.contains('hidden')?($('#drawer').classList.contains('open')?$('#drawer'):null):$('#info-modal');
@@ -81,6 +82,7 @@ function render(){
  $('#attention-count').textContent=`${notes.length} notes`;$('#attention-list').innerHTML=notes.map(([title,note])=>`<button type="button"><div><strong>${title}</strong><small>${esc(note)}</small></div><b>i</b></button>`).join('');$$('#attention-list button').forEach(b=>b.onclick=openDefinitions);
  $('#footer-note').textContent=`USD · Google Ads and Meta Ads: account-wide · CCStorage: selected facilities · ${freshnessOf(reportingDates.latestPeriod(report).end).label}`;
  renderTrend();renderTable();if(typeof renderDetailViews==='function')renderDetailViews();
+ if(!onPublicHost)globalThis.sourcesPanel?.update({periodId:p.id,periodLabel:p.label,ids:rows.map(f=>f.id),allCount:p.facilities.length});
 }
 function renderTrend(){
  const metric=state.chart,kind=metric==='moveIns'?'number':'money',value=p=>metric==='spend'?p.google.spend+p.meta.spend:aggregate(selected(p))[metric];
@@ -114,7 +116,7 @@ function bindEvents(){
  $('#reset-filters').onclick=()=>{Object.assign(state,{period:'2026-08',brand:'all',facility:'all',compare:'previous',coverage:'all',search:'',page:1,chart:'spend',sort:'net',direction:-1});$('#health-filter').value='all';$('#table-search').value='';$('#compare-filter').value='previous';renderFilters();render();};
  $$('.chart-toggle button').forEach(b=>b.onclick=()=>{state.chart=b.dataset.chart;renderTrend();});
  $$('button[data-sort]').forEach(b=>b.onclick=()=>{state.direction=state.sort===b.dataset.sort?-state.direction:-1;state.sort=b.dataset.sort;renderTable();});
- ['definitions-button','outcome-info','help-button'].forEach(id=>$('#'+id).onclick=openDefinitions);['drawer-close','backdrop'].forEach(id=>$('#'+id).onclick=closeOverlays);$('[data-close-modal]').onclick=closeOverlays;
+ ['definitions-button','outcome-info','help-button'].forEach(id=>$('#'+id).onclick=openDefinitions);if(!onPublicHost)$('#sources-info').onclick=openDefinitions;['drawer-close','backdrop'].forEach(id=>$('#'+id).onclick=closeOverlays);$('[data-close-modal]').onclick=closeOverlays;
  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeOverlays();$('#sidebar').classList.remove('open');}else trapTab(e);});$('#mobile-menu').onclick=()=>$('#sidebar').classList.toggle('open');
 }
 (async()=>{try{const response=await fetch('data/reporting.json',{cache:'no-store'});if(!response.ok)throw new Error('Report unavailable');report=await response.json();if(report.schema!=='storage-signal.reporting.v1'||!report.periods?.length)throw new Error('Invalid report');renderFilters();render();bindEvents();}catch(error){$('#mode-ribbon').textContent='Report could not be loaded';$('#content').innerHTML='<section class="panel load-failure"><h2>Reporting data is unavailable</h2><p>Please reload the page or check the published data file.</p></section>';console.error(error);}})();

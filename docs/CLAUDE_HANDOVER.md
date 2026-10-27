@@ -89,6 +89,8 @@ These are recommendations for discussion, not accepted requirements or permissio
 
 Do not revive attribution as an implicit prerequisite. If future work needs qualified leads or rentals by channel, first establish the required measurement and data work with the owner.
 
+**Update 2026-10-27:** the owner approved attribution as labeled evidence tiers only (Confirmed, Credited, Platform-reported, Not recorded), private host first. The rule is in `CLAUDE.md` ("Attribution evidence tiers"); the plan, naming standard and staff guide are in `docs/ATTRIBUTION_*.md`. Modeled or name-based attribution stays prohibited.
+
 ## Continuation sequence
 
 1. Read this handover and the private counterpart when source access is needed.

@@ -11,8 +11,7 @@ Phase 1 is a manual, static reporting product with four tabs: Overview, Google A
 ## Product intent to preserve
 
 - Fill the existing dashboard with direct Google Ads, Meta and CCStorage figures; include GA4 website reporting and useful drilldowns.
-- Preserve the owner's simplification: **no attribution**. Do not allocate advertising to facilities, infer renters from platform conversions, or label payment-register values as audited revenue. The one exception is the identity-based
-  lead matching approved on 2026-09-18 (below).
+- Do not allocate advertising to facilities, infer renters from platform conversions, or label payment-register values as audited revenue. Attribution is allowed **only** as the labeled evidence tiers approved on 2026-10-27 (see [the attribution plan](docs/ATTRIBUTION_PLAN.md) and "Attribution evidence tiers" below). Identity-based lead matching was approved on 2026-09-18 (below).
 - Keep the interface readable. Explain source coverage, incomplete months and materially different metric meanings where the user needs them.
 - Challenge unsupported conclusions. An observation and a plausible cause are different statements; recommendations must retain their evidence and limitations.
 
@@ -48,6 +47,19 @@ first.
 - Contact values stay hashed and are never output.
 - Website visitors are not linked to named renters until CCStorage passes an identifier across
   domains.
+
+## Attribution evidence tiers (owner-approved, 2026-10-27)
+
+Attribution is allowed only as labeled evidence tiers. It is never modeled, estimated or inferred from names.
+
+1. **Confirmed**: an exact normalized email or phone match between a Meta lead and a CCStorage customer. "Possible" name-plus-timing matches stay separate and unconfirmed.
+2. **Credited**: a source recorded in CCStorage itself, meaning the campaign credited on the lease at move-in, or the campaign link on the online-checkout session that became the lease.
+3. **Platform-reported**: what Meta, Google Ads or GA4 claim, shown on that platform's own tab, labeled with the platform, never merged into tiers 1 or 2.
+4. **Not recorded**: move-ins with no evidence in tiers 1 or 2. Always shown, never hidden or reallocated.
+
+Rules: tiers are never summed into one number. Spend is never split across facilities by campaign name. A campaign is linked to spend only through the owner-maintained `data/sources-mapping.json` (slug to Meta/Google campaign), never by matching text. Cost per rental is shown only for tiers 1 and 2 and labeled "at least". Any new dataset starts on the private host; publishing it publicly needs a separate owner approval. Changes to ad or tracking accounts (Google Ads, Meta, GTM, GA4 linker) still need the owner's explicit go-ahead each time; Tyler manages Google Ads.
+
+Still prohibited: modeled allocation, last-touch or multi-touch estimates, crediting a channel by campaign or ad-set name, and combining platform conversion counts into a synthetic rental or lead count.
 
 ## Data and engineering rules
 

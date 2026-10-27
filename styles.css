@@ -663,3 +663,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .tenant-scorecard { transition: none; }
   .tenant-scorecard:hover { transform: none; }
 }
+
+.sources-panel { margin-top: 18px; }
+.sources-panel .sources-badge { margin-left: 8px; border: 1px solid var(--line); border-radius: 999px; padding: 2px 6px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; vertical-align: middle; }
+.sources-panel .sources-total { padding-top: 0; }
+.sources-panel .sources-heading { margin: 12px 0 0; }
+.sources-panel .sources-sub { padding-left: 18px; }
