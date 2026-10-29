@@ -15,6 +15,7 @@
 .q-partial { background: var(--amber-bg); color: var(--amber); }
 .q-blocked, .q-alert { background: var(--red-bg); color: var(--red); }
 .q-private { background: var(--brand-soft); color: var(--muted); }
+.q-platform { display: inline-block; margin: 10px 0 0; padding: 4px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); font-size: 11px; font-weight: 700; }
 .q-answer { margin: 9px 0 0; color: var(--ink); font-size: 13px; line-height: 1.55; }
 .q-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 12px 0 0; }
 .q-facts > div { min-width: 0; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }

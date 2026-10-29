@@ -8,6 +8,7 @@ const path = require("node:path");
 const board = require("../questions.js");
 
 const ROOT = path.join(__dirname, "..");
+const portalFixture = JSON.parse(fs.readFileSync(path.join(__dirname, "fixtures/tracking-portal-ad-source.json"), "utf8")).expected;
 const facility = (id, over = {}) => ({ id, name: `Facility ${id}`, net: 1000, refunds: 0, moveIns: 3, moveOuts: 1, leases: 80, units: 100, occupancy: 0.8, ...over });
 const month = (id, start, end, partial, over = {}) => ({
  id, label: id, start, end, partial,
@@ -47,14 +48,71 @@ function run() {
  const priv = board.answer(privateContext);
  const all = priv.groups.flatMap(g => g.questions);
  assert.deepEqual(priv.groups.map(g => g.title), ["CEO", "CMO", "Finance and audit", "Builder"]);
- assert.equal(all.length, 20);
- assert.equal(new Set(all.map(q => q.id)).size, 20, "question ids are unique");
+ assert.equal(all.length, 21);
+ assert.equal(new Set(all.map(q => q.id)).size, 21, "question ids are unique");
  for (const q of all) {
   assert.ok(board.STATUS[q.status], `${q.id} has a known status`);
   assert.ok(q.headline && !/undefined|NaN/.test(q.headline + JSON.stringify(q.facts) + JSON.stringify(q.table)), `${q.id} renders real values`);
   if (q.status === "blocked") assert.ok(q.unblock || /rule/.test(q.headline) || /not available/.test(q.headline), `${q.id} says what would unblock it`);
  }
  assert.equal(priv.counts.private, 0, "the private host answers every question itself");
+
+ // Portal ad clicks are their own GA4 answer, with raw labels and no rental-tier or move-in arithmetic.
+ const withPortal = board.answer({ ...privateContext, tracking: { ...tracking, portalAdSource: portalFixture } });
+ const portal = find(withPortal, "cmo-portal-ad-source");
+ assert.ok(withPortal.groups.find(g => g.id === "cmo").questions.includes(portal));
+ assert.equal(portal.question, "Are online rentals now arriving from Google or Meta ad clicks?");
+ assert.equal(portal.platform, "Platform-reported (GA4)");
+ assert.equal(portal.status, "partial");
+ assert.equal(portal.headline, "GA4 reported 3 rental-completed events in sessions that arrived from a Google or Meta ad click since 29 Oct 2026, through Oct 30. Total rental-completed events: 7. Later days have not been exported yet; they are not zero.");
+ assert.match(portal.evidence, /went live 29 Oct 2026 \(America\/New_York\)\. Before 29 Oct: 0 of 3 portal events had a click ID: Google Ads 0, Meta 0 \(export coverage/);
+ assert.match(portal.evidence, /independently of the selected month/);
+ assert.match(portal.limit, /separate from Confirmed, Credited, Not recorded and CCStorage move-in counts/);
+ assert.match(portal.limit, /UTM or manual source labels alone never qualify/);
+ assert.match(portal.limit, /Organic search, referrals, ChatGPT and CCStorage's own links are not counted as ads/);
+ assert.match(portal.limit, /A click ID shows the session began with an ad click, not that the ad caused the rental/);
+ assert.deepEqual(portal.facts.map(f => f[1]), ["6", "2", "7", "3", "2"]);
+ assert.equal(portal.facts[1][0], "Portal sessions from an ad click");
+ assert.equal(portal.facts[3][0], "Rental events from an ad click");
+ assert.deepEqual(portal.facts.at(-1), ["Test sessions excluded", "2", "Across the export; excluded from all GA4 counts"]);
+ assert.deepEqual(portal.table.head, ["Click ID", "Source (GA4)", "Medium (GA4)", "Campaign (GA4)", "Rental events from an ad click"]);
+ assert.deepEqual(portal.table.rows, [["Meta", "Facebook", "paid-social", "Synthetic Autumn", "1"], ["Google Ads", "Google Ads", "Paid Search", " Fall <Launch> ", "2"]]);
+ const portalHtml = board.renderQuestion(portal);
+ assert.match(portalHtml, /class="q-platform">Platform-reported \(GA4\)/);
+ assert.match(portalHtml, / Fall &lt;Launch&gt; /);
+ assert.doesNotMatch(portalHtml, /<Launch>/);
+ assert.doesNotMatch(JSON.stringify(portal.facts) + JSON.stringify(portal.table), /%|\$|move-ins|Confirmed|Credited|Not recorded/);
+ for (const id of ["ceo-cost-per-renter", "cmo-sources", "fin-claims", "dev-evidence", "cmo-funnel"]) {
+  assert.deepEqual(find(withPortal, id), find(priv, id), `${id} never incorporates portal ad-source totals`);
+ }
+ const completePortal = find(board.answer({ ...privateContext, tracking: { ...tracking, portalAdSource: { ...portalFixture, days: portalFixture.days.slice(0, 2) } } }), "cmo-portal-ad-source");
+ assert.equal(completePortal.status, "answered");
+ assert.doesNotMatch(completePortal.headline, /not been exported/);
+ const unlabeled = find(board.answer({ ...privateContext, tracking: { ...tracking, portalAdSource: { ...portalFixture, rentalsBySource: [{ clickId: "gclid+fbclid", source: null, medium: null, campaign: null, rentalEvents: 3 }] } } }), "cmo-portal-ad-source");
+ assert.deepEqual(unlabeled.table.rows, [["Both", "Not uniquely recorded", "Not uniquely recorded", "Not uniquely recorded", "3"]]);
+
+ // An old snapshot or pending days cannot turn into zero post-launch results.
+ assert.equal(find(priv, "cmo-portal-ad-source").status, "blocked", "old tracking files prompt a refresh");
+ assert.match(find(priv, "cmo-portal-ad-source").headline, /section of the tracking file is not available/);
+ const oldDefinition = { ...portalFixture, days: [{ date: "2026-10-29", portalSessions: 9, portalSessionsWithAdSource: 9, rentalCompletedEvents: 9, rentalCompletedEventsWithAdSource: 9 }] };
+ const outdated = find(board.answer({ ...privateContext, tracking: { ...tracking, portalAdSource: oldDefinition } }), "cmo-portal-ad-source");
+ assert.equal(outdated.status, "blocked", "the old source-only counts cannot be presented as ad clicks");
+ assert.match(outdated.unblock, /private refresh/);
+ assert.deepEqual(outdated.facts, []);
+ assert.equal(outdated.table, null);
+ for (const pendingDays of [[], portalFixture.days.map(d => ({ ...d, portalSessions: null, portalSessionsWithAdClick: null, rentalCompletedEvents: null, rentalCompletedEventsWithAdClick: null }))]) {
+  const waiting = find(board.answer({ ...privateContext, tracking: { ...tracking, portalAdSource: { ...portalFixture, days: pendingDays, rentalsBySource: [] } } }), "cmo-portal-ad-source");
+  assert.equal(waiting.status, "blocked");
+  assert.equal(waiting.headline, "No GA4 day on or after 29 Oct 2026 has been exported yet. Post-launch results are not available.");
+  assert.equal(waiting.platform, "Platform-reported (GA4)");
+  assert.deepEqual(waiting.facts, [["Test sessions excluded", "2", "Across the export; excluded from all GA4 counts"]]);
+  assert.equal(waiting.table, null);
+  assert.match(waiting.unblock, /after GA4 exports/);
+  assert.doesNotMatch(waiting.headline, /0 rental|0 session/);
+ }
+ const zero = find(board.answer({ ...privateContext, tracking: { ...tracking, portalAdSource: { ...portalFixture, days: [{ date: "2026-10-29", portalSessions: 0, portalSessionsWithAdClick: 0, rentalCompletedEvents: 0, rentalCompletedEventsWithAdClick: 0 }], rentalsBySource: [] } } }), "cmo-portal-ad-source");
+ assert.equal(zero.status, "answered", "exported zero is different from pending data");
+ assert.match(zero.headline, /GA4 reported 0 rental-completed events/);
 
  // Partial months compare per day; complete months compare totals.
  assert.equal(board.versus(165, 300, report.periods[1], report.periods[0]), "+10% per day vs September");
@@ -108,8 +166,10 @@ function run() {
  assert.match(paced.headline, /Google Ads: \$300\.00 of \$620\.00 \(48\.4%\) with 48\.4% of the month elapsed/);
 
  // Public host: no restricted file is read, restricted questions say so, and no restricted number leaks.
- const pub = board.answer({ ...base, isPublic: true, sources, leads, tracking, budgets: { months: { "2026-10": { google: 1 } } } });
- const restrictedIds = ["cmo-sources", "cmo-lead-conversion", "fin-lead-records", "dev-heartbeat", "dev-evidence"];
+ const publicTracking = { ...tracking, portalAdSource: portalFixture };
+ Object.defineProperty(publicTracking, "portalAdSource", { get() { throw new Error("Public host must not access portal ad-source data"); } });
+ const pub = board.answer({ ...base, isPublic: true, sources, leads, tracking: publicTracking, budgets: { months: { "2026-10": { google: 1 } } } });
+ const restrictedIds = ["cmo-sources", "cmo-portal-ad-source", "cmo-lead-conversion", "fin-lead-records", "dev-heartbeat", "dev-evidence"];
  for (const id of restrictedIds) assert.equal(find(pub, id).status, "private", `${id} is private-only on the public host`);
  const pubText = JSON.stringify(pub);
  assert.doesNotMatch(pubText, /Website page views|online move-ins against|Confirmed Meta lead matches|lead records against|800 website visitors|of 40 Meta leads|only 1 of 4/i, "no restricted data on the public host");
@@ -117,8 +177,10 @@ function run() {
  assert.equal(find(pub, "ceo-cost-per-renter").facts.length, 0);
 
  const page = board.render(pub);
- assert.match(visible(page), /20 questions for October 1–15/);
+ assert.match(visible(page), /21 questions for October 1–15/);
  assert.match(page, /Private host only/);
+ assert.match(board.renderQuestion(find(pub, "cmo-portal-ad-source")), /Private host only/);
+ assert.doesNotMatch(page, /Synthetic Autumn|Launch|Test sessions excluded|Before 29 Oct|Post-launch results/);
 
  // Wiring: loaded after details.js, nav and section present, private files fetched only off the public host.
  const index = fs.readFileSync(path.join(ROOT, "index.html"), "utf8");
@@ -131,7 +193,7 @@ function run() {
  assert.match(details, /detail\.view==='questions'.*questionsBoard\?\.update\(\)/);
  assert.match(source, /\.\.\.\(isPublic \? \{\} : PRIVATE_FILES\)/);
  assert.doesNotMatch(source, /localStorage|sessionStorage|document\.cookie/);
- console.log("questions tab: 20 questions answered or blocked with a reason, public host safe, no combined platform numbers");
+ console.log("questions tab: 21 questions answered or blocked with a reason, portal GA4 ad clicks and pending exports covered, public host safe, no combined platform numbers");
 }
 
 run();

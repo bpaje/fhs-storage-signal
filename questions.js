@@ -155,6 +155,57 @@
   });
  }
 
+ function portalAdSource(c) {
+  var q = "Are online rentals now arriving from Google or Meta ad clicks?";
+  if (c.isPublic) return privateOnly("cmo-portal-ad-source", q);
+  var data = c.tracking && c.tracking.portalAdSource;
+  var stale = data && data.days.some(function (day) {
+   return !("portalSessionsWithAdClick" in day) || !("rentalCompletedEventsWithAdClick" in day);
+  });
+  if (!data || stale) {
+   var unavailable = missing("cmo-portal-ad-source", q, "The portal ad-click section of the tracking file");
+   unavailable.platform = "Platform-reported (GA4)";
+   return unavailable;
+  }
+  var liveLabel = Number(data.liveFrom.slice(8)) + " " + shortDate(data.liveFrom).split(" ")[0];
+  var liveDate = liveLabel + " " + data.liveFrom.slice(0, 4);
+  var covered = data.days.filter(function (day) { return isNum(day.portalSessions); });
+  var pending = data.days.some(function (day) { return !isNum(day.portalSessions); });
+  var baseline = data.baseline;
+  var before = isNum(baseline.portalEvents)
+   ? "Before " + liveLabel + ": " + number(baseline.portalEventsWithClickId) + " of " + number(baseline.portalEvents) + " portal events had a click ID" + (isNum(baseline.portalEventsWithGclid) ? ": Google Ads " + number(baseline.portalEventsWithGclid) + ", Meta " + number(baseline.portalEventsWithFbclid) : "") + " (export coverage " + baseline.start + " to " + baseline.through + ")."
+   : "The export has no baseline coverage before " + liveLabel + ".";
+  var facts = [["Test sessions excluded", number(data.testSessionsExcluded), "Across the export; excluded from all GA4 counts"]];
+  if (covered.length) {
+   facts = [
+    ["Portal sessions", number(sum(covered, "portalSessions")), "Since go-live"],
+    ["Portal sessions from an ad click", number(sum(covered, "portalSessionsWithAdClick")), "Session-level GA4 evidence"],
+    ["Rental-completed events", number(sum(covered, "rentalCompletedEvents")), "GA4 events"],
+    ["Rental events from an ad click", number(sum(covered, "rentalCompletedEventsWithAdClick")), "Session-level GA4 evidence"]
+   ].concat(facts);
+  }
+  return ask("cmo-portal-ad-source", q, {
+   platform: "Platform-reported (GA4)",
+   status: covered.length ? (pending ? "partial" : "answered") : "blocked",
+   headline: covered.length
+    ? "GA4 reported " + number(sum(covered, "rentalCompletedEventsWithAdClick")) + " rental-completed events in sessions that arrived from a Google or Meta ad click since " + liveDate + ", through " + shortDate(covered[covered.length - 1].date) + ". Total rental-completed events: " + number(sum(covered, "rentalCompletedEvents")) + "." + (pending ? " Later days have not been exported yet; they are not zero." : "")
+    : "No GA4 day on or after " + liveDate + " has been exported yet. Post-launch results are not available.",
+   facts: facts,
+   table: covered.length && data.rentalsBySource.length ? {
+    head: ["Click ID", "Source (GA4)", "Medium (GA4)", "Campaign (GA4)", "Rental events from an ad click"],
+    rows: data.rentalsBySource.map(function (row) {
+     return [{ gclid: "Google Ads", fbclid: "Meta", "gclid+fbclid": "Both" }[row.clickId],
+      row.source === null ? "Not uniquely recorded" : row.source,
+      row.medium === null ? "Not uniquely recorded" : row.medium,
+      row.campaign === null ? "Not uniquely recorded" : row.campaign, number(row.rentalEvents)];
+    })
+   } : null,
+   evidence: "Iframe source forwarding went live " + liveDate + " (America/New_York). " + before + " This answer covers all exported days since go-live, independently of the selected month. Sessions are dated by their first portal event; rentals by their event date.",
+   limit: "Only sessions with a Google or Meta click ID qualify; UTM or manual source labels alone never qualify. Organic search, referrals, ChatGPT and CCStorage's own links are not counted as ads. A click ID shows the session began with an ad click, not that the ad caused the rental. Labels use UTM values first, then manual values when no usable UTM value exists for that field, ignoring CCStorage's own source and medium. Missing or conflicting labels are not uniquely recorded. These GA4 events are kept separate from Confirmed, Credited, Not recorded and CCStorage move-in counts, with no combined totals or shares.",
+   unblock: !covered.length || pending ? "Refresh the private tracking file after GA4 exports the pending days." : ""
+  });
+ }
+
  function costPerLead(c) {
   const p = c.period, prior = c.prior, leadsAndCalls = period => period?.google.conversionsByGroup?.leads_and_calls ?? null;
   const google = leadsAndCalls(p) ? p.google.spend / leadsAndCalls(p) : null, meta = p.meta.leads ? p.meta.spend / p.meta.leads : null;
@@ -369,7 +420,7 @@
   const c = { ...context, period, prior: report.periods[report.periods.indexOf(period) - 1] || null, now: context.now ?? Date.now() };
   const groups = [
    { id: "ceo", title: "CEO", lead: "Is marketing growing the business?", questions: [growth(c), spend(c), cash(c), costPerRenter(c), facilities(c), targeting(c)] },
-   { id: "cmo", title: "CMO", lead: "Which channels and campaigns work?", questions: [sources(c), costPerLead(c), waste(c), leadConversion(c), funnel(c), budget(c)] },
+   { id: "cmo", title: "CMO", lead: "Which channels and campaigns work?", questions: [sources(c), portalAdSource(c), costPerLead(c), waste(c), leadConversion(c), funnel(c), budget(c)] },
    { id: "finance", title: "Finance and audit", lead: "Can every number be traced and trusted?", questions: [tieOut(c), paymentGap(c), restated(c), claims(c), leadRecords(c)] },
    { id: "builder", title: "Builder", lead: "Is the data pipeline healthy?", questions: [freshness(c), heartbeat(c), evidenceShare(c)] },
   ];
@@ -378,11 +429,12 @@
  }
 
  function renderQuestion(q) {
+  var platform = q.platform ? '<p class="q-platform">' + html(q.platform) + '</p>' : "";
   const facts = q.facts.length ? `<dl class="q-facts">${q.facts.map(([label, value, note]) => `<div><dt>${html(label)}</dt><dd>${html(value)}${note ? `<small>${html(note)}</small>` : ""}</dd></div>`).join("")}</dl>` : "";
   const table = q.table?.rows.length ? `<div class="table-scroll q-table-scroll"><table class="q-table"><thead><tr>${q.table.head.map(h => `<th>${html(h)}</th>`).join("")}</tr></thead><tbody>${q.table.rows.map(r => `<tr>${r.map(cell => `<td>${html(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "";
   const sparks = q.spark ? `<div class="q-sparks">${q.spark.map(s => `<div class="q-spark"><div><strong>${html(s.label)}</strong><small>Latest ${html(number(s.latest))} · typical ${html(number(s.typical))}</small></div><div role="img" aria-label="${html(`${s.label}, last ${s.values.length} days: ${s.values.map(number).join(", ")}`)}">${spark(s.values, s.flagged)}</div></div>`).join("")}</div>` : "";
   const meta = [["Evidence", q.evidence], ["Limit", q.limit], ["To answer it fully", q.unblock]].filter(([, text]) => text).map(([label, text]) => `<p class="q-meta"><b>${label}</b> ${html(text)}</p>`).join("");
-  return `<article class="q-item${q.alert ? " is-alert" : ""}" id="q-${html(q.id)}"><div class="q-head"><h4>${html(q.question)}</h4><span class="q-chips">${q.alert ? '<span class="q-status q-alert">Needs attention</span>' : ""}<span class="q-status q-${html(q.status)}">${html(STATUS[q.status])}</span></span></div><p class="q-answer">${html(q.headline)}</p>${facts}${table}${sparks}${meta}</article>`;
+  return `<article class="q-item${q.alert ? " is-alert" : ""}" id="q-${html(q.id)}"><div class="q-head"><h4>${html(q.question)}</h4><span class="q-chips">${q.alert ? '<span class="q-status q-alert">Needs attention</span>' : ""}<span class="q-status q-${html(q.status)}">${html(STATUS[q.status])}</span></span></div>` + platform + `<p class="q-answer">${html(q.headline)}</p>${facts}${table}${sparks}${meta}</article>`;
  }
 
  function render(result) {

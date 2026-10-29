@@ -1,0 +1,41 @@
+{
+  "ga4": {
+    "start": "2026-10-28",
+    "through": "2026-10-31",
+    "events": [
+      {"user_pseudo_id": "fixture-baseline", "ga_session_id": "fixture-before", "event_timestamp": "2026-10-28T16:00:00Z", "event_name": "page_view", "host": "fixture.ccstorage.com"},
+      {"user_pseudo_id": "fixture-baseline", "ga_session_id": "fixture-before", "event_timestamp": "2026-10-28T16:01:00Z", "event_name": "contact", "host": "fixture.ccstorage.com"},
+      {"user_pseudo_id": "fixture-boundary", "ga_session_id": "fixture-boundary-session", "event_timestamp": "2026-10-29T03:59:00Z", "event_name": "page_view", "host": "fixture.ccstorage.com"},
+      {"user_pseudo_id": "fixture-test-before", "ga_session_id": "fixture-test-before-session", "event_timestamp": "2026-10-28T17:00:00Z", "event_name": "page_view", "host": "fixture.ccstorage.com", "has_gclid": true, "manual_campaign": "owner_test_baseline"},
+      {"user_pseudo_id": "fixture-alpha", "ga_session_id": "fixture-shared-session", "event_timestamp": "2026-10-29T16:00:00Z", "event_name": "page_view", "host": "familyheirloomstorage.com", "has_gclid": true, "utm_source": "Google Ads", "utm_medium": "Paid Search", "utm_campaign": " Fall <Launch> "},
+      {"user_pseudo_id": "fixture-alpha", "ga_session_id": "fixture-shared-session", "event_timestamp": "2026-10-29T16:01:00Z", "event_name": "begin_checkout", "host": "FIXTURE.CCSTORAGE.COM", "manual_source": "ccstorage", "manual_medium": "link", "manual_campaign": "Portal navigation"},
+      {"user_pseudo_id": "fixture-alpha", "ga_session_id": "fixture-shared-session", "event_timestamp": "2026-10-29T16:02:00Z", "event_name": "ccstorage_rental_completed", "host": "fixture.ccstorage.com"},
+      {"user_pseudo_id": "fixture-alpha", "ga_session_id": "fixture-shared-session", "event_timestamp": "2026-10-29T16:03:00Z", "event_name": "ccstorage_rental_completed", "host": "familyheirloomstorage.com"},
+      {"user_pseudo_id": "fixture-beta", "ga_session_id": "fixture-shared-session", "event_timestamp": "2026-10-29T17:00:00Z", "event_name": "page_view", "host": "fixture.ccstorage.com", "has_fbclid": true, "manual_source": "Facebook", "manual_medium": "paid-social", "manual_campaign": "Synthetic Autumn"},
+      {"user_pseudo_id": "fixture-beta", "ga_session_id": "fixture-shared-session", "event_timestamp": "2026-10-29T17:01:00Z", "event_name": "ccstorage_rental_completed", "host": "fixture.ccstorage.com"},
+      {"user_pseudo_id": "fixture-direct", "ga_session_id": "fixture-direct-session", "event_timestamp": "2026-10-29T18:00:00Z", "event_name": "ccstorage_rental_completed", "host": "fixture.ccstorage.com"},
+      {"user_pseudo_id": "fixture-test", "ga_session_id": "fixture-test-session", "event_timestamp": "2026-10-29T19:00:00Z", "event_name": "ccstorage_rental_completed", "host": "fixture.ccstorage.com", "has_fbclid": true},
+      {"user_pseudo_id": "fixture-test", "ga_session_id": "fixture-test-session", "event_timestamp": "2026-10-29T19:01:00Z", "event_name": "begin_checkout", "host": "familyheirloomstorage.com", "utm_source": "owner", "utm_campaign": "owner_test_live"},
+      {"user_pseudo_id": "fixture-alpha", "ga_session_id": "fixture-next-session", "event_timestamp": "2026-10-30T04:00:00Z", "event_name": "page_view", "host": "fixture.ccstorage.com", "first_source": "Google Ads", "first_medium": "Paid Search", "first_campaign": " Fall <Launch> "},
+      {"user_pseudo_id": "fixture-alpha", "ga_session_id": "fixture-next-session", "event_timestamp": "2026-10-30T04:01:00Z", "event_name": "ccstorage_rental_completed", "host": "fixture.ccstorage.com"},
+      {"user_pseudo_id": "fixture-internal", "ga_session_id": "fixture-internal-session", "event_timestamp": "2026-10-29T20:00:00Z", "event_name": "page_view", "host": "fixture.ccstorage.com", "utm_source": "ccstorage", "utm_medium": "link"},
+      {"user_pseudo_id": "fixture-internal", "ga_session_id": "fixture-internal-session", "event_timestamp": "2026-10-29T20:01:00Z", "event_name": "ccstorage_rental_completed", "host": "fixture.ccstorage.com"},
+      {"user_pseudo_id": "fixture-organic", "ga_session_id": "fixture-organic-session", "event_timestamp": "2026-10-29T21:00:00Z", "event_name": "page_view", "host": "fixture.ccstorage.com", "manual_source": "google", "manual_medium": "organic"},
+      {"user_pseudo_id": "fixture-organic", "ga_session_id": "fixture-organic-session", "event_timestamp": "2026-10-29T21:01:00Z", "event_name": "ccstorage_rental_completed", "host": "fixture.ccstorage.com"}
+    ]
+  },
+  "expected": {
+    "liveFrom": "2026-10-29",
+    "baseline": {"start": "2026-10-28", "through": "2026-10-28", "portalEvents": 3, "portalEventsWithClickId": 0, "portalEventsWithGclid": 0, "portalEventsWithFbclid": 0},
+    "days": [
+      {"date": "2026-10-29", "portalSessions": 5, "portalSessionsWithAdClick": 2, "rentalCompletedEvents": 6, "rentalCompletedEventsWithAdClick": 3},
+      {"date": "2026-10-30", "portalSessions": 1, "portalSessionsWithAdClick": 0, "rentalCompletedEvents": 1, "rentalCompletedEventsWithAdClick": 0},
+      {"date": "2026-10-31", "portalSessions": null, "portalSessionsWithAdClick": null, "rentalCompletedEvents": null, "rentalCompletedEventsWithAdClick": null}
+    ],
+    "rentalsBySource": [
+      {"clickId": "fbclid", "source": "Facebook", "medium": "paid-social", "campaign": "Synthetic Autumn", "rentalEvents": 1},
+      {"clickId": "gclid", "source": "Google Ads", "medium": "Paid Search", "campaign": " Fall <Launch> ", "rentalEvents": 2}
+    ],
+    "testSessionsExcluded": 2
+  }
+}
