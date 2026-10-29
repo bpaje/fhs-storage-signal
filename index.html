@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="meta.css" />
     <link rel="stylesheet" href="monthly-trend.css" />
     <link rel="stylesheet" href="questions.css" />
+    <link rel="stylesheet" href="watch.css" />
   </head>
   <body>
     <div class="prototype-ribbon" id="mode-ribbon"><span class="ribbon-dot"></span>Loading monthly report…</div>
@@ -22,6 +23,8 @@
           <button class="nav-item active" data-view="overview"><span class="nav-glyph">⌂</span>Overview</button>
           <button class="nav-item" data-view="questions"><span class="nav-glyph">◈</span>Questions</button>
           <button class="nav-item" data-view="ads"><span class="nav-glyph">↗</span>Google Ads</button>
+          <button class="nav-item tenant-nav-item" data-view="watch"><span class="nav-glyph">◉</span>Watch list</button>
+          <button class="nav-item tenant-nav-item" data-view="keywords"><span class="nav-glyph">⌕</span>Keywords</button>
           <button class="nav-item" data-view="meta"><span class="nav-glyph">◎</span>Meta Ads</button>
           <button class="nav-item" data-view="analytics"><span class="nav-glyph">▥</span>Google Analytics</button>
           <button class="nav-item tenant-nav-item" data-view="tenants"><span class="nav-glyph">◇</span>Tenants <span class="nav-restricted">Restricted</span></button>
@@ -104,6 +107,12 @@
               <footer class="table-footer"><span id="ads-count"></span><div class="pagination" id="ads-pages"></div></footer>
             </article>
           </section>
+          <section id="watch-view" class="hidden" aria-label="Google Ads watch list">
+            <div id="watch-root"><p class="tenant-loading">The watch list loads when this tab is opened.</p></div>
+          </section>
+          <section id="keywords-view" class="hidden" aria-label="Google Ads keywords">
+            <div id="keywords-root"><p class="tenant-loading">Keywords load when this tab is opened.</p></div>
+          </section>
           <section id="meta-view" class="hidden" aria-label="Meta Ads details and insights"></section>
           <section id="analytics-view" class="hidden" aria-label="Google Analytics details">
             <p class="detail-scope" id="ga-scope">Loading website analytics…</p>
@@ -152,5 +161,6 @@
     <script src="journeys.js"></script>
     <script src="sources.js"></script>
     <script src="questions.js"></script>
+    <script src="watch.js"></script>
   </body>
 </html>

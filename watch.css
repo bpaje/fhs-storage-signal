@@ -1,0 +1,85 @@
+/* Watch list and Keywords tabs: Google Ads campaigns and keywords for a saved watch list (watch.js). Private host only. */
+.watch-bar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; margin-bottom: 12px; padding: 14px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); box-shadow: var(--shadow); }
+.watch-bar label { display: flex; flex: 1 1 150px; flex-direction: column; gap: 5px; min-width: 0; max-width: 240px; color: var(--muted); font-size: 11px; font-weight: 750; }
+.watch-bar .watch-wide { flex-basis: 220px; max-width: 320px; }
+.watch-bar .watch-date { flex-basis: 140px; max-width: 170px; }
+.watch-bar .watch-search { flex-basis: 200px; max-width: 300px; }
+.watch-bar input:not([type="checkbox"]), .watch-bar select { width: 100%; min-width: 0; min-height: 44px; border: 1px solid var(--control-border); border-radius: 7px; background: white; padding: 9px 10px; color: var(--ink); font: inherit; font-size: 12px; }
+.watch-bar input:disabled { background: var(--panel-soft); color: var(--faint); }
+.watch-bar .watch-check { flex: 0 1 auto; flex-direction: row; align-items: center; gap: 8px; min-height: 44px; max-width: none; color: var(--ink); font-weight: 650; cursor: pointer; }
+.watch-check input { width: 18px; height: 18px; margin: 0; accent-color: var(--brand-primary); }
+.watch-bar .tenant-cutoff { align-self: center; margin-left: auto; }
+.watch-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.watch-button, .watch-primary, .watch-danger { min-height: 44px; border: 1px solid var(--control-border); border-radius: 7px; background: white; padding: 8px 12px; color: var(--brand-primary); cursor: pointer; font: inherit; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.watch-button:hover:not(:disabled) { border-color: var(--brand-primary); background: var(--brand-soft); }
+.watch-button:disabled, .watch-primary:disabled, .watch-danger:disabled { opacity: .45; cursor: default; }
+.watch-primary { border-color: var(--brand-primary); background: var(--brand-primary); color: white; }
+.watch-primary:hover:not(:disabled) { background: var(--brand-secondary); }
+.watch-danger { border-color: var(--red); background: var(--red); color: white; }
+.watch-note { display: inline-block; margin: 0 0 12px; padding: 5px 10px; border: 1px solid var(--amber); border-radius: 999px; background: var(--amber-bg); color: var(--amber); font-size: 11px; font-weight: 750; }
+.watch-note.is-error, .watch-message.is-error { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+.watch-message { margin: 0 0 12px; padding: 9px 12px; border: 1px solid var(--success); border-radius: 9px; background: var(--success-bg); color: var(--success); font-size: 12px; font-weight: 650; }
+.watch-confirm { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 0 0 12px; padding: 12px 14px; border: 1px solid var(--red); border-radius: 10px; background: var(--red-bg); color: var(--ink); font-size: 12px; }
+.watch-confirm p { flex: 1 1 260px; margin: 0; line-height: 1.5; }
+.watch-about { margin-top: 0; }
+.watch-about b { color: var(--ink); }
+.kpi-grid.watch-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.watch-kpis .report-comparison .delta { padding: 2px 5px; }
+.watch-panel { margin-bottom: 14px; overflow: hidden; }
+.watch-foot { margin: 10px 15px 12px; }
+.watch-table { min-width: 1060px; }
+.watch-keywords { min-width: 1400px; }
+.watch-table th, .watch-table td { padding: 9px 8px; }
+.watch-table th:first-child, .watch-table td:first-child { padding-left: 14px; }
+.watch-table th { vertical-align: bottom; white-space: normal; }
+.watch-table th button { min-width: 48px; max-width: 120px; white-space: normal; }
+.watch-table tbody tr.watch-flag { background: var(--amber-bg); }
+.watch-table tbody tr.watch-flag td:first-child { box-shadow: inset 3px 0 0 var(--amber); }
+.watch-table tfoot td { border-top: 2px solid var(--line-dark); border-bottom: 0; background: var(--panel-soft); font-weight: 750; }
+.watch-name-cell, .watch-keyword-cell { min-width: 170px; max-width: 260px; white-space: normal !important; }
+.watch-text-cell { max-width: 220px; overflow: hidden; text-overflow: ellipsis; }
+.watch-campaign { padding: 0; border: 0; background: transparent; color: var(--brand-primary); cursor: pointer; font: inherit; font-weight: 750; text-align: left; text-decoration: underline; text-decoration-color: var(--brand-accent); text-underline-offset: 3px; }
+.watch-campaign:hover { color: var(--ink); text-decoration-color: currentColor; }
+.watch-table td small.watch-reasons { color: var(--amber); font-weight: 650; }
+.watch-keyword { color: var(--ink); font-weight: 650; overflow-wrap: anywhere; }
+.watch-badge { display: inline-block; margin-left: 4px; padding: 1px 6px; border-radius: 9px; background: var(--purple-bg); color: var(--purple); font-size: 11px; font-weight: 750; white-space: nowrap; }
+.watch-low { display: inline-block; min-width: 22px; padding: 1px 6px; border-radius: 6px; background: var(--red-bg); color: var(--red); font-weight: 800; text-align: center; }
+.watch-below { color: var(--red); font-weight: 650; }
+.watch-spark-cell { width: 104px; }
+.watch-spark { display: block; width: 96px; height: 24px; }
+.watch-spark rect { fill: var(--brand-accent); }
+.watch-spark rect.is-zero { fill: var(--line-dark); }
+.watch-summary { margin: 0 0 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.watch-summary strong { color: var(--ink); }
+
+.tenant-dialog.watch-dialog { width: min(720px, calc(100vw - 32px)); height: min(88vh, 820px); }
+.watch-editor .tenant-dialog-body { display: flex; flex-direction: column; }
+.watch-field { display: flex; flex-direction: column; gap: 5px; margin: 0 0 14px; color: var(--muted); font-size: 11px; font-weight: 750; }
+.watch-field input, .watch-field textarea { width: 100%; min-height: 44px; border: 1px solid var(--control-border); border-radius: 7px; background: white; padding: 9px 10px; color: var(--ink); font: inherit; font-size: 13px; font-weight: 400; resize: vertical; }
+.watch-picker { min-width: 0; margin: 0; padding: 0; border: 0; }
+.watch-picker legend { margin-bottom: 8px; padding: 0; color: var(--ink); font-size: 12px; font-weight: 800; }
+.watch-options { border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+.watch-group-title { margin: 0; padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--panel-soft); color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .045em; text-transform: uppercase; }
+.watch-option { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; align-items: center; gap: 10px; min-height: 44px; padding: 6px 12px; border-bottom: 1px solid var(--line); color: var(--ink); cursor: pointer; font-size: 12px; }
+.watch-option:hover { background: var(--panel-soft); }
+.watch-option input { width: 18px; height: 18px; margin: 0; accent-color: var(--brand-primary); }
+.watch-option span { overflow-wrap: anywhere; }
+.watch-option small { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.watch-option[hidden], .watch-group[hidden], .watch-form-error[hidden] { display: none; }
+.watch-form-error { margin: 0 0 14px; padding: 10px 12px; border: 1px solid var(--red); border-radius: 8px; background: var(--red-bg); color: var(--red); font-size: 12px; font-weight: 650; line-height: 1.5; }
+.watch-editor-foot { display: flex; flex: 0 0 auto; justify-content: flex-end; gap: 8px; padding: 12px 20px; border-top: 1px solid var(--line); }
+
+@media (max-width: 1000px) {
+  .kpi-grid.watch-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  .watch-bar label, .watch-bar .watch-wide, .watch-bar .watch-search { flex-basis: 100%; max-width: none; }
+  .watch-bar .watch-date { flex: 1 1 130px; max-width: none; }
+  .watch-bar .tenant-cutoff { margin-left: 0; }
+  .watch-actions { width: 100%; }
+  .watch-actions .watch-button { flex: 1 1 0; }
+  .watch-bar input:not([type="checkbox"]), .watch-bar select, .watch-field input, .watch-field textarea { font-size: 16px; }
+  .watch-option { grid-template-columns: 18px minmax(0, 1fr); }
+  .watch-option small { grid-column: 2; white-space: normal; }
+  .watch-editor-foot { padding: 12px 14px; }
+}

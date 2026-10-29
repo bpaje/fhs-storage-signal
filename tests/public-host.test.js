@@ -1,6 +1,7 @@
 "use strict";
 
-// The restricted Tenants, Leads and Visitors tabs must not exist on the public GitHub Pages host; unknown hosts fail open.
+// The restricted Tenants, Leads and Visitors tabs and the Watch list and Keywords tabs must not exist on the public GitHub Pages host;
+// unknown hosts fail open.
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
@@ -13,7 +14,7 @@ function run() {
   for (const host of ["localhost", "127.0.0.1", "[::1]", "reports.example.test", "storage-signal.private.example", "evilgithub.io", "github.io.example.com", "bpaje.github.io.example.com", "", null, undefined])
     assert.equal(isPublicHost(host), false, String(host));
 
-  assert.deepEqual(RESTRICTED_VIEWS, ["tenants", "leads", "visitors"]);
+  assert.deepEqual(RESTRICTED_VIEWS, ["tenants", "leads", "visitors", "watch", "keywords"]);
   for (const view of RESTRICTED_VIEWS) {
     assert.equal(resolveView(view, "bpaje.github.io"), "overview", `${view} falls back to Overview on the public host`);
     assert.equal(resolveView(view, "localhost"), view, `${view} stays available on localhost`);
@@ -31,7 +32,8 @@ function run() {
   assert.match(details, /if\(onPublicHost\)\$\$\('\.tenant-nav-item'\)\.forEach\(b=>b\.remove\(\)\);/);
   assert.match(app, /const onPublicHost=publicHost\.isPublicHost\(location\.hostname\);/);
   assert.match(app, /\$\{onPublicHost\?'':'<button type="button" class="tenant-facility-link"/);
-  assert.equal((index.match(/tenant-nav-item/g) || []).length, 3, "the three restricted nav buttons are the ones removed on a public host");
+  assert.equal((index.match(/tenant-nav-item/g) || []).length, 5, "the five restricted nav buttons are the ones removed on a public host");
+  for (const view of ["watch", "keywords"]) assert.match(index, new RegExp(`class="nav-item tenant-nav-item" data-view="${view}"`), `${view} nav button is removed on a public host`);
   console.log("public host guard: github.io hosts public, localhost/private hosts open, restricted views fall back to Overview");
 }
 

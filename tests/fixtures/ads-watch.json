@@ -1,0 +1,78 @@
+{
+ "schema": "storage-signal.ads-watch.v1",
+ "extractedAt": "2026-10-29T09:00:00Z",
+ "from": "2026-10-01",
+ "through": "2026-10-28",
+ "currency": "USD",
+ "timeZone": "America/New_York",
+ "groups": {
+  "leads_and_calls": "Synthetic calls and forms",
+  "phone_clicks": "Synthetic phone taps",
+  "button_clicks": "Synthetic checkout clicks",
+  "store_visits": "Synthetic store visits",
+  "rentals": "Synthetic rentals",
+  "other": "Synthetic other"
+ },
+ "campaigns": [
+  {"id": "1001", "name": "[FHS] Alpha Search", "status": "ENABLED", "channel": "SEARCH", "bidding": "TARGET_SPEND", "budgetPerDay": 50.0},
+  {"id": "1002", "name": "[FHS] Beta <b>Search</b>", "status": "ENABLED", "channel": "SEARCH", "bidding": "TARGET_SPEND", "budgetPerDay": 20.0},
+  {"id": "1003", "name": "[FHS] Gamma Search", "status": "PAUSED", "channel": "SEARCH", "bidding": "TARGET_CPA", "budgetPerDay": null},
+  {"id": "1004", "name": "Delta Search", "status": "ENABLED", "channel": "SEARCH", "bidding": "TARGET_SPEND", "budgetPerDay": 10.0},
+  {"id": "1005", "name": "[FHS] Echo Search", "status": "ENABLED", "channel": "SEARCH", "bidding": "MAXIMIZE_CONVERSIONS", "budgetPerDay": 40.0}
+ ],
+ "campaignDays": {
+  "columns": ["date", "campaignId", "cost", "impressions", "clicks", "phoneCalls", "eligibleImpressions", "lostBudgetImpressions", "lostRankImpressions", "leads_and_calls", "phone_clicks", "button_clicks", "store_visits", "rentals", "other"],
+  "rows": [
+   ["2026-10-01", "1001", 5.0, 10, 1, 0, 20.0, 0.0, 10.0, 0, 0, 0, 0, 0, 0],
+   ["2026-10-16", "1003", 25.0, 50, 5, 0, 100.0, 0.0, 50.0, 0.5, 0, 0, 0, 0, 0],
+   ["2026-10-20", "1001", 40.0, 100, 10, 2, 200.0, 20.0, 80.0, 1, 1, 2, 0, 0, 0],
+   ["2026-10-22", "1002", 120.0, 80, 8, 0, 400.0, 240.0, 80.0, 0, 0, 3, 0, 0, 0],
+   ["2026-10-23", "1005", 300.0, 60, 6, 0, 60.0, 0.0, 0.0, 1, 0, 0, 0, 0, 0],
+   ["2026-10-24", "1004", 10.0, 10, 1, 0, 20.0, 0.0, 10.0, 0, 1, 0, 0, 0, 0],
+   ["2026-10-25", "1001", 60.0, 150, 15, 1, 250.0, 50.0, 50.0, 2, 0, 1, 1, 0, 0.5],
+   ["2026-10-26", "1002", 30.0, 20, 2, 0, 100.0, 50.0, 30.0, 0, 0, 0, 0, 0, 0],
+   ["2026-10-27", "1001", 0.0, 0, 0, 0, null, null, null, 1, 0, 0, 0, 0, 0]
+  ]
+ },
+ "windowShares": {
+  "7": {
+   "1001": {"impressionShare": 0.62, "lostBudget": 0.08, "lostRank": 0.3},
+   "1002": {"impressionShare": 0.21, "lostBudget": 0.39, "lostRank": 0.4},
+   "1005": {"impressionShare": null, "lostBudget": null, "lostRank": null}
+  },
+  "14": {
+   "1001": {"impressionShare": 0.55, "lostBudget": 0.1, "lostRank": 0.35},
+   "1002": {"impressionShare": 0.2, "lostBudget": 0.45, "lostRank": 0.35}
+  },
+  "30": {
+   "1001": {"impressionShare": 0.5, "lostBudget": 0.12, "lostRank": 0.38},
+   "1002": {"impressionShare": 0.2, "lostBudget": 0.44, "lostRank": 0.36},
+   "1003": {"impressionShare": 0.5, "lostBudget": 0.0, "lostRank": 0.5},
+   "1004": {"impressionShare": 0.5, "lostBudget": 0.0, "lostRank": 0.5},
+   "1005": {"impressionShare": 1.0, "lostBudget": 0.0, "lostRank": 0.0}
+  }
+ },
+ "keywords": [
+  {"id": "11~1", "campaignId": "1001", "adGroupId": "11", "adGroup": "Units", "adGroupStatus": "ENABLED", "text": "storage units near me", "matchType": "BROAD", "status": "ENABLED", "qualityScore": 7, "expectedCtr": "ABOVE_AVERAGE", "adRelevance": "AVERAGE", "landingPage": "BELOW_AVERAGE"},
+  {"id": "12~2", "campaignId": "1001", "adGroupId": "12", "adGroup": "Near me", "adGroupStatus": "ENABLED", "text": "Storage Units  near me", "matchType": "BROAD", "status": "ENABLED", "qualityScore": 3, "expectedCtr": "BELOW_AVERAGE", "adRelevance": "BELOW_AVERAGE", "landingPage": "AVERAGE"},
+  {"id": "12~3", "campaignId": "1001", "adGroupId": "12", "adGroup": "Near me", "adGroupStatus": "ENABLED", "text": "storage units near me", "matchType": "PHRASE", "status": "ENABLED", "qualityScore": null, "expectedCtr": null, "adRelevance": null, "landingPage": null},
+  {"id": "13~4", "campaignId": "1001", "adGroupId": "13", "adGroup": "Old", "adGroupStatus": "PAUSED", "text": "storage units near me", "matchType": "PHRASE", "status": "ENABLED", "qualityScore": 5, "expectedCtr": "AVERAGE", "adRelevance": "AVERAGE", "landingPage": "AVERAGE"},
+  {"id": "21~5", "campaignId": "1002", "adGroupId": "21", "adGroup": "Boat <script>x</script>", "adGroupStatus": "ENABLED", "text": "boat <b>storage</b>", "matchType": "EXACT", "status": "ENABLED", "qualityScore": 4, "expectedCtr": "AVERAGE", "adRelevance": "ABOVE_AVERAGE", "landingPage": "AVERAGE"},
+  {"id": "21~6", "campaignId": "1002", "adGroupId": "21", "adGroup": "Boat <script>x</script>", "adGroupStatus": "ENABLED", "text": "storage units near me", "matchType": "BROAD", "status": "ENABLED", "qualityScore": 6, "expectedCtr": "AVERAGE", "adRelevance": "AVERAGE", "landingPage": "ABOVE_AVERAGE"},
+  {"id": "41~7", "campaignId": "1004", "adGroupId": "41", "adGroup": "Delta", "adGroupStatus": "ENABLED", "text": "delta storage", "matchType": "PHRASE", "status": "PAUSED", "qualityScore": 2, "expectedCtr": "BELOW_AVERAGE", "adRelevance": "AVERAGE", "landingPage": "AVERAGE"},
+  {"id": "11~8", "campaignId": "1001", "adGroupId": "11", "adGroup": "Units", "adGroupStatus": "ENABLED", "text": "cheap storage", "matchType": "BROAD", "status": "ENABLED", "qualityScore": 8, "expectedCtr": "ABOVE_AVERAGE", "adRelevance": "ABOVE_AVERAGE", "landingPage": "ABOVE_AVERAGE"}
+ ],
+ "keywordDays": {
+  "columns": ["date", "keywordId", "cost", "impressions", "clicks", "leads_and_calls", "phone_clicks", "button_clicks", "store_visits", "rentals", "other"],
+  "rows": [
+   ["2026-10-20", "11~1", 30.0, 60, 6, 1, 0, 1, 0, 0, 0],
+   ["2026-10-22", "21~5", 60.0, 40, 4, 0, 0, 2, 0, 0, 0],
+   ["2026-10-24", "41~7", 10.0, 10, 1, 0, 1, 0, 0, 0, 0],
+   ["2026-10-25", "11~1", 40.0, 90, 9, 2, 0, 1, 0, 0, 0],
+   ["2026-10-25", "12~2", 20.0, 60, 6, 0, 0, 0, 1, 0, 0],
+   ["2026-10-25", "13~4", 5.0, 5, 1, 0, 0, 0, 0, 0, 0],
+   ["2026-10-26", "21~6", 30.0, 20, 2, 0, 0, 0, 0, 0, 0],
+   ["2026-10-27", "11~1", 0.0, 0, 0, 1, 0, 0, 0, 0, 0]
+  ]
+ }
+}

@@ -196,6 +196,11 @@ The Questions tab (`questions.js`) computes its answers in the browser from the 
 
 Blended cost per move-in (all spend ÷ all move-ins) is deliberately not shown; cost per renter waits for Confirmed or Credited evidence under the 2026-10-27 tiers.
 
+### Watch list and Keywords tabs (private host only, 2026-10-30)
+
+- `data/restricted/ads-watch.json`: `private-scripts/fetch-google-ads-watch.ps1` pulls the last 90 days (ending at the last complete America/New_York day) of daily campaign rows (spend, impressions, clicks, ad calls, impression-share counts), daily keyword rows, conversions by category for both, current keyword Quality Score and its three parts, and Google's own impression share for the 7/14/30/90-day windows; `scripts/build-ads-watch.py` writes the file. `refresh-dashboard.ps1` runs both with the other restricted builders. A lead is `leads_and_calls` + `phone_clicks`, the same grouping as `build-google-ads.py`; checkout-button clicks and store visits are shown apart and never counted as leads. Preset windows show Google's impression share; custom ranges and totals rebuild it from counts and are marked "≈".
+- Watch lists are shared by everyone who signs in to the private host. `watchlists-api.php` (reached only through `gate.php` at `GET`/`POST /api/watchlists`) keeps them in `.watchlists/watchlists.json`, never served, with the previous version beside it. A save needs the signed-in session, the page's CSRF token (the `fhs-csrf` meta tag `gate.php` adds to `index.html`) and the version the page loaded; a stale page gets 409 and the latest lists. Until anything is saved, the API returns the "Meeting 30 Oct" list (Augusta, Augusta RV/Boat/Car, Statesboro Stockyard Rd, Crawford). On a local preview there is no API, so lists are kept in the browser and the tab says so.
+
 ## Restricted Tenants tab and the 2026-09-17 CCStorage re-extraction
 
 *Dated record.* The paragraphs below describe the 2026-09-17 and 2026-09-18 refresh work as it happened, when the shared cutoff was September 9. The cutoff was moved to September 17 on 2026-09-18; the current public datasets and the Tenants source share that cutoff.
