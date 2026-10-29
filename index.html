@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="meta.css" />
     <link rel="stylesheet" href="monthly-trend.css" />
+    <link rel="stylesheet" href="questions.css" />
   </head>
   <body>
     <div class="prototype-ribbon" id="mode-ribbon"><span class="ribbon-dot"></span>Loading monthly report…</div>
@@ -19,6 +20,7 @@
         <nav aria-label="Family Heirloom Storage reporting navigation">
           <p class="nav-label">Workspace</p>
           <button class="nav-item active" data-view="overview"><span class="nav-glyph">⌂</span>Overview</button>
+          <button class="nav-item" data-view="questions"><span class="nav-glyph">◈</span>Questions</button>
           <button class="nav-item" data-view="ads"><span class="nav-glyph">↗</span>Google Ads</button>
           <button class="nav-item" data-view="meta"><span class="nav-glyph">◎</span>Meta Ads</button>
           <button class="nav-item" data-view="analytics"><span class="nav-glyph">▥</span>Google Analytics</button>
@@ -79,6 +81,9 @@
             <footer class="table-footer"><span id="table-result-count">Loading facilities</span><div class="pagination" id="pagination"></div></footer>
           </section>
           </div>
+          <section id="questions-view" class="hidden" aria-label="Leadership questions">
+            <div id="questions-root"><p class="tenant-loading">Answers load when this tab is opened.</p></div>
+          </section>
           <section id="ads-view" class="hidden" aria-label="Google Ads details">
             <div class="detail-filters">
               <label>Campaign location<select id="ads-location"><option value="all">All locations</option></select></label>
@@ -146,5 +151,6 @@
     <script src="tenants.js"></script>
     <script src="journeys.js"></script>
     <script src="sources.js"></script>
+    <script src="questions.js"></script>
   </body>
 </html>

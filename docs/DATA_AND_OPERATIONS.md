@@ -186,6 +186,16 @@ The uppercase filenames are placeholders. Supply quoted real paths from the prot
 
 Google/GA4 converters are scoped to 2026. The Meta converter and several Overview labels are currently scoped to June–September 1–17, 2026 (the current cutoff; labels derive it from `data/reporting.json`). Extending dates requires reviewing hard-coded periods, weekly evidence and labels; it is not just a different file argument. The validator retains the current regional unsupported-metric contract. Resolve these limits before scheduled refreshes.
 
+## Questions tab data (added 2026-10-29)
+
+The Questions tab (`questions.js`) computes its answers in the browser from the existing snapshots plus three files:
+
+- `data/restatements.json` (public aggregate): `scripts/build-restatements.py git:HEAD` compares the new `reporting.json` with the last committed one and lists every revised value in past months, portfolio and facility level. A month whose end date only moved forward is "extended", not restated. The refresh script runs it after `build-meta.py`; a rerun with no new extraction leaves the file unchanged.
+- `data/restricted/tracking.json` (private): `scripts/build-tracking.py` turns the GA4 BigQuery events, Google Ads daily rows, Meta lead records and the `/*fhs:sources*/` extraction into daily signal counts (America/New_York dates) and a monthly visitor-to-rental funnel. A day is flagged only when a signal that normally runs at least 10 a day falls below 25% of its 14-day median; days after the last GA4 export are "not exported yet", never zero. Run against the 2026-08-13 to 2026-10-28 history, it flags exactly the 2026-09-29 to 2026-10-06 GA4 outage. Counts only: no ids or pages.
+- `data/restricted/budgets.json` (private, owner-entered): monthly ad budgets per platform, `{"months": {"2026-11": {"google": 6000, "meta": 600}}}`. Empty until the owner fills it; the budget question stays "not answerable yet" until then.
+
+Blended cost per move-in (all spend ÷ all move-ins) is deliberately not shown; cost per renter waits for Confirmed or Credited evidence under the 2026-10-27 tiers.
+
 ## Restricted Tenants tab and the 2026-09-17 CCStorage re-extraction
 
 *Dated record.* The paragraphs below describe the 2026-09-17 and 2026-09-18 refresh work as it happened, when the shared cutoff was September 9. The cutoff was moved to September 17 on 2026-09-18; the current public datasets and the Tenants source share that cutoff.

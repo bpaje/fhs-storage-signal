@@ -22,6 +22,7 @@ The accepted implementation baseline is [`5dddd4c`](https://github.com/bpaje/fhs
 | Tenants (private host only) | CCStorage activity through the reporting cutoff, September 17; balances as of the extraction date | Owner-login-only renter lists, scorecards and profiles. Never served on GitHub Pages |
 | Leads (private host only) | Meta lead records through the cutoff | Identity-matched lead-to-renter results: Confirmed means an exact normalized email or phone match; Possible (name and timing) is unconfirmed and counted separately |
 | Visitors (private host only) | Anonymous GA4 website journeys through the cutoff | One-way visitor aliases, first-touch channel mix and event timelines. Not linked to named renters |
+| Questions | The selected month, from all loaded snapshots | 20 leadership questions (CEO, CMO, finance and audit, builder), each answered with its evidence and limits or marked "not answerable yet" with what would unblock it. Restricted answers (sources, lead matching, tracking heartbeat, budgets) appear on the private host only |
 
 The four public tabs are Overview, Google Ads, Meta Ads and Google Analytics. The Tenants, Leads and Visitors tabs exist only under owner-approved exceptions (September 17 and 18, 2026) and appear only on the private host; the public site hides them and never fetches their data. Every tab shows each source's own cutoff and age, and warns when it is more than 7 days old.
 

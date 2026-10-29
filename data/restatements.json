@@ -1,0 +1,187 @@
+{
+ "schema": "storage-signal.restatements.v1",
+ "previous": {
+  "refreshed": "2026-10-27",
+  "ccExtractedAt": "2026-10-27T06:38:09.143+00:00",
+  "cutoff": "2026-10-26"
+ },
+ "current": {
+  "refreshed": "2026-10-29",
+  "ccExtractedAt": "2026-10-29T09:23:24.106+00:00",
+  "cutoff": "2026-10-28"
+ },
+ "tolerance": {
+  "money": 0.005,
+  "count": 1e-06
+ },
+ "months": [
+  {
+   "id": "2026-06",
+   "label": "June 2026",
+   "status": "unchanged",
+   "previousEnd": "2026-06-30",
+   "currentEnd": "2026-06-30",
+   "changes": [],
+   "facilities": []
+  },
+  {
+   "id": "2026-07",
+   "label": "July 2026",
+   "status": "unchanged",
+   "previousEnd": "2026-07-31",
+   "currentEnd": "2026-07-31",
+   "changes": [],
+   "facilities": []
+  },
+  {
+   "id": "2026-08",
+   "label": "August 2026",
+   "status": "restated",
+   "previousEnd": "2026-08-31",
+   "currentEnd": "2026-08-31",
+   "changes": [
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 467756.34,
+     "current": 467243.66,
+     "difference": -512.68
+    }
+   ],
+   "facilities": [
+    {
+     "id": "1274",
+     "name": "Family Heirloom Storage of Albany",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 28614.13,
+     "current": 28101.45,
+     "difference": -512.68
+    }
+   ]
+  },
+  {
+   "id": "2026-09",
+   "label": "September 2026",
+   "status": "restated",
+   "previousEnd": "2026-09-30",
+   "currentEnd": "2026-09-30",
+   "changes": [
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 461341.7,
+     "current": 461277.22,
+     "difference": -64.48
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 309,
+     "current": 311,
+     "difference": 2
+    }
+   ],
+   "facilities": [
+    {
+     "id": "1145",
+     "name": "Affordable Storage of Bartow",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 27407.95,
+     "current": 27343.47,
+     "difference": -64.48
+    },
+    {
+     "id": "1184",
+     "name": "Southeastern Self Storage - Walter Street",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 8,
+     "current": 10,
+     "difference": 2
+    }
+   ]
+  },
+  {
+   "id": "2026-10",
+   "label": "October 1\u201328, 2026 (MTD)",
+   "status": "extended",
+   "previousEnd": "2026-10-26",
+   "currentEnd": "2026-10-28",
+   "changes": [
+    {
+     "metric": "google.spend",
+     "label": "Google Ads spend",
+     "kind": "money",
+     "previous": 5902.12,
+     "current": 6357.51,
+     "difference": 455.39
+    },
+    {
+     "metric": "google.conversions",
+     "label": "Google Ads conversions",
+     "kind": "number",
+     "previous": 90.985448,
+     "current": 100.985448,
+     "difference": 10.0
+    },
+    {
+     "metric": "meta.spend",
+     "label": "Meta Ads spend",
+     "kind": "money",
+     "previous": 347.36,
+     "current": 423.92,
+     "difference": 76.56
+    },
+    {
+     "metric": "meta.leads",
+     "label": "Meta leads",
+     "kind": "number",
+     "previous": 13.0,
+     "current": 25.0,
+     "difference": 12.0
+    },
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 435346.02,
+     "current": 449392.01,
+     "difference": 14045.99
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 124,
+     "current": 137,
+     "difference": 13
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 99,
+     "current": 141,
+     "difference": 42
+    },
+    {
+     "metric": "reportingViewVolume",
+     "label": "CCStorage reporting-view volume",
+     "kind": "money",
+     "previous": 406189.72,
+     "current": 419345.77,
+     "difference": 13156.05
+    }
+   ],
+   "facilities": []
+  }
+ ]
+}
