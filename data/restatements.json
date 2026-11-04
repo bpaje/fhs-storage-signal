@@ -1,14 +1,14 @@
 {
  "schema": "storage-signal.restatements.v1",
  "previous": {
-  "refreshed": "2026-10-29",
-  "ccExtractedAt": "2026-10-29T09:23:24.106+00:00",
-  "cutoff": "2026-10-28"
- },
- "current": {
   "refreshed": "2026-11-03",
   "ccExtractedAt": "2026-11-03T09:15:19.991+00:00",
   "cutoff": "2026-11-02"
+ },
+ "current": {
+  "refreshed": "2026-11-04",
+  "ccExtractedAt": "2026-11-04T07:13:55.638+00:00",
+  "cutoff": "2026-11-03"
  },
  "tolerance": {
   "money": 0.005,
@@ -54,82 +54,260 @@
   {
    "id": "2026-10",
    "label": "October 2026",
-   "status": "extended",
-   "previousEnd": "2026-10-28",
+   "status": "restated",
+   "previousEnd": "2026-10-31",
    "currentEnd": "2026-10-31",
    "changes": [
-    {
-     "metric": "google.spend",
-     "label": "Google Ads spend",
-     "kind": "money",
-     "previous": 6357.51,
-     "current": 7211.88,
-     "difference": 854.37
-    },
-    {
-     "metric": "google.conversions",
-     "label": "Google Ads conversions",
-     "kind": "number",
-     "previous": 100.985448,
-     "current": 125.652114,
-     "difference": 24.666666
-    },
-    {
-     "metric": "meta.spend",
-     "label": "Meta Ads spend",
-     "kind": "money",
-     "previous": 423.92,
-     "current": 525.64,
-     "difference": 101.72
-    },
-    {
-     "metric": "meta.leads",
-     "label": "Meta leads",
-     "kind": "number",
-     "previous": 25.0,
-     "current": 36.0,
-     "difference": 11.0
-    },
     {
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 449392.01,
-     "current": 498355.46,
-     "difference": 48963.45
+     "previous": 498355.46,
+     "current": 501408.39,
+     "difference": 3052.93
     },
     {
      "metric": "moveIns",
      "label": "Move-ins",
      "kind": "number",
-     "previous": 137,
-     "current": 170,
-     "difference": 33
+     "previous": 170,
+     "current": 169,
+     "difference": -1
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 141,
-     "current": 175,
-     "difference": 34
+     "previous": 175,
+     "current": 177,
+     "difference": 2
+    }
+   ],
+   "facilities": [
+    {
+     "id": "1144",
+     "name": "Hawthorne Self Storage",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 18777.12,
+     "current": 19217.12,
+     "difference": 440.0
+    },
+    {
+     "id": "1145",
+     "name": "Affordable Storage of Bartow",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 30211.01,
+     "current": 30698.01,
+     "difference": 487.0
+    },
+    {
+     "id": "1145",
+     "name": "Affordable Storage of Bartow",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 17,
+     "current": 18,
+     "difference": 1
+    },
+    {
+     "id": "1155",
+     "name": "Affordable Storage of Thomasville",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 15961.57,
+     "current": 16035.57,
+     "difference": 74.0
+    },
+    {
+     "id": "1156",
+     "name": "Family Heirloom Storage of Statesboro",
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 6,
+     "current": 5,
+     "difference": -1
+    },
+    {
+     "id": "1167",
+     "name": "Family Heirloom Storage - Crawford",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 15840.4,
+     "current": 16161.4,
+     "difference": 321.0
+    },
+    {
+     "id": "1170",
+     "name": "Family Heirloom Storage of Douglasville",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 6,
+     "current": 7,
+     "difference": 1
+    },
+    {
+     "id": "1171",
+     "name": "Fayetteville Affordable Storage",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 17597.78,
+     "current": 17656.78,
+     "difference": 59.0
+    },
+    {
+     "id": "1175",
+     "name": "Eagles Landing Storage - Ed Moore Court",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 7477.43,
+     "current": 7562.43,
+     "difference": 85.0
+    },
+    {
+     "id": "1179",
+     "name": "Family Heirloom Storage - Pinnacle",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 19112.86,
+     "current": 19496.86,
+     "difference": 384.0
+    },
+    {
+     "id": "1184",
+     "name": "Southeastern Self Storage - Walter Street",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 35291.05,
+     "current": 35726.05,
+     "difference": 435.0
+    },
+    {
+     "id": "1274",
+     "name": "Family Heirloom Storage of Albany",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 29358.27,
+     "current": 29437.27,
+     "difference": 79.0
+    },
+    {
+     "id": "1543",
+     "name": "Family Heirloom Storage of Chester- 1840",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 10557.76,
+     "current": 10614.73,
+     "difference": 56.97
+    },
+    {
+     "id": "1546",
+     "name": "Family Heirloom Storage of Kings Mountain- York Rd",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 11294.36,
+     "current": 11684.04,
+     "difference": 389.68
+    },
+    {
+     "id": "1632",
+     "name": "Family Heirloom Storage of Tupelo-107 Industrial Rd.",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 12672.72,
+     "current": 12915.0,
+     "difference": 242.28
+    }
+   ]
+  },
+  {
+   "id": "2026-11",
+   "label": "November 1\u20133, 2026 (MTD)",
+   "status": "extended",
+   "previousEnd": "2026-11-02",
+   "currentEnd": "2026-11-03",
+   "changes": [
+    {
+     "metric": "google.spend",
+     "label": "Google Ads spend",
+     "kind": "money",
+     "previous": 627.85,
+     "current": 1018.6,
+     "difference": 390.75
+    },
+    {
+     "metric": "google.conversions",
+     "label": "Google Ads conversions",
+     "kind": "number",
+     "previous": 7.333334,
+     "current": 15.333334,
+     "difference": 8.0
+    },
+    {
+     "metric": "meta.spend",
+     "label": "Meta Ads spend",
+     "kind": "money",
+     "previous": 68.73,
+     "current": 100.08,
+     "difference": 31.35
+    },
+    {
+     "metric": "meta.leads",
+     "label": "Meta leads",
+     "kind": "number",
+     "previous": 6.0,
+     "current": 10.0,
+     "difference": 4.0
+    },
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 170903.99,
+     "current": 195205.16,
+     "difference": 24301.17
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 10,
+     "current": 19,
+     "difference": 9
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 3,
+     "current": 4,
+     "difference": 1
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 419345.77,
-     "current": 468773.55,
-     "difference": 49427.78
+     "previous": 209917.29,
+     "current": 235106.37,
+     "difference": 25189.08
     }
    ],
-   "facilities": []
-  },
-  {
-   "id": "2026-11",
-   "label": "November 1\u20132, 2026 (MTD)",
-   "status": "new",
-   "changes": [],
    "facilities": []
   }
  ]
