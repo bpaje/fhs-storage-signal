@@ -1,14 +1,14 @@
 {
  "schema": "storage-signal.restatements.v1",
  "previous": {
-  "refreshed": "2026-11-03",
-  "ccExtractedAt": "2026-11-03T09:15:19.991+00:00",
-  "cutoff": "2026-11-02"
- },
- "current": {
   "refreshed": "2026-11-04",
   "ccExtractedAt": "2026-11-04T07:13:55.638+00:00",
   "cutoff": "2026-11-03"
+ },
+ "current": {
+  "refreshed": "2026-11-06",
+  "ccExtractedAt": "2026-11-05T19:10:30.970+00:00",
+  "cutoff": "2026-11-04"
  },
  "tolerance": {
   "money": 0.005,
@@ -27,11 +27,41 @@
   {
    "id": "2026-07",
    "label": "July 2026",
-   "status": "unchanged",
+   "status": "restated",
    "previousEnd": "2026-07-31",
    "currentEnd": "2026-07-31",
-   "changes": [],
-   "facilities": []
+   "changes": [
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 106,
+     "current": 108,
+     "difference": 2
+    }
+   ],
+   "facilities": [
+    {
+     "id": "1543",
+     "name": "Family Heirloom Storage of Chester- 1840",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 3,
+     "current": 4,
+     "difference": 1
+    },
+    {
+     "id": "1546",
+     "name": "Family Heirloom Storage of Kings Mountain- York Rd",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 4,
+     "current": 5,
+     "difference": 1
+    }
+   ]
   },
   {
    "id": "2026-08",
@@ -59,50 +89,48 @@
    "currentEnd": "2026-10-31",
    "changes": [
     {
+     "metric": "google.conversions",
+     "label": "Google Ads conversions",
+     "kind": "number",
+     "previous": 125.652114,
+     "current": 130.652114,
+     "difference": 5.0
+    },
+    {
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 498355.46,
-     "current": 501408.39,
-     "difference": 3052.93
+     "previous": 501408.39,
+     "current": 502419.39,
+     "difference": 1011.0
     },
     {
      "metric": "moveIns",
      "label": "Move-ins",
      "kind": "number",
-     "previous": 170,
-     "current": 169,
+     "previous": 169,
+     "current": 168,
      "difference": -1
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 175,
-     "current": 177,
-     "difference": 2
+     "previous": 177,
+     "current": 187,
+     "difference": 10
     }
    ],
    "facilities": [
     {
      "id": "1144",
      "name": "Hawthorne Self Storage",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 18777.12,
-     "current": 19217.12,
-     "difference": 440.0
-    },
-    {
-     "id": "1145",
-     "name": "Affordable Storage of Bartow",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 30211.01,
-     "current": 30698.01,
-     "difference": 487.0
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 9,
+     "current": 10,
+     "difference": 1
     },
     {
      "id": "1145",
@@ -110,29 +138,19 @@
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 17,
-     "current": 18,
+     "previous": 18,
+     "current": 19,
      "difference": 1
     },
     {
      "id": "1155",
      "name": "Affordable Storage of Thomasville",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 15961.57,
-     "current": 16035.57,
-     "difference": 74.0
-    },
-    {
-     "id": "1156",
-     "name": "Family Heirloom Storage of Statesboro",
-     "metric": "moveIns",
-     "label": "Move-ins",
+     "metric": "moveOuts",
+     "label": "Move-outs",
      "kind": "number",
-     "previous": 6,
-     "current": 5,
-     "difference": -1
+     "previous": 7,
+     "current": 8,
+     "difference": 1
     },
     {
      "id": "1167",
@@ -140,13 +158,103 @@
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 15840.4,
-     "current": 16161.4,
-     "difference": 321.0
+     "previous": 16161.4,
+     "current": 16887.4,
+     "difference": 726.0
     },
     {
-     "id": "1170",
-     "name": "Family Heirloom Storage of Douglasville",
+     "id": "1171",
+     "name": "Fayetteville Affordable Storage",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 17656.78,
+     "current": 17786.78,
+     "difference": 130.0
+    },
+    {
+     "id": "1175",
+     "name": "Eagles Landing Storage - Ed Moore Court",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 7562.43,
+     "current": 7576.43,
+     "difference": 14.0
+    },
+    {
+     "id": "1176",
+     "name": "Eagles Landing Storage - S. Main St.",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 8163.92,
+     "current": 8221.92,
+     "difference": 58.0
+    },
+    {
+     "id": "1179",
+     "name": "Family Heirloom Storage - Pinnacle",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 19496.86,
+     "current": 19590.86,
+     "difference": 94.0
+    },
+    {
+     "id": "1182",
+     "name": "Southeastern Self Storage - S. Madison Street",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 5,
+     "current": 6,
+     "difference": 1
+    },
+    {
+     "id": "1183",
+     "name": "Southeastern Self Storage - Tabor City",
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 5,
+     "current": 4,
+     "difference": -1
+    },
+    {
+     "id": "1184",
+     "name": "Southeastern Self Storage - Walter Street",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 35726.05,
+     "current": 35625.05,
+     "difference": -101.0
+    },
+    {
+     "id": "1185",
+     "name": "Southeastern Self Storage - Pecan Street",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 7,
+     "current": 8,
+     "difference": 1
+    },
+    {
+     "id": "1274",
+     "name": "Family Heirloom Storage of Albany",
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 29437.27,
+     "current": 29527.27,
+     "difference": 90.0
+    },
+    {
+     "id": "1274",
+     "name": "Family Heirloom Storage of Albany",
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
@@ -155,143 +263,8 @@
      "difference": 1
     },
     {
-     "id": "1171",
-     "name": "Fayetteville Affordable Storage",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 17597.78,
-     "current": 17656.78,
-     "difference": 59.0
-    },
-    {
-     "id": "1175",
-     "name": "Eagles Landing Storage - Ed Moore Court",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 7477.43,
-     "current": 7562.43,
-     "difference": 85.0
-    },
-    {
-     "id": "1179",
-     "name": "Family Heirloom Storage - Pinnacle",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 19112.86,
-     "current": 19496.86,
-     "difference": 384.0
-    },
-    {
-     "id": "1184",
-     "name": "Southeastern Self Storage - Walter Street",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 35291.05,
-     "current": 35726.05,
-     "difference": 435.0
-    },
-    {
-     "id": "1274",
-     "name": "Family Heirloom Storage of Albany",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 29358.27,
-     "current": 29437.27,
-     "difference": 79.0
-    },
-    {
-     "id": "1543",
-     "name": "Family Heirloom Storage of Chester- 1840",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 10557.76,
-     "current": 10614.73,
-     "difference": 56.97
-    },
-    {
-     "id": "1546",
-     "name": "Family Heirloom Storage of Kings Mountain- York Rd",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 11294.36,
-     "current": 11684.04,
-     "difference": 389.68
-    },
-    {
-     "id": "1632",
-     "name": "Family Heirloom Storage of Tupelo-107 Industrial Rd.",
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 12672.72,
-     "current": 12915.0,
-     "difference": 242.28
-    }
-   ]
-  },
-  {
-   "id": "2026-11",
-   "label": "November 1\u20133, 2026 (MTD)",
-   "status": "extended",
-   "previousEnd": "2026-11-02",
-   "currentEnd": "2026-11-03",
-   "changes": [
-    {
-     "metric": "google.spend",
-     "label": "Google Ads spend",
-     "kind": "money",
-     "previous": 627.85,
-     "current": 1018.6,
-     "difference": 390.75
-    },
-    {
-     "metric": "google.conversions",
-     "label": "Google Ads conversions",
-     "kind": "number",
-     "previous": 7.333334,
-     "current": 15.333334,
-     "difference": 8.0
-    },
-    {
-     "metric": "meta.spend",
-     "label": "Meta Ads spend",
-     "kind": "money",
-     "previous": 68.73,
-     "current": 100.08,
-     "difference": 31.35
-    },
-    {
-     "metric": "meta.leads",
-     "label": "Meta leads",
-     "kind": "number",
-     "previous": 6.0,
-     "current": 10.0,
-     "difference": 4.0
-    },
-    {
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 170903.99,
-     "current": 195205.16,
-     "difference": 24301.17
-    },
-    {
-     "metric": "moveIns",
-     "label": "Move-ins",
-     "kind": "number",
-     "previous": 10,
-     "current": 19,
-     "difference": 9
-    },
-    {
+     "id": "1350",
+     "name": "Family Heirloom Storage of Birmingham- Ave D",
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
@@ -300,12 +273,89 @@
      "difference": 1
     },
     {
+     "id": "1631",
+     "name": "Family Heirloom storage of Tupelo-Washington Ave",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 4,
+     "current": 6,
+     "difference": 2
+    },
+    {
+     "id": "1632",
+     "name": "Family Heirloom Storage of Tupelo-107 Industrial Rd.",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 8,
+     "current": 9,
+     "difference": 1
+    }
+   ]
+  },
+  {
+   "id": "2026-11",
+   "label": "November 1\u20134, 2026 (MTD)",
+   "status": "extended",
+   "previousEnd": "2026-11-03",
+   "currentEnd": "2026-11-04",
+   "changes": [
+    {
+     "metric": "google.spend",
+     "label": "Google Ads spend",
+     "kind": "money",
+     "previous": 1018.6,
+     "current": 1314.09,
+     "difference": 295.49
+    },
+    {
+     "metric": "google.conversions",
+     "label": "Google Ads conversions",
+     "kind": "number",
+     "previous": 15.333334,
+     "current": 22.333334,
+     "difference": 7.0
+    },
+    {
+     "metric": "meta.spend",
+     "label": "Meta Ads spend",
+     "kind": "money",
+     "previous": 100.08,
+     "current": 127.82,
+     "difference": 27.74
+    },
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 195205.16,
+     "current": 262570.97,
+     "difference": 67365.81
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 19,
+     "current": 26,
+     "difference": 7
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 4,
+     "current": 7,
+     "difference": 3
+    },
+    {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 209917.29,
-     "current": 235106.37,
-     "difference": 25189.08
+     "previous": 235106.37,
+     "current": 257477.69,
+     "difference": 22371.32
     }
    ],
    "facilities": []
