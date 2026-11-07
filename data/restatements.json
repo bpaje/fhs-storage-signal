@@ -2,13 +2,13 @@
  "schema": "storage-signal.restatements.v1",
  "previous": {
   "refreshed": "2026-11-06",
-  "ccExtractedAt": "2026-11-05T19:10:30.970+00:00",
-  "cutoff": "2026-11-04"
- },
- "current": {
-  "refreshed": "2026-11-06",
   "ccExtractedAt": "2026-11-06T07:12:23.745+00:00",
   "cutoff": "2026-11-05"
+ },
+ "current": {
+  "refreshed": "2026-11-07",
+  "ccExtractedAt": "2026-11-07T10:12:04.527+00:00",
+  "cutoff": "2026-11-06"
  },
  "tolerance": {
   "money": 0.005,
@@ -45,31 +45,11 @@
   {
    "id": "2026-09",
    "label": "September 2026",
-   "status": "restated",
+   "status": "unchanged",
    "previousEnd": "2026-09-30",
    "currentEnd": "2026-09-30",
-   "changes": [
-    {
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 311,
-     "current": 312,
-     "difference": 1
-    }
-   ],
-   "facilities": [
-    {
-     "id": "1634",
-     "name": "Family Heirloom Storage of Baldwyn",
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 6,
-     "current": 7,
-     "difference": 1
-    }
-   ]
+   "changes": [],
+   "facilities": []
   },
   {
    "id": "2026-10",
@@ -82,86 +62,114 @@
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 187,
-     "current": 188,
-     "difference": 1
+     "previous": 188,
+     "current": 191,
+     "difference": 3
     }
    ],
    "facilities": [
     {
-     "id": "1635",
-     "name": "Family Heirloom Storage of Mooreville",
+     "id": "1145",
+     "name": "Affordable Storage of Bartow",
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 3,
-     "current": 4,
+     "previous": 19,
+     "current": 20,
+     "difference": 1
+    },
+    {
+     "id": "1182",
+     "name": "Southeastern Self Storage - S. Madison Street",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 6,
+     "current": 7,
+     "difference": 1
+    },
+    {
+     "id": "1274",
+     "name": "Family Heirloom Storage of Albany",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 7,
+     "current": 8,
      "difference": 1
     }
    ]
   },
   {
    "id": "2026-11",
-   "label": "November 1\u20135, 2026 (MTD)",
+   "label": "November 1\u20136, 2026 (MTD)",
    "status": "extended",
-   "previousEnd": "2026-11-04",
-   "currentEnd": "2026-11-05",
+   "previousEnd": "2026-11-05",
+   "currentEnd": "2026-11-06",
    "changes": [
     {
      "metric": "google.spend",
      "label": "Google Ads spend",
      "kind": "money",
-     "previous": 1314.09,
-     "current": 1606.81,
-     "difference": 292.72
+     "previous": 1606.81,
+     "current": 1793.18,
+     "difference": 186.37
     },
     {
      "metric": "google.conversions",
      "label": "Google Ads conversions",
      "kind": "number",
-     "previous": 22.333334,
-     "current": 26.333334,
-     "difference": 4.0
+     "previous": 26.333334,
+     "current": 29.333334,
+     "difference": 3.0
     },
     {
      "metric": "meta.spend",
      "label": "Meta Ads spend",
      "kind": "money",
-     "previous": 127.82,
-     "current": 153.21,
-     "difference": 25.39
+     "previous": 153.21,
+     "current": 179.33,
+     "difference": 26.12
+    },
+    {
+     "metric": "meta.leads",
+     "label": "Meta leads",
+     "kind": "number",
+     "previous": 10.0,
+     "current": 12.0,
+     "difference": 2.0
     },
     {
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 262570.97,
-     "current": 298960.83,
-     "difference": 36389.86
+     "previous": 298960.83,
+     "current": 322196.65,
+     "difference": 23235.82
     },
     {
      "metric": "moveIns",
      "label": "Move-ins",
      "kind": "number",
-     "previous": 26,
-     "current": 40,
-     "difference": 14
+     "previous": 40,
+     "current": 59,
+     "difference": 19
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 7,
-     "current": 13,
-     "difference": 6
+     "previous": 13,
+     "current": 16,
+     "difference": 3
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 257477.69,
-     "current": 291286.73,
-     "difference": 33809.04
+     "previous": 291286.73,
+     "current": 308733.58,
+     "difference": 17446.85
     }
    ],
    "facilities": []
