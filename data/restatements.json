@@ -1,14 +1,14 @@
 {
  "schema": "storage-signal.restatements.v1",
  "previous": {
-  "refreshed": "2026-11-06",
-  "ccExtractedAt": "2026-11-06T07:12:23.745+00:00",
-  "cutoff": "2026-11-05"
- },
- "current": {
   "refreshed": "2026-11-07",
   "ccExtractedAt": "2026-11-07T10:12:04.527+00:00",
   "cutoff": "2026-11-06"
+ },
+ "current": {
+  "refreshed": "2026-11-08",
+  "ccExtractedAt": "2026-11-08T11:57:57.695+00:00",
+  "cutoff": "2026-11-07"
  },
  "tolerance": {
   "money": 0.005,
@@ -59,117 +59,115 @@
    "currentEnd": "2026-10-31",
    "changes": [
     {
+     "metric": "google.conversions",
+     "label": "Google Ads conversions",
+     "kind": "number",
+     "previous": 130.652114,
+     "current": 131.652114,
+     "difference": 1.0
+    },
+    {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 188,
-     "current": 191,
-     "difference": 3
+     "previous": 191,
+     "current": 193,
+     "difference": 2
     }
    ],
    "facilities": [
     {
-     "id": "1145",
-     "name": "Affordable Storage of Bartow",
+     "id": "1169",
+     "name": "Family Heirloom Storage of Birmingham",
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 19,
-     "current": 20,
+     "previous": 11,
+     "current": 12,
      "difference": 1
     },
     {
-     "id": "1182",
-     "name": "Southeastern Self Storage - S. Madison Street",
+     "id": "1633",
+     "name": "Family Heirloom Storage of Guntown",
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 6,
-     "current": 7,
-     "difference": 1
-    },
-    {
-     "id": "1274",
-     "name": "Family Heirloom Storage of Albany",
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 7,
-     "current": 8,
+     "previous": 0,
+     "current": 1,
      "difference": 1
     }
    ]
   },
   {
    "id": "2026-11",
-   "label": "November 1\u20136, 2026 (MTD)",
+   "label": "November 1\u20137, 2026 (MTD)",
    "status": "extended",
-   "previousEnd": "2026-11-05",
-   "currentEnd": "2026-11-06",
+   "previousEnd": "2026-11-06",
+   "currentEnd": "2026-11-07",
    "changes": [
     {
      "metric": "google.spend",
      "label": "Google Ads spend",
      "kind": "money",
-     "previous": 1606.81,
-     "current": 1793.18,
-     "difference": 186.37
+     "previous": 1793.18,
+     "current": 2249.89,
+     "difference": 456.71
     },
     {
      "metric": "google.conversions",
      "label": "Google Ads conversions",
      "kind": "number",
-     "previous": 26.333334,
-     "current": 29.333334,
-     "difference": 3.0
+     "previous": 29.333334,
+     "current": 34.333334,
+     "difference": 5.0
     },
     {
      "metric": "meta.spend",
      "label": "Meta Ads spend",
      "kind": "money",
-     "previous": 153.21,
-     "current": 179.33,
-     "difference": 26.12
+     "previous": 179.33,
+     "current": 209.82,
+     "difference": 30.49
     },
     {
      "metric": "meta.leads",
      "label": "Meta leads",
      "kind": "number",
-     "previous": 10.0,
-     "current": 12.0,
+     "previous": 12.0,
+     "current": 14.0,
      "difference": 2.0
     },
     {
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 298960.83,
-     "current": 322196.65,
-     "difference": 23235.82
+     "previous": 322196.65,
+     "current": 325830.95,
+     "difference": 3634.3
     },
     {
      "metric": "moveIns",
      "label": "Move-ins",
      "kind": "number",
-     "previous": 40,
-     "current": 59,
-     "difference": 19
+     "previous": 59,
+     "current": 66,
+     "difference": 7
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 13,
-     "current": 16,
+     "previous": 16,
+     "current": 19,
      "difference": 3
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 291286.73,
-     "current": 308733.58,
-     "difference": 17446.85
+     "previous": 308733.58,
+     "current": 312783.88,
+     "difference": 4050.3
     }
    ],
    "facilities": []
