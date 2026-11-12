@@ -1,14 +1,14 @@
 {
  "schema": "storage-signal.restatements.v1",
  "previous": {
-  "refreshed": "2026-11-08",
-  "ccExtractedAt": "2026-11-08T11:57:57.695+00:00",
-  "cutoff": "2026-11-07"
- },
- "current": {
   "refreshed": "2026-11-09",
   "ccExtractedAt": "2026-11-09T07:12:13.560+00:00",
   "cutoff": "2026-11-08"
+ },
+ "current": {
+  "refreshed": "2026-11-12",
+  "ccExtractedAt": "2026-11-12T07:12:09.643+00:00",
+  "cutoff": "2026-11-11"
  },
  "tolerance": {
   "money": 0.005,
@@ -27,11 +27,31 @@
   {
    "id": "2026-07",
    "label": "July 2026",
-   "status": "unchanged",
+   "status": "restated",
    "previousEnd": "2026-07-31",
    "currentEnd": "2026-07-31",
-   "changes": [],
-   "facilities": []
+   "changes": [
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 108,
+     "current": 109,
+     "difference": 1
+    }
+   ],
+   "facilities": [
+    {
+     "id": "1546",
+     "name": "Family Heirloom Storage of Kings Mountain- York Rd",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 5,
+     "current": 6,
+     "difference": 1
+    }
+   ]
   },
   {
    "id": "2026-08",
@@ -59,89 +79,125 @@
    "currentEnd": "2026-10-31",
    "changes": [
     {
+     "metric": "google.conversions",
+     "label": "Google Ads conversions",
+     "kind": "number",
+     "previous": 131.652114,
+     "current": 132.666673,
+     "difference": 1.014559
+    },
+    {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 193,
-     "current": 194,
-     "difference": 1
+     "previous": 194,
+     "current": 200,
+     "difference": 6
     }
    ],
    "facilities": [
+    {
+     "id": "1183",
+     "name": "Southeastern Self Storage - Tabor City",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 2,
+     "current": 3,
+     "difference": 1
+    },
     {
      "id": "1274",
      "name": "Family Heirloom Storage of Albany",
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 8,
-     "current": 9,
+     "previous": 9,
+     "current": 13,
+     "difference": 4
+    },
+    {
+     "id": "1548",
+     "name": "Family Heirloom Storage of Forest City",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 4,
+     "current": 5,
      "difference": 1
     }
    ]
   },
   {
    "id": "2026-11",
-   "label": "November 1\u20138, 2026 (MTD)",
+   "label": "November 1\u201311, 2026 (MTD)",
    "status": "extended",
-   "previousEnd": "2026-11-07",
-   "currentEnd": "2026-11-08",
+   "previousEnd": "2026-11-08",
+   "currentEnd": "2026-11-11",
    "changes": [
     {
      "metric": "google.spend",
      "label": "Google Ads spend",
      "kind": "money",
-     "previous": 2249.89,
-     "current": 2558.37,
-     "difference": 308.48
+     "previous": 2558.37,
+     "current": 3771.55,
+     "difference": 1213.18
     },
     {
      "metric": "google.conversions",
      "label": "Google Ads conversions",
      "kind": "number",
-     "previous": 34.333334,
-     "current": 36.333334,
-     "difference": 2.0
+     "previous": 36.333334,
+     "current": 61.318775,
+     "difference": 24.985441
     },
     {
      "metric": "meta.spend",
      "label": "Meta Ads spend",
      "kind": "money",
-     "previous": 209.82,
-     "current": 238.41,
-     "difference": 28.59
+     "previous": 238.41,
+     "current": 333.7,
+     "difference": 95.29
+    },
+    {
+     "metric": "meta.leads",
+     "label": "Meta leads",
+     "kind": "number",
+     "previous": 14.0,
+     "current": 19.0,
+     "difference": 5.0
     },
     {
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 325830.95,
-     "current": 327104.28,
-     "difference": 1273.33
+     "previous": 327104.28,
+     "current": 348710.03,
+     "difference": 21605.75
     },
     {
      "metric": "moveIns",
      "label": "Move-ins",
      "kind": "number",
-     "previous": 66,
-     "current": 69,
-     "difference": 3
+     "previous": 69,
+     "current": 89,
+     "difference": 20
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 19,
-     "current": 21,
-     "difference": 2
+     "previous": 21,
+     "current": 38,
+     "difference": 17
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 312783.88,
-     "current": 314057.21,
-     "difference": 1273.33
+     "previous": 314057.21,
+     "current": 327904.98,
+     "difference": 13847.77
     }
    ],
    "facilities": []
