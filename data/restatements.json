@@ -1,14 +1,14 @@
 {
  "schema": "storage-signal.restatements.v1",
  "previous": {
-  "refreshed": "2026-11-09",
-  "ccExtractedAt": "2026-11-09T07:12:13.560+00:00",
-  "cutoff": "2026-11-08"
- },
- "current": {
   "refreshed": "2026-11-12",
   "ccExtractedAt": "2026-11-12T07:12:09.643+00:00",
   "cutoff": "2026-11-11"
+ },
+ "current": {
+  "refreshed": "2026-11-23",
+  "ccExtractedAt": "2026-11-23T07:12:34.224+00:00",
+  "cutoff": "2026-11-22"
  },
  "tolerance": {
   "money": 0.005,
@@ -35,20 +35,20 @@
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 108,
-     "current": 109,
+     "previous": 109,
+     "current": 110,
      "difference": 1
     }
    ],
    "facilities": [
     {
-     "id": "1546",
-     "name": "Family Heirloom Storage of Kings Mountain- York Rd",
+     "id": "1543",
+     "name": "Family Heirloom Storage of Chester- 1840",
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 5,
-     "current": 6,
+     "previous": 4,
+     "current": 5,
      "difference": 1
     }
    ]
@@ -82,122 +82,122 @@
      "metric": "google.conversions",
      "label": "Google Ads conversions",
      "kind": "number",
-     "previous": 131.652114,
-     "current": 132.666673,
-     "difference": 1.014559
+     "previous": 132.666673,
+     "current": 132.667847,
+     "difference": 0.001174
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 194,
-     "current": 200,
-     "difference": 6
+     "previous": 200,
+     "current": 204,
+     "difference": 4
     }
    ],
    "facilities": [
     {
-     "id": "1183",
-     "name": "Southeastern Self Storage - Tabor City",
+     "id": "1543",
+     "name": "Family Heirloom Storage of Chester- 1840",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 0,
+     "current": 1,
+     "difference": 1
+    },
+    {
+     "id": "1632",
+     "name": "Family Heirloom Storage of Tupelo-107 Industrial Rd.",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 9,
+     "current": 11,
+     "difference": 2
+    },
+    {
+     "id": "1634",
+     "name": "Family Heirloom Storage of Baldwyn",
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
      "previous": 2,
      "current": 3,
      "difference": 1
-    },
-    {
-     "id": "1274",
-     "name": "Family Heirloom Storage of Albany",
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 9,
-     "current": 13,
-     "difference": 4
-    },
-    {
-     "id": "1548",
-     "name": "Family Heirloom Storage of Forest City",
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 4,
-     "current": 5,
-     "difference": 1
     }
    ]
   },
   {
    "id": "2026-11",
-   "label": "November 1\u201311, 2026 (MTD)",
+   "label": "November 1\u201322, 2026 (MTD)",
    "status": "extended",
-   "previousEnd": "2026-11-08",
-   "currentEnd": "2026-11-11",
+   "previousEnd": "2026-11-11",
+   "currentEnd": "2026-11-22",
    "changes": [
     {
      "metric": "google.spend",
      "label": "Google Ads spend",
      "kind": "money",
-     "previous": 2558.37,
-     "current": 3771.55,
-     "difference": 1213.18
+     "previous": 3771.55,
+     "current": 8320.17,
+     "difference": 4548.62
     },
     {
      "metric": "google.conversions",
      "label": "Google Ads conversions",
      "kind": "number",
-     "previous": 36.333334,
-     "current": 61.318775,
-     "difference": 24.985441
+     "previous": 61.318775,
+     "current": 135.317601,
+     "difference": 73.998826
     },
     {
      "metric": "meta.spend",
      "label": "Meta Ads spend",
      "kind": "money",
-     "previous": 238.41,
-     "current": 333.7,
-     "difference": 95.29
+     "previous": 333.7,
+     "current": 665.61,
+     "difference": 331.91
     },
     {
      "metric": "meta.leads",
      "label": "Meta leads",
      "kind": "number",
-     "previous": 14.0,
-     "current": 19.0,
-     "difference": 5.0
+     "previous": 19.0,
+     "current": 26.0,
+     "difference": 7.0
     },
     {
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 327104.28,
-     "current": 348710.03,
-     "difference": 21605.75
+     "previous": 348710.03,
+     "current": 409326.09,
+     "difference": 60616.06
     },
     {
      "metric": "moveIns",
      "label": "Move-ins",
      "kind": "number",
-     "previous": 69,
-     "current": 89,
-     "difference": 20
+     "previous": 89,
+     "current": 142,
+     "difference": 53
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 21,
-     "current": 38,
-     "difference": 17
+     "previous": 38,
+     "current": 70,
+     "difference": 32
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 314057.21,
-     "current": 327904.98,
-     "difference": 13847.77
+     "previous": 327904.98,
+     "current": 364664.91,
+     "difference": 36759.93
     }
    ],
    "facilities": []
