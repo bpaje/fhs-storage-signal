@@ -88,6 +88,19 @@ def test_window_shares_and_budgets():
     assert out["campaigns"][1]["status"] == "PAUSED"
 
 
+def test_removed_keywords_kept_only_with_traffic():
+    # The fetch includes removed keywords (2026-11-24): one removed inside the window keeps its traffic and a name,
+    # one removed earlier with no traffic adds nothing.
+    src = source()
+    reports = src["reports"]
+    reports["keywords"][0]["ad_group_criterion.status"] = "REMOVED"
+    reports["keywords"].append(dict(reports["keywords"][1], **{"ad_group_criterion.criterion_id": "102",
+                                                                "ad_group_criterion.status": "REMOVED"}))
+    out = watch.build(src)
+    assert [(k["id"], k["status"]) for k in out["keywords"]] == [("10~100", "REMOVED")]
+    assert out["keywordDays"]["rows"][0][1] == "10~100"
+
+
 def test_traffic_for_unknown_keyword_fails_loudly():
     src = source()
     src["reports"]["keywordDays"][0]["ad_group_criterion.criterion_id"] = "999"

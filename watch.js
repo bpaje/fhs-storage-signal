@@ -510,7 +510,7 @@
    <label class="watch-wide"><span>Watch list</span><select id="kw-list">${listOptions(lists, list.id)}</select></label>
    <label class="watch-wide"><span>Campaign</span>${select("kw-campaign", [["all", "All campaigns in this list"], ...campaigns.map(item => [item.id, `${shortName(item.name)}${item.status === "ENABLED" ? "" : ` (${STATUS[item.status] || item.status})`}`])], campaign)}</label>
    <label><span>Match type</span>${select("kw-match", [["all", "All match types"], ["BROAD", "Broad"], ["PHRASE", "Phrase"], ["EXACT", "Exact"]], kw.match)}</label>
-   <label class="watch-wide"><span>Keyword status</span>${select("kw-status", [["active", "Enabled, in enabled ad groups"], ["paused", "Paused, or in a paused ad group"], ["all", "All keywords"]], kw.status)}</label>
+   <label class="watch-wide"><span>Keyword status</span>${select("kw-status", [["active", "Enabled, in enabled ad groups"], ["paused", "Paused or removed, or in a paused ad group"], ["all", "All keywords"]], kw.status)}</label>
    <label class="watch-search"><span>Search</span><input id="kw-search" type="search" value="${html(kw.search)}" placeholder="Keyword or ad group" autocomplete="off"></label>
    <label class="watch-check"><input id="kw-spend" type="checkbox"${kw.onlySpend ? " checked" : ""}><span>Only keywords with spend in these dates</span></label>
    ${dateControls("kw", data, range)}

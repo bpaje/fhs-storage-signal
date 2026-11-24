@@ -121,6 +121,11 @@ async function run() {
  assert.deepEqual(ids({ search: "<B>" }), ["21~5"]);
  assert.deepEqual(ids({ search: "cheap", onlySpend: false }), ["11~8"]);
  assert.equal(watch.keywordModel(data, ["1001"], kwFilters({ status: "all", onlySpend: false }), r7).rows.find(row => row.id === "13~4").statusNote, "Ad group paused");
+ // A keyword removed inside the window keeps its traffic: shown under "Paused or removed", never as active.
+ const removedData = watch.prepare({ ...raw, keywords: raw.keywords.map(k => k.id === "41~7" ? { ...k, status: "REMOVED" } : k) });
+ const removedIds = status => watch.keywordModel(removedData, ["1004"], kwFilters({ status, onlySpend: false }), r7).rows.map(row => row.id);
+ assert.deepEqual([removedIds("active"), removedIds("paused"), removedIds("all")], [[], ["41~7"], ["41~7"]]);
+ assert.equal(watch.keywordModel(removedData, ["1004"], kwFilters({ status: "all", onlySpend: false }), r7).rows[0].statusNote, "Removed keyword");
  assert.equal(watch.keywordSummary([]).lowQualityShare, null);
  assert.deepEqual(watch.sortRows(keywords.rows, "cost", -1).map(row => row.id), ["21~5", "11~1", "21~6", "12~2"]);
  assert.deepEqual(watch.sortRows(watch.keywordModel(data, ["1001"], kwFilters({ onlySpend: false }), r7).rows, "qualityScore", 1).map(row => row.qualityScore), [3, 7, 8, null], "blanks sort last");
