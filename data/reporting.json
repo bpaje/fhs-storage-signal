@@ -1,10 +1,10 @@
 {
   "schema": "storage-signal.reporting.v1",
-  "refreshed": "2026-11-23",
+  "refreshed": "2026-11-24",
   "currency": "USD",
   "adTimezone": "America/New_York",
-  "ccExtractedAt": "2026-11-23T07:12:34.224+00:00",
-  "metaExtractedAt": "2026-11-23T07:19:15.8137205Z",
+  "ccExtractedAt": "2026-11-24T06:00:51.471+00:00",
+  "metaExtractedAt": "2026-11-24T06:12:51.8074163Z",
   "periods": [
     {
       "id": "2026-06",
@@ -244,21 +244,6 @@
           "units": 140,
           "autopay": 42,
           "occupancy": 0.8571428571428571
-        },
-        {
-          "id": "1173",
-          "name": "Clean and Tidy Storage",
-          "brand": "Other brands",
-          "net": 6592.25,
-          "gross": 6592.25,
-          "refunds": 0.0,
-          "payments": 54,
-          "moveIns": 1,
-          "moveOuts": 1,
-          "leases": 78,
-          "units": 117,
-          "autopay": 52,
-          "occupancy": 0.6666666666666666
         },
         {
           "id": "1175",
@@ -621,7 +606,7 @@
           "occupancy": null
         }
       ],
-      "reportingViewVolume": 347120.79
+      "reportingViewVolume": 341484.54
     },
     {
       "id": "2026-07",
@@ -861,21 +846,6 @@
           "units": 140,
           "autopay": 41,
           "occupancy": 0.8714285714285714
-        },
-        {
-          "id": "1173",
-          "name": "Clean and Tidy Storage",
-          "brand": "Other brands",
-          "net": 7459.06,
-          "gross": 7459.06,
-          "refunds": 0.0,
-          "payments": 59,
-          "moveIns": 2,
-          "moveOuts": 2,
-          "leases": 80,
-          "units": 117,
-          "autopay": 50,
-          "occupancy": 0.6837606837606838
         },
         {
           "id": "1175",
@@ -1238,7 +1208,7 @@
           "occupancy": null
         }
       ],
-      "reportingViewVolume": 398203.33
+      "reportingViewVolume": 391776.27
     },
     {
       "id": "2026-08",
@@ -1478,21 +1448,6 @@
           "units": 140,
           "autopay": 40,
           "occupancy": 0.8357142857142857
-        },
-        {
-          "id": "1173",
-          "name": "Clean and Tidy Storage",
-          "brand": "Other brands",
-          "net": 7181.86,
-          "gross": 7181.86,
-          "refunds": 0.0,
-          "payments": 60,
-          "moveIns": 5,
-          "moveOuts": 4,
-          "leases": 80,
-          "units": 117,
-          "autopay": 48,
-          "occupancy": 0.6837606837606838
         },
         {
           "id": "1175",
@@ -1855,7 +1810,7 @@
           "occupancy": 0.8392857142857143
         }
       ],
-      "reportingViewVolume": 432019.05
+      "reportingViewVolume": 425950.55
     },
     {
       "id": "2026-09",
@@ -2095,21 +2050,6 @@
           "units": 140,
           "autopay": 38,
           "occupancy": 0.8
-        },
-        {
-          "id": "1173",
-          "name": "Clean and Tidy Storage",
-          "brand": "Other brands",
-          "net": 8922.77,
-          "gross": 8922.77,
-          "refunds": 0.0,
-          "payments": 56,
-          "moveIns": 1,
-          "moveOuts": 5,
-          "leases": 79,
-          "units": 117,
-          "autopay": 46,
-          "occupancy": 0.6752136752136753
         },
         {
           "id": "1175",
@@ -2472,7 +2412,7 @@
           "occupancy": 0.8035714285714286
         }
       ],
-      "reportingViewVolume": 429323.78
+      "reportingViewVolume": 423872.01
     },
     {
       "id": "2026-10",
@@ -2712,21 +2652,6 @@
           "units": 140,
           "autopay": 40,
           "occupancy": 0.7928571428571428
-        },
-        {
-          "id": "1173",
-          "name": "Clean and Tidy Storage",
-          "brand": "Other brands",
-          "net": 7878.72,
-          "gross": 8070.47,
-          "refunds": 191.75,
-          "payments": 67,
-          "moveIns": 2,
-          "moveOuts": 5,
-          "leases": 75,
-          "units": 117,
-          "autopay": 46,
-          "occupancy": 0.6410256410256411
         },
         {
           "id": "1175",
@@ -3089,34 +3014,34 @@
           "occupancy": 0.7678571428571429
         }
       ],
-      "reportingViewVolume": 468773.55
+      "reportingViewVolume": 462247.96
     },
     {
       "id": "2026-11",
-      "label": "November 1\u201322, 2026 (MTD)",
+      "label": "November 1\u201323, 2026 (MTD)",
       "start": "2026-11-01",
-      "end": "2026-11-22",
+      "end": "2026-11-23",
       "partial": true,
       "google": {
-        "spend": 8320.17,
-        "impressions": 7863,
-        "clicks": 607,
-        "conversions": 135.317601,
+        "spend": 8783.42,
+        "impressions": 8318,
+        "clicks": 635,
+        "conversions": 150.317601,
         "conversionsByGroup": {
-          "leads_and_calls": 28.998826,
-          "phone_clicks": 22,
-          "button_clicks": 70.318775,
-          "store_visits": 14,
+          "leads_and_calls": 29.998826,
+          "phone_clicks": 24,
+          "button_clicks": 73.318775,
+          "store_visits": 23,
           "rentals": 0,
           "other": 0
         }
       },
       "meta": {
-        "spend": 665.61,
-        "impressions": 32642.0,
-        "clicks": 939.0,
-        "linkClicks": 437.0,
-        "reach": 11606.0,
+        "spend": 694.1,
+        "impressions": 33866.0,
+        "clicks": 971.0,
+        "linkClicks": 446.0,
+        "reach": 11872.0,
         "leads": 26.0
       },
       "facilities": [
@@ -3124,16 +3049,16 @@
           "id": "1140",
           "name": "Family Heirloom Storage of Ludowici",
           "brand": "Family Heirloom",
-          "net": 7705.1,
-          "gross": 7776.86,
+          "net": 7920.36,
+          "gross": 7992.12,
           "refunds": 71.76,
-          "payments": 51,
+          "payments": 53,
           "moveIns": 3,
           "moveOuts": 1,
-          "leases": 81,
-          "units": 102,
-          "autopay": 39,
-          "occupancy": 0.7941176470588235
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1144",
@@ -3145,160 +3070,160 @@
           "payments": 93,
           "moveIns": 3,
           "moveOuts": 2,
-          "leases": 145,
-          "units": 163,
-          "autopay": 59,
-          "occupancy": 0.8895705521472392
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1145",
           "name": "Affordable Storage of Bartow",
           "brand": "Other brands",
-          "net": 25073.14,
-          "gross": 25073.14,
+          "net": 25630.88,
+          "gross": 25630.88,
           "refunds": 0.0,
-          "payments": 183,
-          "moveIns": 12,
-          "moveOuts": 4,
-          "leases": 292,
-          "units": 349,
-          "autopay": 126,
-          "occupancy": 0.836676217765043
+          "payments": 188,
+          "moveIns": 13,
+          "moveOuts": 6,
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1155",
           "name": "Affordable Storage of Thomasville",
           "brand": "Other brands",
-          "net": 13932.08,
-          "gross": 13932.08,
+          "net": 14099.5,
+          "gross": 14099.5,
           "refunds": 0.0,
-          "payments": 114,
+          "payments": 116,
           "moveIns": 6,
           "moveOuts": 1,
-          "leases": 177,
-          "units": 194,
-          "autopay": 86,
-          "occupancy": 0.9123711340206185
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1156",
           "name": "Family Heirloom Storage of Statesboro",
           "brand": "Family Heirloom",
-          "net": 14976.78,
-          "gross": 14976.78,
+          "net": 15136.92,
+          "gross": 15136.92,
           "refunds": 0.0,
-          "payments": 115,
+          "payments": 116,
           "moveIns": 5,
           "moveOuts": 1,
-          "leases": 160,
-          "units": 234,
-          "autopay": 84,
-          "occupancy": 0.6837606837606838
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1164",
           "name": "Affordable Storage of Waynesboro",
           "brand": "Other brands",
-          "net": 9662.52,
-          "gross": 9662.52,
+          "net": 9756.12,
+          "gross": 9756.12,
           "refunds": 0.0,
-          "payments": 89,
+          "payments": 90,
           "moveIns": 7,
           "moveOuts": 3,
-          "leases": 154,
-          "units": 179,
-          "autopay": 60,
-          "occupancy": 0.8603351955307262
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1165",
           "name": "Augusta Self Storage",
           "brand": "Other brands",
-          "net": 14365.04,
-          "gross": 14365.04,
+          "net": 14798.53,
+          "gross": 14798.53,
           "refunds": 0.0,
-          "payments": 104,
+          "payments": 108,
           "moveIns": 3,
           "moveOuts": 1,
-          "leases": 168,
-          "units": 233,
-          "autopay": 95,
-          "occupancy": 0.721030042918455
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1166",
           "name": "Eagles Landing Storage Brannen St",
           "brand": "Eagles Landing",
-          "net": 3472.31,
-          "gross": 3472.31,
+          "net": 3593.98,
+          "gross": 3593.98,
           "refunds": 0.0,
-          "payments": 40,
+          "payments": 41,
           "moveIns": 2,
           "moveOuts": 0,
-          "leases": 61,
-          "units": 92,
-          "autopay": 33,
-          "occupancy": 0.6630434782608695
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1167",
           "name": "Family Heirloom Storage - Crawford",
           "brand": "Family Heirloom",
-          "net": 12981.31,
+          "net": 12913.71,
           "gross": 12981.31,
-          "refunds": 0.0,
+          "refunds": 67.6,
           "payments": 89,
           "moveIns": 8,
           "moveOuts": 9,
-          "leases": 157,
-          "units": 244,
-          "autopay": 77,
-          "occupancy": 0.6434426229508197
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1168",
           "name": "Family Heirloom Storage of Bamberg",
           "brand": "Family Heirloom",
-          "net": 9917.01,
-          "gross": 9917.01,
+          "net": 10221.5,
+          "gross": 10221.5,
           "refunds": 0.0,
-          "payments": 78,
+          "payments": 80,
           "moveIns": 1,
           "moveOuts": 3,
-          "leases": 109,
-          "units": 208,
-          "autopay": 72,
-          "occupancy": 0.5240384615384616
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1169",
           "name": "Family Heirloom Storage of Birmingham",
           "brand": "Family Heirloom",
-          "net": 8797.44,
-          "gross": 8797.44,
+          "net": 8808.88,
+          "gross": 8808.88,
           "refunds": 0.0,
-          "payments": 61,
+          "payments": 62,
           "moveIns": 4,
-          "moveOuts": 2,
-          "leases": 98,
-          "units": 200,
-          "autopay": 34,
-          "occupancy": 0.49
+          "moveOuts": 3,
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1170",
           "name": "Family Heirloom Storage of Douglasville",
           "brand": "Family Heirloom",
-          "net": 11196.66,
-          "gross": 11196.66,
+          "net": 11322.49,
+          "gross": 11322.49,
           "refunds": 0.0,
-          "payments": 87,
+          "payments": 88,
           "moveIns": 5,
           "moveOuts": 4,
-          "leases": 138,
-          "units": 290,
-          "autopay": 66,
-          "occupancy": 0.47586206896551725
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1171",
@@ -3310,55 +3235,40 @@
           "payments": 53,
           "moveIns": 3,
           "moveOuts": 4,
-          "leases": 105,
-          "units": 248,
-          "autopay": 60,
-          "occupancy": 0.42338709677419356
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1172",
           "name": "Southeastern Self Storage - Main Street",
           "brand": "Southeastern",
-          "net": 10180.8,
-          "gross": 10180.8,
+          "net": 10779.1,
+          "gross": 10779.1,
           "refunds": 0.0,
-          "payments": 72,
+          "payments": 75,
           "moveIns": 2,
           "moveOuts": 1,
-          "leases": 113,
-          "units": 140,
-          "autopay": 42,
-          "occupancy": 0.8071428571428572
-        },
-        {
-          "id": "1173",
-          "name": "Clean and Tidy Storage",
-          "brand": "Other brands",
-          "net": 6709.46,
-          "gross": 6709.46,
-          "refunds": 0.0,
-          "payments": 40,
-          "moveIns": 3,
-          "moveOuts": 1,
-          "leases": 77,
-          "units": 117,
-          "autopay": 46,
-          "occupancy": 0.6581196581196581
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1175",
           "name": "Eagles Landing Storage - Ed Moore Court",
           "brand": "Eagles Landing",
-          "net": 5596.96,
-          "gross": 5596.96,
+          "net": 5712.74,
+          "gross": 5712.74,
           "refunds": 0.0,
-          "payments": 47,
+          "payments": 49,
           "moveIns": 3,
           "moveOuts": 4,
-          "leases": 75,
-          "units": 120,
-          "autopay": 41,
-          "occupancy": 0.625
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1176",
@@ -3370,40 +3280,40 @@
           "payments": 40,
           "moveIns": 1,
           "moveOuts": 1,
-          "leases": 73,
-          "units": 122,
-          "autopay": 39,
-          "occupancy": 0.5983606557377049
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1177",
           "name": "Eagles Landing Storage - Zetterower Ave",
           "brand": "Eagles Landing",
-          "net": 8552.93,
-          "gross": 8552.93,
+          "net": 8656.08,
+          "gross": 8656.08,
           "refunds": 0.0,
-          "payments": 65,
+          "payments": 66,
           "moveIns": 6,
           "moveOuts": 3,
-          "leases": 94,
-          "units": 143,
-          "autopay": 48,
-          "occupancy": 0.6573426573426573
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1178",
           "name": "Family Heirloom Storage - Hwy 58",
           "brand": "Family Heirloom",
-          "net": 12753.08,
-          "gross": 12753.08,
+          "net": 13053.97,
+          "gross": 13053.97,
           "refunds": 0.0,
-          "payments": 76,
-          "moveIns": 5,
+          "payments": 80,
+          "moveIns": 6,
           "moveOuts": 1,
-          "leases": 129,
-          "units": 174,
-          "autopay": 67,
-          "occupancy": 0.7413793103448276
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1179",
@@ -3415,25 +3325,25 @@
           "payments": 119,
           "moveIns": 6,
           "moveOuts": 3,
-          "leases": 170,
-          "units": 237,
-          "autopay": 128,
-          "occupancy": 0.7172995780590717
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1180",
           "name": "Southeastern Self Storage - Lake Waccamaw",
           "brand": "Southeastern",
-          "net": 8581.18,
-          "gross": 8581.18,
+          "net": 8725.73,
+          "gross": 8725.73,
           "refunds": 0.0,
-          "payments": 63,
+          "payments": 64,
           "moveIns": 2,
           "moveOuts": 0,
-          "leases": 109,
-          "units": 134,
-          "autopay": 59,
-          "occupancy": 0.8134328358208955
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1181",
@@ -3445,85 +3355,85 @@
           "payments": 35,
           "moveIns": 0,
           "moveOuts": 0,
-          "leases": 52,
-          "units": 62,
-          "autopay": 19,
-          "occupancy": 0.8387096774193549
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1182",
           "name": "Southeastern Self Storage - S. Madison Street",
           "brand": "Southeastern",
-          "net": 14624.86,
-          "gross": 14683.48,
+          "net": 14861.18,
+          "gross": 14919.8,
           "refunds": 58.62,
-          "payments": 91,
-          "moveIns": 5,
-          "moveOuts": 1,
-          "leases": 156,
-          "units": 190,
-          "autopay": 54,
-          "occupancy": 0.8210526315789474
+          "payments": 94,
+          "moveIns": 6,
+          "moveOuts": 2,
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1183",
           "name": "Southeastern Self Storage - Tabor City",
           "brand": "Southeastern",
-          "net": 7471.16,
-          "gross": 7471.16,
+          "net": 7984.05,
+          "gross": 7984.05,
           "refunds": 0.0,
-          "payments": 57,
+          "payments": 59,
           "moveIns": 2,
           "moveOuts": 2,
-          "leases": 110,
-          "units": 121,
-          "autopay": 35,
-          "occupancy": 0.9090909090909091
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1184",
           "name": "Southeastern Self Storage - Walter Street",
           "brand": "Southeastern",
-          "net": 24153.55,
-          "gross": 24153.55,
+          "net": 25744.68,
+          "gross": 25744.68,
           "refunds": 0.0,
-          "payments": 161,
+          "payments": 167,
           "moveIns": 6,
           "moveOuts": 3,
-          "leases": 282,
-          "units": 316,
-          "autopay": 97,
-          "occupancy": 0.8924050632911392
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1185",
           "name": "Southeastern Self Storage - Pecan Street",
           "brand": "Southeastern",
-          "net": 3783.19,
-          "gross": 3825.83,
+          "net": 3950.33,
+          "gross": 3992.97,
           "refunds": 42.64,
-          "payments": 39,
+          "payments": 41,
           "moveIns": 1,
-          "moveOuts": 0,
-          "leases": 62,
-          "units": 73,
-          "autopay": 21,
-          "occupancy": 0.8493150684931506
+          "moveOuts": 1,
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1274",
           "name": "Family Heirloom Storage of Albany",
           "brand": "Family Heirloom",
-          "net": 21555.49,
-          "gross": 21658.44,
+          "net": 21849.78,
+          "gross": 21952.73,
           "refunds": 102.95,
-          "payments": 180,
-          "moveIns": 10,
+          "payments": 183,
+          "moveIns": 12,
           "moveOuts": 3,
-          "leases": 326,
-          "units": 515,
-          "autopay": 88,
-          "occupancy": 0.6330097087378641
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1350",
@@ -3535,10 +3445,10 @@
           "payments": 23,
           "moveIns": 1,
           "moveOuts": 2,
-          "leases": 32,
-          "units": 105,
-          "autopay": 13,
-          "occupancy": 0.3047619047619048
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1542",
@@ -3550,10 +3460,10 @@
           "payments": 38,
           "moveIns": 2,
           "moveOuts": 0,
-          "leases": 66,
-          "units": 107,
-          "autopay": 19,
-          "occupancy": 0.616822429906542
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1543",
@@ -3565,10 +3475,10 @@
           "payments": 51,
           "moveIns": 7,
           "moveOuts": 1,
-          "leases": 104,
-          "units": 122,
-          "autopay": 31,
-          "occupancy": 0.8524590163934426
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1544",
@@ -3589,31 +3499,31 @@
           "id": "1546",
           "name": "Family Heirloom Storage of Kings Mountain- York Rd",
           "brand": "Family Heirloom",
-          "net": 8984.92,
-          "gross": 8984.92,
+          "net": 9092.02,
+          "gross": 9092.02,
           "refunds": 0.0,
-          "payments": 55,
+          "payments": 56,
           "moveIns": 5,
           "moveOuts": 0,
-          "leases": 117,
-          "units": 144,
-          "autopay": 22,
-          "occupancy": 0.8125
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1547",
           "name": "Family Heirloom Storage of Kings Mountain- Woodland Dr.",
           "brand": "Family Heirloom",
-          "net": 5150.5,
-          "gross": 5150.5,
+          "net": 5400.06,
+          "gross": 5400.06,
           "refunds": 0.0,
-          "payments": 35,
+          "payments": 37,
           "moveIns": 1,
           "moveOuts": 1,
-          "leases": 55,
-          "units": 75,
-          "autopay": 15,
-          "occupancy": 0.7333333333333333
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1548",
@@ -3625,25 +3535,25 @@
           "payments": 92,
           "moveIns": 4,
           "moveOuts": 3,
-          "leases": 169,
-          "units": 254,
-          "autopay": 53,
-          "occupancy": 0.6653543307086615
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1631",
           "name": "Family Heirloom storage of Tupelo-Washington Ave",
           "brand": "Family Heirloom",
-          "net": 7003.33,
-          "gross": 7116.28,
+          "net": 7128.71,
+          "gross": 7241.66,
           "refunds": 112.95,
-          "payments": 40,
+          "payments": 41,
           "moveIns": 1,
           "moveOuts": 2,
-          "leases": 82,
-          "units": 96,
-          "autopay": 36,
-          "occupancy": 0.8541666666666666
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1632",
@@ -3655,10 +3565,10 @@
           "payments": 80,
           "moveIns": 1,
           "moveOuts": 0,
-          "leases": 140,
-          "units": 206,
-          "autopay": 47,
-          "occupancy": 0.6796116504854369
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1633",
@@ -3669,26 +3579,26 @@
           "refunds": 0.0,
           "payments": 54,
           "moveIns": 1,
-          "moveOuts": 1,
-          "leases": 85,
-          "units": 91,
-          "autopay": 40,
-          "occupancy": 0.9340659340659341
+          "moveOuts": 2,
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1634",
           "name": "Family Heirloom Storage of Baldwyn",
           "brand": "Family Heirloom",
-          "net": 7064.29,
-          "gross": 7064.29,
+          "net": 7192.98,
+          "gross": 7192.98,
           "refunds": 0.0,
-          "payments": 79,
-          "moveIns": 3,
-          "moveOuts": 2,
-          "leases": 112,
-          "units": 140,
-          "autopay": 43,
-          "occupancy": 0.8
+          "payments": 81,
+          "moveIns": 5,
+          "moveOuts": 3,
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         },
         {
           "id": "1635",
@@ -3699,14 +3609,14 @@
           "refunds": 0.0,
           "payments": 32,
           "moveIns": 2,
-          "moveOuts": 0,
-          "leases": 45,
-          "units": 56,
-          "autopay": 22,
-          "occupancy": 0.8035714285714286
+          "moveOuts": 1,
+          "leases": null,
+          "units": null,
+          "autopay": null,
+          "occupancy": null
         }
       ],
-      "reportingViewVolume": 364664.91
+      "reportingViewVolume": 360787.45
     }
   ]
 }

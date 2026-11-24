@@ -1,14 +1,14 @@
 {
  "schema": "storage-signal.restatements.v1",
  "previous": {
-  "refreshed": "2026-11-12",
-  "ccExtractedAt": "2026-11-12T07:12:09.643+00:00",
-  "cutoff": "2026-11-11"
- },
- "current": {
   "refreshed": "2026-11-23",
   "ccExtractedAt": "2026-11-23T07:12:34.224+00:00",
   "cutoff": "2026-11-22"
+ },
+ "current": {
+  "refreshed": "2026-11-24",
+  "ccExtractedAt": "2026-11-24T06:00:51.471+00:00",
+  "cutoff": "2026-11-23"
  },
  "tolerance": {
   "money": 0.005,
@@ -18,10 +18,43 @@
   {
    "id": "2026-06",
    "label": "June 2026",
-   "status": "unchanged",
+   "status": "restated",
    "previousEnd": "2026-06-30",
    "currentEnd": "2026-06-30",
-   "changes": [],
+   "changes": [
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 374641.87,
+     "current": 368049.62,
+     "difference": -6592.25
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 207,
+     "current": 206,
+     "difference": -1
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 169,
+     "current": 168,
+     "difference": -1
+    },
+    {
+     "metric": "reportingViewVolume",
+     "label": "CCStorage reporting-view volume",
+     "kind": "money",
+     "previous": 347120.79,
+     "current": 341484.54,
+     "difference": -5636.25
+    }
+   ],
    "facilities": []
   },
   {
@@ -32,43 +65,122 @@
    "currentEnd": "2026-07-31",
    "changes": [
     {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 425702.84,
+     "current": 418243.78,
+     "difference": -7459.06
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 311,
+     "current": 309,
+     "difference": -2
+    },
+    {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 109,
-     "current": 110,
-     "difference": 1
+     "previous": 110,
+     "current": 108,
+     "difference": -2
+    },
+    {
+     "metric": "reportingViewVolume",
+     "label": "CCStorage reporting-view volume",
+     "kind": "money",
+     "previous": 398203.33,
+     "current": 391776.27,
+     "difference": -6427.06
     }
    ],
-   "facilities": [
-    {
-     "id": "1543",
-     "name": "Family Heirloom Storage of Chester- 1840",
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 4,
-     "current": 5,
-     "difference": 1
-    }
-   ]
+   "facilities": []
   },
   {
    "id": "2026-08",
    "label": "August 2026",
-   "status": "unchanged",
+   "status": "restated",
    "previousEnd": "2026-08-31",
    "currentEnd": "2026-08-31",
-   "changes": [],
+   "changes": [
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 467243.66,
+     "current": 460061.8,
+     "difference": -7181.86
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 134,
+     "current": 129,
+     "difference": -5
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 253,
+     "current": 249,
+     "difference": -4
+    },
+    {
+     "metric": "reportingViewVolume",
+     "label": "CCStorage reporting-view volume",
+     "kind": "money",
+     "previous": 432019.05,
+     "current": 425950.55,
+     "difference": -6068.5
+    }
+   ],
    "facilities": []
   },
   {
    "id": "2026-09",
    "label": "September 2026",
-   "status": "unchanged",
+   "status": "restated",
    "previousEnd": "2026-09-30",
    "currentEnd": "2026-09-30",
-   "changes": [],
+   "changes": [
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 461277.22,
+     "current": 452354.45,
+     "difference": -8922.77
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 101,
+     "current": 100,
+     "difference": -1
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 312,
+     "current": 307,
+     "difference": -5
+    },
+    {
+     "metric": "reportingViewVolume",
+     "label": "CCStorage reporting-view volume",
+     "kind": "money",
+     "previous": 429323.78,
+     "current": 423872.01,
+     "difference": -5451.77
+    }
+   ],
    "facilities": []
   },
   {
@@ -79,125 +191,102 @@
    "currentEnd": "2026-10-31",
    "changes": [
     {
-     "metric": "google.conversions",
-     "label": "Google Ads conversions",
-     "kind": "number",
-     "previous": 132.666673,
-     "current": 132.667847,
-     "difference": 0.001174
-    },
-    {
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 200,
-     "current": 204,
-     "difference": 4
-    }
-   ],
-   "facilities": [
-    {
-     "id": "1543",
-     "name": "Family Heirloom Storage of Chester- 1840",
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 0,
-     "current": 1,
-     "difference": 1
-    },
-    {
-     "id": "1632",
-     "name": "Family Heirloom Storage of Tupelo-107 Industrial Rd.",
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 9,
-     "current": 11,
-     "difference": 2
-    },
-    {
-     "id": "1634",
-     "name": "Family Heirloom Storage of Baldwyn",
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 2,
-     "current": 3,
-     "difference": 1
-    }
-   ]
-  },
-  {
-   "id": "2026-11",
-   "label": "November 1\u201322, 2026 (MTD)",
-   "status": "extended",
-   "previousEnd": "2026-11-11",
-   "currentEnd": "2026-11-22",
-   "changes": [
-    {
-     "metric": "google.spend",
-     "label": "Google Ads spend",
-     "kind": "money",
-     "previous": 3771.55,
-     "current": 8320.17,
-     "difference": 4548.62
-    },
-    {
-     "metric": "google.conversions",
-     "label": "Google Ads conversions",
-     "kind": "number",
-     "previous": 61.318775,
-     "current": 135.317601,
-     "difference": 73.998826
-    },
-    {
-     "metric": "meta.spend",
-     "label": "Meta Ads spend",
-     "kind": "money",
-     "previous": 333.7,
-     "current": 665.61,
-     "difference": 331.91
-    },
-    {
-     "metric": "meta.leads",
-     "label": "Meta leads",
-     "kind": "number",
-     "previous": 19.0,
-     "current": 26.0,
-     "difference": 7.0
-    },
-    {
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 348710.03,
-     "current": 409326.09,
-     "difference": 60616.06
+     "previous": 502419.39,
+     "current": 494540.67,
+     "difference": -7878.72
     },
     {
      "metric": "moveIns",
      "label": "Move-ins",
      "kind": "number",
-     "previous": 89,
-     "current": 142,
-     "difference": 53
+     "previous": 168,
+     "current": 166,
+     "difference": -2
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 38,
-     "current": 70,
-     "difference": 32
+     "previous": 204,
+     "current": 199,
+     "difference": -5
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 327904.98,
-     "current": 364664.91,
-     "difference": 36759.93
+     "previous": 468773.55,
+     "current": 462247.96,
+     "difference": -6525.59
+    }
+   ],
+   "facilities": []
+  },
+  {
+   "id": "2026-11",
+   "label": "November 1\u201323, 2026 (MTD)",
+   "status": "extended",
+   "previousEnd": "2026-11-22",
+   "currentEnd": "2026-11-23",
+   "changes": [
+    {
+     "metric": "google.spend",
+     "label": "Google Ads spend",
+     "kind": "money",
+     "previous": 8320.17,
+     "current": 8783.42,
+     "difference": 463.25
+    },
+    {
+     "metric": "google.conversions",
+     "label": "Google Ads conversions",
+     "kind": "number",
+     "previous": 135.317601,
+     "current": 150.317601,
+     "difference": 15.0
+    },
+    {
+     "metric": "meta.spend",
+     "label": "Meta Ads spend",
+     "kind": "money",
+     "previous": 665.61,
+     "current": 694.1,
+     "difference": 28.49
+    },
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 409326.09,
+     "current": 409415.28,
+     "difference": 89.19
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 142,
+     "current": 146,
+     "difference": 4
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 70,
+     "current": 77,
+     "difference": 7
+    },
+    {
+     "metric": "reportingViewVolume",
+     "label": "CCStorage reporting-view volume",
+     "kind": "money",
+     "previous": 364664.91,
+     "current": 360787.45,
+     "difference": -3877.46
     }
    ],
    "facilities": []
