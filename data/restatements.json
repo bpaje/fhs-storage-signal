@@ -1,13 +1,13 @@
 {
  "schema": "storage-signal.restatements.v1",
  "previous": {
-  "refreshed": "2026-11-23",
-  "ccExtractedAt": "2026-11-23T07:12:34.224+00:00",
-  "cutoff": "2026-11-22"
+  "refreshed": "2026-11-24",
+  "ccExtractedAt": "2026-11-24T06:00:51.471+00:00",
+  "cutoff": "2026-11-23"
  },
  "current": {
   "refreshed": "2026-11-24",
-  "ccExtractedAt": "2026-11-24T06:00:51.471+00:00",
+  "ccExtractedAt": "2026-11-24T06:56:16.919+00:00",
   "cutoff": "2026-11-23"
  },
  "tolerance": {
@@ -18,275 +18,70 @@
   {
    "id": "2026-06",
    "label": "June 2026",
-   "status": "restated",
+   "status": "unchanged",
    "previousEnd": "2026-06-30",
    "currentEnd": "2026-06-30",
-   "changes": [
-    {
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 374641.87,
-     "current": 368049.62,
-     "difference": -6592.25
-    },
-    {
-     "metric": "moveIns",
-     "label": "Move-ins",
-     "kind": "number",
-     "previous": 207,
-     "current": 206,
-     "difference": -1
-    },
-    {
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 169,
-     "current": 168,
-     "difference": -1
-    },
-    {
-     "metric": "reportingViewVolume",
-     "label": "CCStorage reporting-view volume",
-     "kind": "money",
-     "previous": 347120.79,
-     "current": 341484.54,
-     "difference": -5636.25
-    }
-   ],
+   "changes": [],
    "facilities": []
   },
   {
    "id": "2026-07",
    "label": "July 2026",
-   "status": "restated",
+   "status": "unchanged",
    "previousEnd": "2026-07-31",
    "currentEnd": "2026-07-31",
-   "changes": [
-    {
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 425702.84,
-     "current": 418243.78,
-     "difference": -7459.06
-    },
-    {
-     "metric": "moveIns",
-     "label": "Move-ins",
-     "kind": "number",
-     "previous": 311,
-     "current": 309,
-     "difference": -2
-    },
-    {
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 110,
-     "current": 108,
-     "difference": -2
-    },
-    {
-     "metric": "reportingViewVolume",
-     "label": "CCStorage reporting-view volume",
-     "kind": "money",
-     "previous": 398203.33,
-     "current": 391776.27,
-     "difference": -6427.06
-    }
-   ],
+   "changes": [],
    "facilities": []
   },
   {
    "id": "2026-08",
    "label": "August 2026",
-   "status": "restated",
+   "status": "unchanged",
    "previousEnd": "2026-08-31",
    "currentEnd": "2026-08-31",
-   "changes": [
-    {
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 467243.66,
-     "current": 460061.8,
-     "difference": -7181.86
-    },
-    {
-     "metric": "moveIns",
-     "label": "Move-ins",
-     "kind": "number",
-     "previous": 134,
-     "current": 129,
-     "difference": -5
-    },
-    {
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 253,
-     "current": 249,
-     "difference": -4
-    },
-    {
-     "metric": "reportingViewVolume",
-     "label": "CCStorage reporting-view volume",
-     "kind": "money",
-     "previous": 432019.05,
-     "current": 425950.55,
-     "difference": -6068.5
-    }
-   ],
+   "changes": [],
    "facilities": []
   },
   {
    "id": "2026-09",
    "label": "September 2026",
-   "status": "restated",
+   "status": "unchanged",
    "previousEnd": "2026-09-30",
    "currentEnd": "2026-09-30",
-   "changes": [
-    {
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 461277.22,
-     "current": 452354.45,
-     "difference": -8922.77
-    },
-    {
-     "metric": "moveIns",
-     "label": "Move-ins",
-     "kind": "number",
-     "previous": 101,
-     "current": 100,
-     "difference": -1
-    },
-    {
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 312,
-     "current": 307,
-     "difference": -5
-    },
-    {
-     "metric": "reportingViewVolume",
-     "label": "CCStorage reporting-view volume",
-     "kind": "money",
-     "previous": 429323.78,
-     "current": 423872.01,
-     "difference": -5451.77
-    }
-   ],
+   "changes": [],
    "facilities": []
   },
   {
    "id": "2026-10",
    "label": "October 2026",
-   "status": "restated",
+   "status": "unchanged",
    "previousEnd": "2026-10-31",
    "currentEnd": "2026-10-31",
-   "changes": [
-    {
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 502419.39,
-     "current": 494540.67,
-     "difference": -7878.72
-    },
-    {
-     "metric": "moveIns",
-     "label": "Move-ins",
-     "kind": "number",
-     "previous": 168,
-     "current": 166,
-     "difference": -2
-    },
-    {
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 204,
-     "current": 199,
-     "difference": -5
-    },
-    {
-     "metric": "reportingViewVolume",
-     "label": "CCStorage reporting-view volume",
-     "kind": "money",
-     "previous": 468773.55,
-     "current": 462247.96,
-     "difference": -6525.59
-    }
-   ],
+   "changes": [],
    "facilities": []
   },
   {
    "id": "2026-11",
    "label": "November 1\u201323, 2026 (MTD)",
-   "status": "extended",
-   "previousEnd": "2026-11-22",
+   "status": "restated",
+   "previousEnd": "2026-11-23",
    "currentEnd": "2026-11-23",
    "changes": [
-    {
-     "metric": "google.spend",
-     "label": "Google Ads spend",
-     "kind": "money",
-     "previous": 8320.17,
-     "current": 8783.42,
-     "difference": 463.25
-    },
-    {
-     "metric": "google.conversions",
-     "label": "Google Ads conversions",
-     "kind": "number",
-     "previous": 135.317601,
-     "current": 150.317601,
-     "difference": 15.0
-    },
     {
      "metric": "meta.spend",
      "label": "Meta Ads spend",
      "kind": "money",
-     "previous": 665.61,
-     "current": 694.1,
-     "difference": 28.49
-    },
-    {
-     "metric": "net",
-     "label": "Net recorded payments",
-     "kind": "money",
-     "previous": 409326.09,
-     "current": 409415.28,
-     "difference": 89.19
-    },
-    {
-     "metric": "moveIns",
-     "label": "Move-ins",
-     "kind": "number",
-     "previous": 142,
-     "current": 146,
-     "difference": 4
-    },
-    {
-     "metric": "moveOuts",
-     "label": "Move-outs",
-     "kind": "number",
-     "previous": 70,
-     "current": 77,
-     "difference": 7
+     "previous": 694.1,
+     "current": 694.14,
+     "difference": 0.04
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 364664.91,
-     "current": 360787.45,
-     "difference": -3877.46
+     "previous": 360787.45,
+     "current": 367604.7,
+     "difference": 6817.25
     }
    ],
    "facilities": []
