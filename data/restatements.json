@@ -2,13 +2,13 @@
  "schema": "storage-signal.restatements.v1",
  "previous": {
   "refreshed": "2026-11-24",
-  "ccExtractedAt": "2026-11-24T06:00:51.471+00:00",
+  "ccExtractedAt": "2026-11-24T06:56:16.919+00:00",
   "cutoff": "2026-11-23"
  },
  "current": {
-  "refreshed": "2026-11-24",
-  "ccExtractedAt": "2026-11-24T06:56:16.919+00:00",
-  "cutoff": "2026-11-23"
+  "refreshed": "2026-11-25",
+  "ccExtractedAt": "2026-11-25T07:13:22.356+00:00",
+  "cutoff": "2026-11-24"
  },
  "tolerance": {
   "money": 0.005,
@@ -62,26 +62,74 @@
   },
   {
    "id": "2026-11",
-   "label": "November 1\u201323, 2026 (MTD)",
-   "status": "restated",
+   "label": "November 1\u201324, 2026 (MTD)",
+   "status": "extended",
    "previousEnd": "2026-11-23",
-   "currentEnd": "2026-11-23",
+   "currentEnd": "2026-11-24",
    "changes": [
+    {
+     "metric": "google.spend",
+     "label": "Google Ads spend",
+     "kind": "money",
+     "previous": 8783.42,
+     "current": 9447.73,
+     "difference": 664.31
+    },
+    {
+     "metric": "google.conversions",
+     "label": "Google Ads conversions",
+     "kind": "number",
+     "previous": 150.317601,
+     "current": 157.317601,
+     "difference": 7.0
+    },
     {
      "metric": "meta.spend",
      "label": "Meta Ads spend",
      "kind": "money",
-     "previous": 694.1,
-     "current": 694.14,
-     "difference": 0.04
+     "previous": 694.14,
+     "current": 730.21,
+     "difference": 36.07
+    },
+    {
+     "metric": "meta.leads",
+     "label": "Meta leads",
+     "kind": "number",
+     "previous": 26.0,
+     "current": 27.0,
+     "difference": 1.0
+    },
+    {
+     "metric": "net",
+     "label": "Net recorded payments",
+     "kind": "money",
+     "previous": 409415.28,
+     "current": 416333.73,
+     "difference": 6918.45
+    },
+    {
+     "metric": "moveIns",
+     "label": "Move-ins",
+     "kind": "number",
+     "previous": 146,
+     "current": 149,
+     "difference": 3
+    },
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 77,
+     "current": 81,
+     "difference": 4
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 360787.45,
-     "current": 367604.7,
-     "difference": 6817.25
+     "previous": 367604.7,
+     "current": 373463.15,
+     "difference": 5858.45
     }
    ],
    "facilities": []
