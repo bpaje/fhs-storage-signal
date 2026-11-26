@@ -1,14 +1,14 @@
 {
  "schema": "storage-signal.restatements.v1",
  "previous": {
-  "refreshed": "2026-11-24",
-  "ccExtractedAt": "2026-11-24T06:56:16.919+00:00",
-  "cutoff": "2026-11-23"
- },
- "current": {
   "refreshed": "2026-11-25",
   "ccExtractedAt": "2026-11-25T07:13:22.356+00:00",
   "cutoff": "2026-11-24"
+ },
+ "current": {
+  "refreshed": "2026-11-26",
+  "ccExtractedAt": "2026-11-26T07:13:03.445+00:00",
+  "cutoff": "2026-11-25"
  },
  "tolerance": {
   "money": 0.005,
@@ -54,82 +54,102 @@
   {
    "id": "2026-10",
    "label": "October 2026",
-   "status": "unchanged",
+   "status": "restated",
    "previousEnd": "2026-10-31",
    "currentEnd": "2026-10-31",
-   "changes": [],
-   "facilities": []
+   "changes": [
+    {
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 199,
+     "current": 200,
+     "difference": 1
+    }
+   ],
+   "facilities": [
+    {
+     "id": "1632",
+     "name": "Family Heirloom Storage of Tupelo-107 Industrial Rd.",
+     "metric": "moveOuts",
+     "label": "Move-outs",
+     "kind": "number",
+     "previous": 11,
+     "current": 12,
+     "difference": 1
+    }
+   ]
   },
   {
    "id": "2026-11",
-   "label": "November 1\u201324, 2026 (MTD)",
+   "label": "November 1\u201325, 2026 (MTD)",
    "status": "extended",
-   "previousEnd": "2026-11-23",
-   "currentEnd": "2026-11-24",
+   "previousEnd": "2026-11-24",
+   "currentEnd": "2026-11-25",
    "changes": [
     {
      "metric": "google.spend",
      "label": "Google Ads spend",
      "kind": "money",
-     "previous": 8783.42,
-     "current": 9447.73,
-     "difference": 664.31
+     "previous": 9447.73,
+     "current": 9846.77,
+     "difference": 399.04
     },
     {
      "metric": "google.conversions",
      "label": "Google Ads conversions",
      "kind": "number",
-     "previous": 150.317601,
-     "current": 157.317601,
-     "difference": 7.0
+     "previous": 157.317601,
+     "current": 159.317601,
+     "difference": 2.0
     },
     {
      "metric": "meta.spend",
      "label": "Meta Ads spend",
      "kind": "money",
-     "previous": 694.14,
-     "current": 730.21,
-     "difference": 36.07
+     "previous": 730.21,
+     "current": 764.07,
+     "difference": 33.86
     },
     {
      "metric": "meta.leads",
      "label": "Meta leads",
      "kind": "number",
-     "previous": 26.0,
-     "current": 27.0,
+     "previous": 27.0,
+     "current": 28.0,
      "difference": 1.0
     },
     {
      "metric": "net",
      "label": "Net recorded payments",
      "kind": "money",
-     "previous": 409415.28,
-     "current": 416333.73,
-     "difference": 6918.45
+     "previous": 416333.73,
+     "current": 423436.15,
+     "difference": 7102.42
     },
     {
      "metric": "moveIns",
      "label": "Move-ins",
      "kind": "number",
-     "previous": 146,
-     "current": 149,
+     "previous": 149,
+     "current": 152,
      "difference": 3
     },
     {
      "metric": "moveOuts",
      "label": "Move-outs",
      "kind": "number",
-     "previous": 77,
-     "current": 81,
-     "difference": 4
+     "previous": 81,
+     "current": 83,
+     "difference": 2
     },
     {
      "metric": "reportingViewVolume",
      "label": "CCStorage reporting-view volume",
      "kind": "money",
-     "previous": 367604.7,
-     "current": 373463.15,
-     "difference": 5858.45
+     "previous": 373463.15,
+     "current": 379188.43,
+     "difference": 5725.28
     }
    ],
    "facilities": []
