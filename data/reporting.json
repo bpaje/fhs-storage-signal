@@ -1,10 +1,10 @@
 {
   "schema": "storage-signal.reporting.v1",
-  "refreshed": "2026-11-26",
+  "refreshed": "2026-11-27",
   "currency": "USD",
   "adTimezone": "America/New_York",
-  "ccExtractedAt": "2026-11-26T07:13:03.445+00:00",
-  "metaExtractedAt": "2026-11-26T07:15:45.3276190Z",
+  "ccExtractedAt": "2026-11-27T07:12:11.802+00:00",
+  "metaExtractedAt": "2026-11-27T07:15:57.2638616Z",
   "periods": [
     {
       "id": "2026-06",
@@ -3018,31 +3018,31 @@
     },
     {
       "id": "2026-11",
-      "label": "November 1\u201325, 2026 (MTD)",
+      "label": "November 1\u201326, 2026 (MTD)",
       "start": "2026-11-01",
-      "end": "2026-11-25",
+      "end": "2026-11-26",
       "partial": true,
       "google": {
-        "spend": 9846.77,
-        "impressions": 8936,
-        "clicks": 691,
+        "spend": 9966.59,
+        "impressions": 9123,
+        "clicks": 701,
         "conversions": 159.317601,
         "conversionsByGroup": {
           "leads_and_calls": 32.998826,
           "phone_clicks": 28,
-          "button_clicks": 76.318775,
-          "store_visits": 22,
+          "button_clicks": 78.318775,
+          "store_visits": 20,
           "rentals": 0,
           "other": 0
         }
       },
       "meta": {
-        "spend": 764.07,
-        "impressions": 36837.0,
-        "clicks": 1040.0,
-        "linkClicks": 472.0,
-        "reach": 12361.0,
-        "leads": 28.0
+        "spend": 792.18,
+        "impressions": 37916.0,
+        "clicks": 1059.0,
+        "linkClicks": 483.0,
+        "reach": 12572.0,
+        "leads": 29.0
       },
       "facilities": [
         {
@@ -3079,16 +3079,16 @@
           "id": "1145",
           "name": "Affordable Storage of Bartow",
           "brand": "Other brands",
-          "net": 26771.09,
-          "gross": 26771.09,
+          "net": 26896.92,
+          "gross": 26896.92,
           "refunds": 0.0,
-          "payments": 196,
-          "moveIns": 14,
+          "payments": 197,
+          "moveIns": 15,
           "moveOuts": 6,
-          "leases": 292,
+          "leases": 293,
           "units": 349,
-          "autopay": 127,
-          "occupancy": 0.836676217765043
+          "autopay": 128,
+          "occupancy": 0.839541547277937
         },
         {
           "id": "1155",
@@ -3154,10 +3154,10 @@
           "id": "1166",
           "name": "Eagles Landing Storage Brannen St",
           "brand": "Eagles Landing",
-          "net": 3705.25,
-          "gross": 3705.25,
+          "net": 3810.28,
+          "gross": 3810.28,
           "refunds": 0.0,
-          "payments": 42,
+          "payments": 43,
           "moveIns": 2,
           "moveOuts": 0,
           "leases": 61,
@@ -3174,11 +3174,11 @@
           "refunds": 67.6,
           "payments": 92,
           "moveIns": 8,
-          "moveOuts": 9,
-          "leases": 157,
+          "moveOuts": 10,
+          "leases": 156,
           "units": 244,
           "autopay": 74,
-          "occupancy": 0.6434426229508197
+          "occupancy": 0.639344262295082
         },
         {
           "id": "1168",
@@ -3289,10 +3289,10 @@
           "id": "1177",
           "name": "Eagles Landing Storage - Zetterower Ave",
           "brand": "Eagles Landing",
-          "net": 8656.08,
-          "gross": 8656.08,
+          "net": 8787.11,
+          "gross": 8787.11,
           "refunds": 0.0,
-          "payments": 66,
+          "payments": 67,
           "moveIns": 6,
           "moveOuts": 4,
           "leases": 93,
@@ -3529,10 +3529,10 @@
           "id": "1548",
           "name": "Family Heirloom Storage of Forest City",
           "brand": "Family Heirloom",
-          "net": 36880.42,
-          "gross": 36880.42,
+          "net": 37163.26,
+          "gross": 37163.26,
           "refunds": 0.0,
-          "payments": 95,
+          "payments": 97,
           "moveIns": 4,
           "moveOuts": 3,
           "leases": 169,
@@ -3544,10 +3544,10 @@
           "id": "1631",
           "name": "Family Heirloom storage of Tupelo-Washington Ave",
           "brand": "Family Heirloom",
-          "net": 7312.17,
-          "gross": 7425.12,
+          "net": 7494.15,
+          "gross": 7607.1,
           "refunds": 112.95,
-          "payments": 44,
+          "payments": 45,
           "moveIns": 1,
           "moveOuts": 2,
           "leases": 82,
@@ -3616,7 +3616,7 @@
           "occupancy": 0.7678571428571429
         }
       ],
-      "reportingViewVolume": 379188.43
+      "reportingViewVolume": 380101.59
     }
   ]
 }
